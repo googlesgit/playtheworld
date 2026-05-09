@@ -20,16 +20,15 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
 /* HEADER */
-header{display:flex;align-items:center;gap:10px;padding:0 20px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20;position:relative}
+header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
-.search-group{display:flex;align-items:center;flex-shrink:0}
-.search-wrap{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--border);border-right:none;border-radius:24px 0 0 24px;padding:7px 14px;width:260px;transition:.2s}
-.search-wrap:focus-within{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.07)}
-.search-wrap input{background:none;border:none;outline:none;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
-.search-wrap input::placeholder{color:var(--t3)}
+.sgroup{display:flex;align-items:center;flex-shrink:0}
+.swrap{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--border);border-right:none;border-radius:24px 0 0 24px;padding:7px 14px;width:270px;transition:.2s}
+.swrap:focus-within{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08)}
+.swrap input{background:none;border:none;outline:none;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
+.swrap input::placeholder{color:var(--t3)}
 .sbtn{height:36px;padding:0 18px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#08080f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;white-space:nowrap}
-.sbtn:hover{background:#b8a3fc}
-.sbtn:active{transform:scale(.97)}
+.sbtn:hover{background:#b8a3fc}.sbtn:active{transform:scale(.97)}
 .gtabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex:1}
 .gtabs::-webkit-scrollbar{display:none}
 .gtab{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
@@ -40,128 +39,113 @@ header{display:flex;align-items:center;gap:10px;padding:0 20px;background:rgba(1
 .main{display:grid;grid-template-columns:220px 1fr;overflow:hidden}
 
 /* SIDEBAR */
-.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:14px 0;overflow-y:auto}
+.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto}
 .slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 18px 5px}
 .nitem{display:flex;align-items:center;gap:9px;padding:7px 18px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
 .nitem:hover{background:var(--hover);color:var(--t1)}
 .nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
-.badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase}
-.badge.yt{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.25)}
-.badge.in{background:rgba(96,165,250,.12);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;box-shadow:0 0 6px var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* CONTENT */
 .content{overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column}
 .cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
 .ctitle{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
 .ccount{font-size:12px;color:var(--t2)}
-.wavewrap{display:flex;align-items:flex-end;gap:3px;height:24px}
+.wavewrap{display:flex;align-items:flex-end;gap:3px;height:24px;flex-shrink:0}
 .wbar{width:3px;background:linear-gradient(to top,var(--accent),var(--blue));border-radius:2px 2px 0 0;height:4px}
-.wbar.a1{animation:wv1 .8s ease-in-out infinite}
-.wbar.a2{animation:wv2 .9s ease-in-out infinite .1s}
-.wbar.a3{animation:wv1 .7s ease-in-out infinite .2s}
-.wbar.a4{animation:wv2 .85s ease-in-out infinite .05s}
+.wbar.a1{animation:wv1 .8s ease-in-out infinite}.wbar.a2{animation:wv2 .9s ease-in-out infinite .1s}
+.wbar.a3{animation:wv1 .7s ease-in-out infinite .2s}.wbar.a4{animation:wv2 .85s ease-in-out infinite .05s}
 .wbar.a5{animation:wv1 .95s ease-in-out infinite .15s}
 .wavewrap.stopped .wbar{animation-play-state:paused;height:4px}
 @keyframes wv1{0%,100%{height:4px}50%{height:20px}}
 @keyframes wv2{0%,100%{height:8px}50%{height:22px}}
 
-/* Loading spinner */
-.spinner-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:14px;color:var(--t2)}
-.spinner{width:36px;height:36px;border:2px solid rgba(167,139,250,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+.spin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:14px;color:var(--t2);font-size:13px}
+.spinner{width:36px;height:36px;border:2px solid rgba(167,139,250,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Track table */
-.thead{display:grid;grid-template-columns:38px 1fr 70px 50px;gap:10px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
+.thead{display:grid;grid-template-columns:36px 56px 1fr 52px;gap:8px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
 .tgrid{display:flex;flex-direction:column;gap:2px}
-.trow{display:grid;grid-template-columns:38px 1fr 70px 50px;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
+.trow{display:grid;grid-template-columns:36px 56px 1fr 52px;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
 .trow:hover{background:var(--hover)}
 .trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
 .tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums}
 .trow.on .tnum,.trow.on .tname{color:var(--accent)}
+.tthumb{width:54px;height:38px;border-radius:6px;object-fit:cover;display:block;background:rgba(255,255,255,.05)}
+.tthumb-ph{width:54px;height:38px;border-radius:6px;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .tinfo{min-width:0}
-.tname{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.tname{font-size:13px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .tartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tsrc{font-size:10px;padding:2px 7px;border-radius:5px;text-align:center;font-weight:600;white-space:nowrap;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
 .tdur{font-size:12px;color:var(--t3);text-align:right;font-variant-numeric:tabular-nums}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:10px;color:var(--t2);text-align:center}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:10px;color:var(--t2);text-align:center;line-height:1.8;font-size:13px}
 .eico{font-size:40px;opacity:.3}
-
-/* Info banner */
-.infobanner{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:var(--accent);font-size:12px;padding:7px 14px;border-radius:8px;margin-bottom:10px;line-height:1.5}
+.alert{padding:9px 14px;border-radius:8px;font-size:12.5px;margin-bottom:10px;line-height:1.5;display:none}
+.alert.ok{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);color:var(--green)}
+.alert.warn{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);color:var(--red)}
+.alert.info{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);color:var(--accent)}
 
 /* PLAYER */
 .player{background:rgba(10,10,18,.99);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:0 20px;gap:16px}
 .nowplay{display:flex;align-items:center;gap:12px;min-width:0}
-.nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-/* Thumbnail for YouTube */
-.nowart img{width:100%;height:100%;object-fit:cover;border-radius:8px;position:absolute;top:0;left:0}
+.nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.nowart img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:8px}
 .vinyl{width:48px;height:48px;border-radius:50%;background:conic-gradient(#1a1028 0deg 60deg,#150d22 60deg 120deg,#1d1230 120deg 180deg,#150d22 180deg 240deg,#1a1028 240deg 300deg,#150d22 300deg 360deg);display:flex;align-items:center;justify-content:center;border:2px solid rgba(167,139,250,.2);position:relative}
 .vinyl.spin{animation:vspin 2.4s linear infinite}
 @keyframes vspin{to{transform:rotate(360deg)}}
 .vring{position:absolute;width:28px;height:28px;border-radius:50%;border:4px solid rgba(167,139,250,.12)}
-.vctr{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--glow);position:relative;z-index:1}
+.vctr{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--glow);z-index:1}
 .nowinfo{min-width:0;flex:1}
 .nowtitle{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .nowartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hbtn{background:none;border:none;cursor:pointer;font-size:17px;padding:4px;transition:transform .2s;flex-shrink:0}
 .hbtn:hover{transform:scale(1.2)}
-
-/* Controls */
 .pcenter{display:flex;flex-direction:column;align-items:center;gap:8px}
 .controls{display:flex;align-items:center;gap:4px}
 .cbtn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}
-.cbtn:hover{color:var(--t1);background:var(--hover)}
-.cbtn.on{color:var(--accent)}
+.cbtn:hover{color:var(--t1);background:var(--hover)}.cbtn.on{color:var(--accent)}
 .playbtn{width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#08080f;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;box-shadow:0 0 20px var(--glow)}
-.playbtn:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(167,139,250,.55)}
-.playbtn:active{transform:scale(.96)}
+.playbtn:hover{transform:scale(1.07)}.playbtn:active{transform:scale(.96)}
 .progwrap{width:100%;display:flex;align-items:center;gap:8px}
 .tlabel{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums;min-width:32px}
 .tlabel.r{text-align:right}
 .progtrack{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;position:relative;cursor:pointer}
 .progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none}
-.progthumb{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--glow);opacity:0;pointer-events:none;transition:opacity .2s}
+.progthumb{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);opacity:0;pointer-events:none;transition:opacity .2s}
 .progtrack:hover .progthumb{opacity:1}
-
-/* Right */
 .pright{display:flex;align-items:center;justify-content:flex-end;gap:12px}
 .qbadge{font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
 .volwrap{display:flex;align-items:center;gap:7px}
 .volico{font-size:16px;cursor:pointer;user-select:none}
 input[type=range]{-webkit-appearance:none;appearance:none;width:74px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 5px var(--glow)}
-
-/* Hidden YouTube player */
 #ytPlayer{position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;opacity:0}
-
 @media(max-width:860px){.main{grid-template-columns:1fr}.sidebar{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- HEADER -->
 <header>
   <div class="logo">◉ SONIQ</div>
-  <div class="search-group">
-    <div class="search-wrap">
-      <input id="searchInput" type="text" placeholder="Search any song, artist, album…" autocomplete="off"/>
+  <div class="sgroup">
+    <div class="swrap">
+      <input id="searchInput" type="text" placeholder="Search any song, artist, movie…" autocomplete="off"/>
     </div>
     <button class="sbtn" id="searchBtn">🔍 Search</button>
   </div>
   <div class="gtabs" id="gtabs">
-    <button class="gtab on" data-g="top hindi songs 2024">All</button>
-    <button class="gtab" data-g="latest bollywood hits 2024">🇮🇳 Bollywood</button>
-    <button class="gtab" data-g="best hindi songs">Hindi</button>
-    <button class="gtab" data-g="arijit singh songs">Arijit Singh</button>
-    <button class="gtab" data-g="punjabi songs 2024">Punjabi</button>
-    <button class="gtab" data-g="jazz music">Jazz</button>
-    <button class="gtab" data-g="electronic music">Electronic</button>
-    <button class="gtab" data-g="lo-fi chill music">Chill</button>
+    <button class="gtab on" data-q="top hindi songs 2024">All</button>
+    <button class="gtab" data-q="latest bollywood 2024">🇮🇳 Bollywood</button>
+    <button class="gtab" data-q="best hindi songs">Hindi</button>
+    <button class="gtab" data-q="arijit singh">Arijit Singh</button>
+    <button class="gtab" data-q="new punjabi songs 2024">Punjabi</button>
+    <button class="gtab" data-q="best jazz music">Jazz</button>
+    <button class="gtab" data-q="electronic music mix">Electronic</button>
+    <button class="gtab" data-q="lofi chill music">Chill</button>
   </div>
 </header>
 
-<!-- MAIN -->
 <div class="main">
   <aside class="sidebar">
     <div class="slabel">Library</div>
@@ -170,29 +154,30 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <div class="nitem" id="sRecent">🕐 Recently Played</div>
 
     <div class="slabel">Source</div>
-    <div class="nitem">▶ YouTube <span class="badge yt">LIVE</span></div>
+    <div class="nitem" style="cursor:default">▶ YouTube (via Invidious) <div class="live-dot"></div></div>
 
-    <div class="slabel">Bollywood</div>
-    <div class="nitem" data-q="arijit singh best songs">🎤 Arijit Singh</div>
+    <div class="slabel">Bollywood Artists</div>
+    <div class="nitem" data-q="arijit singh songs">🎤 Arijit Singh</div>
     <div class="nitem" data-q="atif aslam songs">🎤 Atif Aslam</div>
     <div class="nitem" data-q="shreya ghoshal songs">🎤 Shreya Ghoshal</div>
     <div class="nitem" data-q="kishore kumar songs">🎤 Kishore Kumar</div>
     <div class="nitem" data-q="lata mangeshkar songs">🎤 Lata Mangeshkar</div>
+    <div class="nitem" data-q="ar rahman best songs">🎤 A.R. Rahman</div>
+    <div class="nitem" data-q="diljit dosanjh songs">🎤 Diljit Dosanjh</div>
 
     <div class="slabel">Indian Genres</div>
-    <div class="nitem" data-q="latest bollywood songs 2024">🎬 Bollywood</div>
-    <div class="nitem" data-q="carnatic classical indian music">🪘 Carnatic</div>
-    <div class="nitem" data-q="punjabi bhangra songs 2024">🎵 Punjabi / Bhangra</div>
-    <div class="nitem" data-q="devotional bhajans hindi">🙏 Devotional</div>
-    <div class="nitem" data-q="indian folk music songs">🌾 Indian Folk</div>
-    <div class="nitem" data-q="sufi music hindi songs">🎶 Sufi</div>
+    <div class="nitem" data-q="bollywood hits 2024">🎬 Bollywood</div>
+    <div class="nitem" data-q="carnatic classical music">🪘 Carnatic</div>
+    <div class="nitem" data-q="punjabi bhangra 2024">🎵 Punjabi / Bhangra</div>
+    <div class="nitem" data-q="hindi devotional bhajans">🙏 Devotional</div>
+    <div class="nitem" data-q="rajasthani folk songs">🌾 Indian Folk</div>
+    <div class="nitem" data-q="sufi hindi songs">🎶 Sufi</div>
 
-    <div class="slabel">Global Genres</div>
+    <div class="slabel">Global</div>
     <div class="nitem" data-q="top pop songs 2024">🎸 Pop</div>
-    <div class="nitem" data-q="best jazz music">🎷 Jazz</div>
-    <div class="nitem" data-q="electronic dance music">⚡ Electronic</div>
-    <div class="nitem" data-q="classic rock songs">🎸 Rock</div>
-    <div class="nitem" data-q="lo-fi hip hop chill beats">😌 Lo-Fi / Chill</div>
+    <div class="nitem" data-q="best jazz music playlist">🎷 Jazz</div>
+    <div class="nitem" data-q="lofi hip hop beats">😌 Lo-Fi / Chill</div>
+    <div class="nitem" data-q="classic rock greatest hits">🎸 Rock</div>
   </aside>
 
   <section class="content">
@@ -206,25 +191,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
         <div class="wbar a3"></div><div class="wbar a4"></div><div class="wbar a5"></div>
       </div>
     </div>
-
-    <div class="infobanner" id="infoBanner" style="display:none"></div>
-
-    <div class="thead">
-      <span>#</span><span>Title</span><span>Source</span><span>⏱</span>
-    </div>
-    <div id="trackList">
-      <div class="spinner-wrap"><div class="spinner"></div><div>Loading songs from YouTube…</div></div>
-    </div>
+    <div class="alert" id="alert"></div>
+    <div class="thead"><span>#</span><span></span><span>Title / Artist</span><span>⏱</span></div>
+    <div id="trackList"><div class="spin-wrap"><div class="spinner"></div><div>Loading songs…</div></div></div>
   </section>
 </div>
 
-<!-- PLAYER -->
 <footer class="player">
   <div class="nowplay">
     <div class="nowart" id="nowArt">
-      <div class="vinyl" id="vinyl">
-        <div class="vring"></div><div class="vctr"></div>
-      </div>
+      <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>
     </div>
     <div class="nowinfo">
       <div class="nowtitle" id="nowTitle">Select a track</div>
@@ -232,7 +208,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     </div>
     <button class="hbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
   </div>
-
   <div class="pcenter">
     <div class="controls">
       <button class="cbtn" id="shuffleBtn" onclick="toggleShuffle()">🔀</button>
@@ -250,7 +225,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
       <span class="tlabel r" id="totTime">0:00</span>
     </div>
   </div>
-
   <div class="pright">
     <div class="qbadge">YT</div>
     <div class="volwrap">
@@ -261,444 +235,383 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 </footer>
 </div>
 
-<!-- Hidden YouTube IFrame player -->
 <div id="ytPlayer"></div>
-
-<!-- YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  YouTube Data API v3 — free, 10,000 units/day quota
-//  Works on GitHub Pages — no CORS issues at all
-// ══════════════════════════════════════════════════════
-const YT_KEY = 'REDACTED_GOOGLE_API_KEY'; // Free public API key
+// ════════════════════════════════════════════════════════
+//  Invidious public instances — no key, no signup needed!
+//  We try them in order, move to the next if one is down.
+// ════════════════════════════════════════════════════════
+const INVIDIOUS = [
+  'https://inv.nadeko.net',
+  'https://invidious.nerdvpn.de',
+  'https://invidious.privacyredirect.com',
+  'https://iv.datura.network',
+  'https://invidious.incogniweb.net',
+];
+let instanceIdx = 0;
+function apiBase(){ return INVIDIOUS[instanceIdx % INVIDIOUS.length]; }
 
-// ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
+//  CURATED FALLBACK (20 real YouTube IDs — always works)
+// ════════════════════════════════════════════════════════
+const CURATED = [
+  {id:'sRw4ld4ul64',n:'Tum Hi Ho',                 a:'Arijit Singh',      th:'https://img.youtube.com/vi/sRw4ld4ul64/mqdefault.jpg',d:'4:43'},
+  {id:'8UVNT4wvIGY',n:'Channa Mereya',             a:'Arijit Singh',      th:'https://img.youtube.com/vi/8UVNT4wvIGY/mqdefault.jpg',d:'5:50'},
+  {id:'YykjpeuMNEk',n:'Kabira',                    a:'Arijit Singh',      th:'https://img.youtube.com/vi/YykjpeuMNEk/mqdefault.jpg',d:'4:25'},
+  {id:'lp-EJBangSQ',n:'Kun Faya Kun',              a:'A.R. Rahman',       th:'https://img.youtube.com/vi/lp-EJBangSQ/mqdefault.jpg',d:'7:52'},
+  {id:'xo1VInw-SKc',n:'Ae Dil Hai Mushkil',        a:'Arijit Singh',      th:'https://img.youtube.com/vi/xo1VInw-SKc/mqdefault.jpg',d:'4:28'},
+  {id:'ZVSz6iNhqHg',n:'Kal Ho Naa Ho',             a:'Sonu Nigam',        th:'https://img.youtube.com/vi/ZVSz6iNhqHg/mqdefault.jpg',d:'6:05'},
+  {id:'Y4OcSGrRPsU',n:'Pehli Nazar Mein',          a:'Atif Aslam',        th:'https://img.youtube.com/vi/Y4OcSGrRPsU/mqdefault.jpg',d:'5:24'},
+  {id:'ktvTqknDobU',n:'Iktara',                    a:'Amit Trivedi',      th:'https://img.youtube.com/vi/ktvTqknDobU/mqdefault.jpg',d:'5:02'},
+  {id:'lWA2pjMjpBs',n:'Raabta',                    a:'Arijit Singh',      th:'https://img.youtube.com/vi/lWA2pjMjpBs/mqdefault.jpg',d:'4:18'},
+  {id:'CvBfHwUxHIk',n:'Jai Ho',                    a:'A.R. Rahman',       th:'https://img.youtube.com/vi/CvBfHwUxHIk/mqdefault.jpg',d:'5:36'},
+  {id:'vYDMKNs2lJo',n:'Tujh Mein Rab Dikhta Hai', a:'Roop Kumar Rathod', th:'https://img.youtube.com/vi/vYDMKNs2lJo/mqdefault.jpg',d:'5:45'},
+  {id:'8ZP5eqm4JqM',n:'Tere Bina',                 a:'A.R. Rahman',       th:'https://img.youtube.com/vi/8ZP5eqm4JqM/mqdefault.jpg',d:'6:13'},
+  {id:'JGwWNGJdvx8',n:'Shape of You',              a:'Ed Sheeran',        th:'https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg',d:'4:24'},
+  {id:'BmjZSmJ4v_Q',n:'Let Her Go',                a:'Passenger',         th:'https://img.youtube.com/vi/BmjZSmJ4v_Q/mqdefault.jpg',d:'4:15'},
+  {id:'hT_nvWreIhg',n:'Counting Stars',            a:'OneRepublic',       th:'https://img.youtube.com/vi/hT_nvWreIhg/mqdefault.jpg',d:'4:17'},
+  {id:'60ItHLz5WEA',n:'Africa',                    a:'Toto',              th:'https://img.youtube.com/vi/60ItHLz5WEA/mqdefault.jpg',d:'4:55'},
+  {id:'fJ9rUzIMcZQ',n:'Bohemian Rhapsody',         a:'Queen',             th:'https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg',d:'5:55'},
+  {id:'RgKAFK5djSk',n:'See You Again',             a:'Wiz Khalifa',       th:'https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg',d:'3:50'},
+  {id:'09R8_2nJtjg',n:'Sugar',                     a:'Maroon 5',          th:'https://img.youtube.com/vi/09R8_2nJtjg/mqdefault.jpg',d:'3:55'},
+  {id:'3AtDnEC4zak',n:'Dil Dhadakne Do',           a:'Priyanka Chopra',   th:'https://img.youtube.com/vi/3AtDnEC4zak/mqdefault.jpg',d:'4:20'},
+];
+
+// ════════════════════════════════════════════════════════
 //  STATE
-// ══════════════════════════════════════════════════════
-let tracks   = [];
-let cur      = -1;
-let playing  = false;
-let shuffle  = false;
-let repeat   = false;
-let muted    = false;
-let ytReady  = false;
-let player   = null;
-let progTimer= null;
-let curGenreQuery = 'top hindi songs 2024';
+// ════════════════════════════════════════════════════════
+let tracks=[], cur=-1, playing=false, shuffle=false, repeat=false, muted=false;
+let ytReady=false, ytPlayer=null, progTimer=null, pendingIdx=null;
+let favs   = JSON.parse(localStorage.getItem('sq_fav4')||'[]');
+let recent = JSON.parse(localStorage.getItem('sq_rec4')||'[]');
 
-let favs   = JSON.parse(localStorage.getItem('sq_fav2')  || '[]');
-let recent = JSON.parse(localStorage.getItem('sq_rec2')  || '[]');
+// ════════════════════════════════════════════════════════
+//  INVIDIOUS SEARCH — no API key, no signup
+// ════════════════════════════════════════════════════════
+async function invSearch(query, retries=0){
+  showSpinner(query);
+  try {
+    const url = `${apiBase()}/api/v1/search?q=${encodeURIComponent(query)}&type=video&page=1`;
+    const res  = await Promise.race([fetch(url), tout(7000)]);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
 
-// ══════════════════════════════════════════════════════
-//  YOUTUBE IFRAME PLAYER INIT
-// ══════════════════════════════════════════════════════
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('ytPlayer', {
-    height: '1', width: '1',
-    playerVars: { autoplay: 0, controls: 0 },
-    events: {
-      onReady:       () => { ytReady = true; },
+    // Filter to music-like results (has duration, not live)
+    const videos = data
+      .filter(v => v.type==='video' && v.lengthSeconds > 30 && !v.liveNow)
+      .slice(0,25);
+
+    if(!videos.length) throw new Error('empty');
+
+    tracks = videos.map(v => ({
+      id:  v.videoId,
+      n:   v.title,
+      a:   v.author,
+      th:  v.videoThumbnails?.find(t=>t.quality==='medium')?.url ||
+           v.videoThumbnails?.find(t=>t.quality==='default')?.url ||
+           `https://img.youtube.com/vi/${v.videoId}/mqdefault.jpg`,
+      d:   fmtD(v.lengthSeconds),
+    }));
+
+    setCount(tracks.length + ' songs found ✓');
+    hideAlert();
+    render();
+
+  } catch(e) {
+    instanceIdx++; // try next Invidious instance
+    if(retries < INVIDIOUS.length - 1){
+      showAlert('info', `Trying backup server… (${e.message})`);
+      setTimeout(()=>invSearch(query, retries+1), 600);
+    } else {
+      // All instances failed — use curated fallback
+      showAlert('warn', '⚠️ Live search unavailable right now. Showing curated songs. Try again in a moment!');
+      const q = query.toLowerCase();
+      tracks = CURATED.filter(t=>t.n.toLowerCase().includes(q)||t.a.toLowerCase().includes(q));
+      if(!tracks.length) tracks=[...CURATED];
+      setCount(tracks.length + ' curated songs');
+      render();
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════
+//  YOUTUBE IFRAME PLAYER
+// ════════════════════════════════════════════════════════
+function onYouTubeIframeAPIReady(){
+  ytPlayer = new YT.Player('ytPlayer',{
+    height:'1',width:'1',
+    playerVars:{autoplay:0,controls:0},
+    events:{
+      onReady:       ()=>{ ytReady=true; if(pendingIdx!==null){play(pendingIdx);pendingIdx=null;} },
       onStateChange: onYTState,
-      onError:       onYTError,
+      onError:       onYTErr,
     }
   });
 }
 
-function onYTState(e) {
-  // YT.PlayerState: ENDED=0, PLAYING=1, PAUSED=2, BUFFERING=3
-  if (e.data === YT.PlayerState.PLAYING) {
-    playing = true;
-    startProgTimer();
-    ui();
-  } else if (e.data === YT.PlayerState.PAUSED) {
-    playing = false;
-    stopProgTimer();
-    ui();
-  } else if (e.data === YT.PlayerState.ENDED) {
-    stopProgTimer();
-    if (repeat) { player.seekTo(0); player.playVideo(); }
-    else nextTrack();
-  } else if (e.data === YT.PlayerState.BUFFERING) {
-    document.getElementById('playBtn').textContent = '⏳';
-  }
+function onYTState(e){
+  const S = YT.PlayerState;
+  if(e.data===S.PLAYING){ playing=true; startProg(); uiBar(); }
+  else if(e.data===S.PAUSED){ playing=false; stopProg(); uiBar(); }
+  else if(e.data===S.ENDED){ stopProg(); resetProg(); if(repeat){ytPlayer.seekTo(0);ytPlayer.playVideo();}else nextTrack(); }
+  else if(e.data===S.BUFFERING){ document.getElementById('playBtn').textContent='⏳'; }
 }
 
-function onYTError(e) {
-  // Video not available — skip to next automatically
-  console.warn('YT error:', e.data);
-  if (cur < tracks.length - 1) setTimeout(() => play(cur + 1), 400);
+function onYTErr(e){
+  // Skip unplayable video silently
+  if(cur<tracks.length-1) setTimeout(()=>play(cur+1),300);
 }
 
-// ══════════════════════════════════════════════════════
-//  YOUTUBE SEARCH via Data API v3
-// ══════════════════════════════════════════════════════
-async function ytSearch(query) {
-  showSpinner('Searching YouTube for "' + query + '"…');
-  try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&videoCategoryId=10&maxResults=25&key=${YT_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error?.message || 'API error');
-    }
-    const data = await res.json();
+// ════════════════════════════════════════════════════════
+//  PLAY — progress resets instantly on track change
+// ════════════════════════════════════════════════════════
+function play(i){
+  if(i<0||i>=tracks.length) return;
+  cur=i;
+  const t=tracks[i];
 
-    if (!data.items || !data.items.length) {
-      showEmpty('No results found for "' + query + '". Try another search.');
-      return;
-    }
+  // Reset immediately
+  resetProg();
+  playing=false;
+  stopProg();
+  document.getElementById('playBtn').textContent='⏳';
 
-    tracks = data.items.map((item, i) => ({
-      id:        item.id.videoId,
-      n:         item.snippet.title.replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"'),
-      a:         item.snippet.channelTitle,
-      thumb:     item.snippet.thumbnails.default.url,
-      src:       'YouTube',
-      d:         '–',
-      g:         query,
-    }));
+  if(!ytReady||!ytPlayer){ pendingIdx=i; return; }
 
-    setCount(tracks.length + ' songs found');
-    render();
+  ytPlayer.loadVideoById({videoId:t.id});
+  ytPlayer.setVolume(muted?0:parseInt(document.getElementById('volSlider').value));
 
-    // Also fetch durations for the videos
-    fetchDurations(tracks.map(t => t.id));
-
-  } catch(err) {
-    console.error('YouTube search error:', err);
-    // Quota exceeded or key error — fall back to no-key approach
-    showInfo('⚡ YouTube API quota reached. Showing curated tracks. Try again in a few hours, or search again!');
-    loadFallback(query);
-  }
-}
-
-// Fetch video durations (separate API call)
-async function fetchDurations(videoIds) {
-  try {
-    const ids = videoIds.join(',');
-    const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids}&key=${YT_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) return;
-    const data = await res.json();
-    if (!data.items) return;
-
-    data.items.forEach(item => {
-      const t = tracks.find(tr => tr.id === item.id);
-      if (t) t.d = parseISO8601(item.contentDetails.duration);
-    });
-    render(); // re-render with durations
-  } catch(e) {}
-}
-
-function parseISO8601(dur) {
-  // PT4M13S → 4:13
-  const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!m) return '–';
-  const h = parseInt(m[1]||0), mn = parseInt(m[2]||0), s = parseInt(m[3]||0);
-  if (h > 0) return `${h}:${String(mn).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  return `${mn}:${String(s).padStart(2,'0')}`;
-}
-
-// ══════════════════════════════════════════════════════
-//  FALLBACK TRACKS (when API quota is hit)
-// ══════════════════════════════════════════════════════
-const FALLBACK = [
-  // Real YouTube video IDs for popular songs
-  {id:'JGwWNGJdvx8',n:'Shape of You',                a:'Ed Sheeran',        thumb:'https://img.youtube.com/vi/JGwWNGJdvx8/default.jpg',src:'YouTube',d:'4:24',g:'pop'},
-  {id:'ktvTqknDobU',n:'Iktara',                      a:'Amit Trivedi',      thumb:'https://img.youtube.com/vi/ktvTqknDobU/default.jpg',src:'YouTube',d:'5:02',g:'bollywood'},
-  {id:'sRw4ld4ul64',n:'Tum Hi Ho',                   a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/sRw4ld4ul64/default.jpg',src:'YouTube',d:'4:43',g:'bollywood'},
-  {id:'vYDMKNs2lJo',n:'Tujh Mein Rab Dikhta Hai',   a:'Roop Kumar Rathod', thumb:'https://img.youtube.com/vi/vYDMKNs2lJo/default.jpg',src:'YouTube',d:'5:45',g:'bollywood'},
-  {id:'8UVNT4wvIGY',n:'Channa Mereya',               a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/8UVNT4wvIGY/default.jpg',src:'YouTube',d:'5:50',g:'bollywood'},
-  {id:'lp-EJBangSQ',n:'Kun Faya Kun',                a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/lp-EJBangSQ/default.jpg',src:'YouTube',d:'7:52',g:'sufi'},
-  {id:'YykjpeuMNEk',n:'Kabira',                      a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/YykjpeuMNEk/default.jpg',src:'YouTube',d:'4:25',g:'bollywood'},
-  {id:'ZVSz6iNhqHg',n:'Kal Ho Naa Ho',               a:'Sonu Nigam',        thumb:'https://img.youtube.com/vi/ZVSz6iNhqHg/default.jpg',src:'YouTube',d:'6:05',g:'bollywood'},
-  {id:'3AtDnEC4zak',n:'Dil Dhadakne Do',             a:'Priyanka Chopra',   thumb:'https://img.youtube.com/vi/3AtDnEC4zak/default.jpg',src:'YouTube',d:'4:20',g:'bollywood'},
-  {id:'BmjZSmJ4v_Q',n:'Let Her Go',                  a:'Passenger',         thumb:'https://img.youtube.com/vi/BmjZSmJ4v_Q/default.jpg',src:'YouTube',d:'4:15',g:'pop'},
-  {id:'hT_nvWreIhg',n:'Counting Stars',              a:'OneRepublic',       thumb:'https://img.youtube.com/vi/hT_nvWreIhg/default.jpg',src:'YouTube',d:'4:17',g:'pop'},
-  {id:'09R8_2nJtjg',n:'Sugar',                       a:'Maroon 5',          thumb:'https://img.youtube.com/vi/09R8_2nJtjg/default.jpg',src:'YouTube',d:'3:55',g:'pop'},
-  {id:'60ItHLz5WEA',n:'Africa',                      a:'Toto',              thumb:'https://img.youtube.com/vi/60ItHLz5WEA/default.jpg',src:'YouTube',d:'4:55',g:'rock'},
-  {id:'fJ9rUzIMcZQ',n:'Bohemian Rhapsody',           a:'Queen',             thumb:'https://img.youtube.com/vi/fJ9rUzIMcZQ/default.jpg',src:'YouTube',d:'5:55',g:'rock'},
-  {id:'Y4OcSGrRPsU',n:'Pehli Nazar Mein',            a:'Atif Aslam',        thumb:'https://img.youtube.com/vi/Y4OcSGrRPsU/default.jpg',src:'YouTube',d:'5:24',g:'bollywood'},
-  {id:'8ZP5eqm4JqM',n:'Tere Bina',                   a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/8ZP5eqm4JqM/default.jpg',src:'YouTube',d:'6:13',g:'bollywood'},
-  {id:'CvBfHwUxHIk',n:'Jai Ho',                      a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/CvBfHwUxHIk/default.jpg',src:'YouTube',d:'5:36',g:'bollywood'},
-  {id:'xo1VInw-SKc',n:'Ae Dil Hai Mushkil',          a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/xo1VInw-SKc/default.jpg',src:'YouTube',d:'4:28',g:'bollywood'},
-  {id:'lWA2pjMjpBs',n:'Raabta',                      a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/lWA2pjMjpBs/default.jpg',src:'YouTube',d:'4:18',g:'bollywood'},
-  {id:'RgKAFK5djSk',n:'See You Again',               a:'Wiz Khalifa',       thumb:'https://img.youtube.com/vi/RgKAFK5djSk/default.jpg',src:'YouTube',d:'3:50',g:'pop'},
-];
-
-function loadFallback(query) {
-  let list = [...FALLBACK];
-  if (query) {
-    const q = query.toLowerCase();
-    const filtered = FALLBACK.filter(t => t.n.toLowerCase().includes(q) || t.a.toLowerCase().includes(q) || t.g.toLowerCase().includes(q));
-    list = filtered.length ? filtered : FALLBACK;
-  }
-  tracks = list;
-  setCount(tracks.length + ' curated tracks');
-  render();
-}
-
-// ══════════════════════════════════════════════════════
-//  PLAY
-// ══════════════════════════════════════════════════════
-function play(i) {
-  if (i < 0 || i >= tracks.length) return;
-  cur = i;
-  const t = tracks[i];
-
-  if (!ytReady || !player) {
-    setTimeout(() => play(i), 500); return;
-  }
-
-  player.loadVideoById(t.id);
-  player.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
-
-  // Update thumbnail
-  const artEl = document.getElementById('nowArt');
-  artEl.innerHTML = t.thumb
-    ? `<img src="${t.thumb}" alt="thumb"/>`
-    : `<div class="vinyl spin" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
+  // Update now-playing artwork
+  const art=document.getElementById('nowArt');
+  art.innerHTML = t.th
+    ? `<img src="${t.th}" alt=""/>`
+    : `<div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
 
   document.getElementById('nowTitle').textContent  = t.n;
   document.getElementById('nowArtist').textContent = t.a;
-  document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
-  document.title = t.n + ' — SONIQ';
+  document.getElementById('heartBtn').textContent  = favs.includes(t.id)?'❤️':'🤍';
+  document.title = t.n+' — SONIQ';
   saveRec(t);
   render();
 }
 
-function togglePlay() {
-  if (!tracks.length) return;
-  if (cur === -1) { play(0); return; }
-  if (!player) return;
-  const state = player.getPlayerState();
-  if (state === YT.PlayerState.PLAYING) player.pauseVideo();
-  else player.playVideo();
+function togglePlay(){
+  if(!tracks.length) return;
+  if(cur===-1){ play(0); return; }
+  if(!ytPlayer) return;
+  const s=ytPlayer.getPlayerState();
+  if(s===YT.PlayerState.PLAYING) ytPlayer.pauseVideo();
+  else ytPlayer.playVideo();
 }
 
-function prevTrack() {
-  if (player && player.getCurrentTime() > 3) { player.seekTo(0); return; }
-  play(cur > 0 ? cur - 1 : tracks.length - 1);
+function prevTrack(){
+  try{if(ytPlayer.getCurrentTime()>3){ytPlayer.seekTo(0);return;}}catch(e){}
+  play(cur>0?cur-1:tracks.length-1);
+}
+function nextTrack(){
+  if(shuffle){let r;do{r=Math.floor(Math.random()*tracks.length);}while(r===cur&&tracks.length>1);play(r);return;}
+  play(cur<tracks.length-1?cur+1:0);
+}
+function toggleShuffle(){ shuffle=!shuffle; document.getElementById('shuffleBtn').classList.toggle('on',shuffle); }
+function toggleRepeat() { repeat=!repeat;   document.getElementById('repeatBtn').classList.toggle('on',repeat); }
+function toggleMute()   {
+  muted=!muted;
+  if(ytPlayer) ytPlayer.setVolume(muted?0:parseInt(document.getElementById('volSlider').value));
+  document.getElementById('volIco').textContent=muted?'🔇':'🔊';
+}
+function toggleFav(){
+  if(cur===-1)return;
+  const id=tracks[cur].id,i=favs.indexOf(id);
+  if(i===-1){favs.push(id);document.getElementById('heartBtn').textContent='❤️';}
+  else{favs.splice(i,1);document.getElementById('heartBtn').textContent='🤍';}
+  localStorage.setItem('sq_fav4',JSON.stringify(favs));
+}
+function saveRec(t){
+  recent=recent.filter(r=>r.id!==t.id);
+  recent.unshift({id:t.id,n:t.n,a:t.a,th:t.th});
+  if(recent.length>60)recent.pop();
+  localStorage.setItem('sq_rec4',JSON.stringify(recent));
 }
 
-function nextTrack() {
-  if (shuffle) {
-    let r; do { r = Math.floor(Math.random()*tracks.length); } while(r===cur && tracks.length>1);
-    play(r); return;
-  }
-  play(cur < tracks.length-1 ? cur+1 : 0);
+// ════════════════════════════════════════════════════════
+//  PROGRESS
+// ════════════════════════════════════════════════════════
+function startProg(){
+  stopProg();
+  progTimer=setInterval(()=>{
+    if(!ytPlayer||!playing)return;
+    const c=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;
+    if(d<=0)return;
+    const p=(c/d)*100;
+    document.getElementById('progFill').style.width=p+'%';
+    document.getElementById('progThumb').style.left=p+'%';
+    document.getElementById('curTime').textContent=fmtD(c);
+    document.getElementById('totTime').textContent=fmtD(d);
+  },500);
+}
+function stopProg(){ if(progTimer){clearInterval(progTimer);progTimer=null;} }
+function resetProg(){
+  document.getElementById('progFill').style.width='0%';
+  document.getElementById('progThumb').style.left='0%';
+  document.getElementById('curTime').textContent='0:00';
+  document.getElementById('totTime').textContent='0:00';
 }
 
-function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffleBtn').classList.toggle('on',shuffle); }
-function toggleRepeat()  { repeat=!repeat;   document.getElementById('repeatBtn').classList.toggle('on',repeat); }
-
-function toggleMute() {
-  muted = !muted;
-  if (player) player.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
-  document.getElementById('volIco').textContent = muted ? '🔇' : '🔊';
-}
-
-function toggleFav() {
-  if (cur===-1) return;
-  const id = tracks[cur].id;
-  const i = favs.indexOf(id);
-  if (i===-1) { favs.push(id); document.getElementById('heartBtn').textContent='❤️'; }
-  else        { favs.splice(i,1); document.getElementById('heartBtn').textContent='🤍'; }
-  localStorage.setItem('sq_fav2', JSON.stringify(favs));
-}
-
-function saveRec(t) {
-  recent = recent.filter(r=>r.id!==t.id);
-  recent.unshift({id:t.id, n:t.n, a:t.a, thumb:t.thumb});
-  if (recent.length>50) recent.pop();
-  localStorage.setItem('sq_rec2', JSON.stringify(recent));
-}
-
-// ══════════════════════════════════════════════════════
-//  PROGRESS TIMER
-// ══════════════════════════════════════════════════════
-function startProgTimer() {
-  stopProgTimer();
-  progTimer = setInterval(() => {
-    if (!player || !playing) return;
-    const cur_ = player.getCurrentTime() || 0;
-    const dur  = player.getDuration() || 0;
-    if (dur <= 0) return;
-    const pct = (cur_ / dur) * 100;
-    document.getElementById('progFill').style.width  = pct + '%';
-    document.getElementById('progThumb').style.left  = pct + '%';
-    document.getElementById('curTime').textContent   = fmtD(cur_);
-    document.getElementById('totTime').textContent   = fmtD(dur);
-  }, 500);
-}
-function stopProgTimer() { if (progTimer) { clearInterval(progTimer); progTimer=null; } }
-
-document.getElementById('progTrack').addEventListener('click', e => {
-  if (!player) return;
-  const dur = player.getDuration();
-  if (!dur) return;
-  const rect = e.currentTarget.getBoundingClientRect();
-  player.seekTo(((e.clientX-rect.left)/rect.width)*dur);
+document.getElementById('progTrack').addEventListener('click',e=>{
+  if(!ytPlayer)return;
+  const d=ytPlayer.getDuration();if(!d)return;
+  const r=e.currentTarget.getBoundingClientRect();
+  ytPlayer.seekTo(((e.clientX-r.left)/r.width)*d,true);
+});
+document.getElementById('volSlider').addEventListener('input',e=>{
+  if(muted){muted=false;document.getElementById('volIco').textContent='🔊';}
+  if(ytPlayer)ytPlayer.setVolume(parseInt(e.target.value));
 });
 
-// Volume
-document.getElementById('volSlider').addEventListener('input', e => {
-  if (muted) { muted=false; document.getElementById('volIco').textContent='🔊'; }
-  if (player) player.setVolume(parseInt(e.target.value));
-});
-
-// ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
 //  UI
-// ══════════════════════════════════════════════════════
-function ui() {
-  document.getElementById('playBtn').textContent   = playing ? '⏸' : '▶';
-  document.getElementById('wave').className        = 'wavewrap' + (playing ? '' : ' stopped');
-
-  // Vinyl spin on nowArt if no thumbnail
-  const v = document.getElementById('vinyl');
-  if (v) v.className = 'vinyl' + (playing ? ' spin' : '');
-
-  render();
+// ════════════════════════════════════════════════════════
+function uiBar(){
+  document.getElementById('playBtn').textContent=playing?'⏸':'▶';
+  document.getElementById('wave').className='wavewrap'+(playing?'':' stopped');
+  const v=document.getElementById('vinyl');if(v)v.className='vinyl'+(playing?' spin':'');
 }
 
-function render() {
-  if (!tracks.length) return;
-  const html = tracks.map((t,i) => {
-    const on = i===cur ? ' on' : '';
-    const num = (i===cur && playing) ? '▶' : (i+1);
-    return `<div class="trow${on}" onclick="play(${i})">
-      <div class="tnum">${num}</div>
-      <div class="tinfo">
-        <div class="tname">${x(t.n)}</div>
-        <div class="tartist">${x(t.a)}</div>
-      </div>
-      <div class="tsrc">${x(t.src)}</div>
+function render(){
+  if(!tracks.length){showEmpty('No songs found.');return;}
+  const html=tracks.map((t,i)=>{
+    const on=i===cur?' on':'';
+    const num=(i===cur&&playing)?'▶':(i+1);
+    const th=t.th?`<img class="tthumb" src="${t.th}" alt="" loading="lazy"/>`:`<div class="tthumb-ph">🎵</div>`;
+    return`<div class="trow${on}" onclick="play(${i})">
+      <div class="tnum">${num}</div>${th}
+      <div class="tinfo"><div class="tname">${x(t.n)}</div><div class="tartist">${x(t.a)}</div></div>
       <div class="tdur">${t.d||'–'}</div>
     </div>`;
   }).join('');
-  document.getElementById('trackList').innerHTML = '<div class="tgrid">'+html+'</div>';
+  document.getElementById('trackList').innerHTML='<div class="tgrid">'+html+'</div>';
 }
 
-function setCount(t)   { document.getElementById('ccount').textContent = t; }
-function showSpinner(msg) {
-  document.getElementById('trackList').innerHTML =
-    `<div class="spinner-wrap"><div class="spinner"></div><div>${x(msg)}</div></div>`;
+function setCount(t) { document.getElementById('ccount').textContent=t; }
+function showSpinner(q){
+  document.getElementById('trackList').innerHTML=`<div class="spin-wrap"><div class="spinner"></div><div>Searching for "<strong>${x(q)}</strong>"…</div></div>`;
   setCount('Searching…');
 }
-function showEmpty(msg) {
-  document.getElementById('trackList').innerHTML =
-    `<div class="empty"><div class="eico">🎵</div><div>${x(msg)}</div></div>`;
-  setCount('0 tracks');
+function showEmpty(m){
+  document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">🎵</div><div>${x(m)}</div></div>`;
+  setCount('0 results');
 }
-function showInfo(msg) {
-  const b = document.getElementById('infoBanner');
-  b.textContent = msg; b.style.display = 'block';
-  setTimeout(() => b.style.display='none', 8000);
+function showAlert(type,msg){
+  const el=document.getElementById('alert');
+  el.className='alert '+type; el.textContent=msg; el.style.display='block';
 }
+function hideAlert(){ document.getElementById('alert').style.display='none'; }
 
-// ══════════════════════════════════════════════════════
-//  SEARCH
-// ══════════════════════════════════════════════════════
-function doSearch() {
-  const q = document.getElementById('searchInput').value.trim();
-  if (!q) return;
-  document.getElementById('ctitle').textContent = `Results for "${q}"`;
+// ════════════════════════════════════════════════════════
+//  SEARCH BUTTON + ENTER
+// ════════════════════════════════════════════════════════
+function doSearch(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q){ showAlert('info','Type a song name and press Search — e.g. "Tum Hi Ho" or "let me love you"'); return; }
+  document.getElementById('ctitle').textContent=`Results for "${q}"`;
   document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
-  ytSearch(q);
+  invSearch(q);
 }
+document.getElementById('searchBtn').onclick=doSearch;
+document.getElementById('searchInput').addEventListener('keydown',e=>{ if(e.key==='Enter')doSearch(); });
 
-document.getElementById('searchBtn').addEventListener('click', doSearch);
-document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
-
-// ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
 //  GENRE TABS
-// ══════════════════════════════════════════════════════
-document.getElementById('gtabs').addEventListener('click', e => {
-  const btn = e.target.closest('.gtab'); if(!btn) return;
+// ════════════════════════════════════════════════════════
+document.getElementById('gtabs').addEventListener('click',e=>{
+  const btn=e.target.closest('.gtab');if(!btn)return;
   document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  curGenreQuery = btn.dataset.g;
-  document.getElementById('ctitle').textContent = btn.textContent.trim();
-  document.getElementById('searchInput').value = '';
-  document.getElementById('infoBanner').style.display = 'none';
-  ytSearch(curGenreQuery);
+  document.getElementById('ctitle').textContent=btn.textContent.trim();
+  document.getElementById('searchInput').value='';
+  hideAlert();
+  invSearch(btn.dataset.q);
 });
 
-// ══════════════════════════════════════════════════════
-//  SIDEBAR NAV
-// ══════════════════════════════════════════════════════
-function setNav(el) { document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on')); if(el)el.classList.add('on'); }
+// ════════════════════════════════════════════════════════
+//  SIDEBAR
+// ════════════════════════════════════════════════════════
+function setNav(el){ document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on'); }
 
-document.getElementById('sDiscover').onclick = () => {
+document.getElementById('sDiscover').onclick=()=>{
   setNav(document.getElementById('sDiscover'));
-  document.getElementById('ctitle').textContent = 'Discover Free Music';
-  document.getElementById('searchInput').value = '';
-  ytSearch('top hindi songs 2024');
+  document.getElementById('ctitle').textContent='Discover Free Music';
+  document.getElementById('searchInput').value='';
+  hideAlert();
+  invSearch('top hindi songs 2024');
 };
 
-document.getElementById('sFav').onclick = () => {
+document.getElementById('sFav').onclick=()=>{
   setNav(document.getElementById('sFav'));
-  document.getElementById('ctitle').textContent = '❤️ Favorites';
-  tracks = FALLBACK.filter(t=>favs.includes(t.id));
-  // also check recently-played cache
-  const recTracks = recent.filter(r=>favs.includes(r.id)).map(r=>({id:r.id,n:r.n,a:r.a,thumb:r.thumb,src:'YouTube',d:'–',g:'fav'}));
-  const merged = [...recTracks];
-  FALLBACK.filter(t=>favs.includes(t.id)).forEach(t=>{ if(!merged.find(m=>m.id===t.id)) merged.push(t); });
-  tracks = merged;
+  document.getElementById('ctitle').textContent='❤️ Favorites';
+  hideAlert();
+  const rFavs=recent.filter(r=>favs.includes(r.id)).map(r=>({id:r.id,n:r.n,a:r.a,th:r.th||'',d:'–'}));
+  const cFavs=CURATED.filter(t=>favs.includes(t.id));
+  const merged=[...rFavs];
+  cFavs.forEach(t=>{if(!merged.find(m=>m.id===t.id))merged.push(t);});
+  tracks=merged;
   setCount(tracks.length+' favorites');
-  if(!tracks.length){ showEmpty('No favorites yet. Press ♡ while a song plays.'); } else render();
+  if(!tracks.length)showEmpty('No favorites yet. Press ♡ while a song is playing.');
+  else render();
 };
 
-document.getElementById('sRecent').onclick = () => {
+document.getElementById('sRecent').onclick=()=>{
   setNav(document.getElementById('sRecent'));
-  document.getElementById('ctitle').textContent = '🕐 Recently Played';
-  tracks = recent.map(r=>({id:r.id,n:r.n,a:r.a,thumb:r.thumb||'',src:'YouTube',d:'–',g:'recent'}));
+  document.getElementById('ctitle').textContent='🕐 Recently Played';
+  hideAlert();
+  tracks=recent.map(r=>({id:r.id,n:r.n,a:r.a,th:r.th||'',d:'–'}));
   setCount(tracks.length+' tracks');
-  if(!tracks.length){ showEmpty('Nothing played yet. Start listening!'); } else render();
+  if(!tracks.length)showEmpty('Nothing played yet. Start listening!');
+  else render();
 };
 
-document.querySelectorAll('[data-q]').forEach(el => {
-  el.onclick = () => {
-    const q = el.dataset.q;
-    document.getElementById('ctitle').textContent = el.textContent.trim();
-    document.getElementById('searchInput').value = '';
-    curGenreQuery = q;
-    ytSearch(q);
+document.querySelectorAll('[data-q]').forEach(el=>{
+  el.onclick=()=>{
+    document.getElementById('ctitle').textContent=el.textContent.trim();
+    document.getElementById('searchInput').value='';
+    hideAlert();
+    invSearch(el.dataset.q);
     setNav(el);
   };
 });
 
-// ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
 //  KEYBOARD
-// ══════════════════════════════════════════════════════
-document.addEventListener('keydown', e => {
-  if (document.activeElement===document.getElementById('searchInput')) return;
-  if (e.code==='Space')                 { e.preventDefault(); togglePlay(); }
-  if (e.code==='ArrowRight'&&e.altKey)  nextTrack();
-  if (e.code==='ArrowLeft'&&e.altKey)   prevTrack();
-  if (e.code==='KeyM') toggleMute();
-  if (e.code==='KeyS') toggleShuffle();
-  if (e.code==='KeyR') toggleRepeat();
+// ════════════════════════════════════════════════════════
+document.addEventListener('keydown',e=>{
+  if(document.activeElement===document.getElementById('searchInput'))return;
+  if(e.code==='Space'){e.preventDefault();togglePlay();}
+  if(e.code==='ArrowRight'&&e.altKey)nextTrack();
+  if(e.code==='ArrowLeft'&&e.altKey)prevTrack();
+  if(e.code==='KeyM')toggleMute();
+  if(e.code==='KeyS')toggleShuffle();
+  if(e.code==='KeyR')toggleRepeat();
 });
 
-// ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
 //  UTILS
-// ══════════════════════════════════════════════════════
-function fmtD(s) {
-  if (!s||isNaN(s)) return '–';
-  s=Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
+// ════════════════════════════════════════════════════════
+function fmtD(s){
+  if(!s||isNaN(s))return'–';
+  s=Math.floor(s);return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
 }
-function x(s) {
-  if(!s) return '';
+function x(s){
+  if(!s)return'';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+function tout(ms){return new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms));}
 
-// ══════════════════════════════════════════════════════
-//  INIT — load on page open
-// ══════════════════════════════════════════════════════
-ytSearch('top hindi songs 2024');
+// ════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════
+invSearch('top hindi songs 2024');
 </script>
 </body>
 </html>
