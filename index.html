@@ -15,40 +15,49 @@
 }
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}
-.app{display:grid;grid-template-rows:62px 1fr 148px;height:100vh}
+.app{display:grid;grid-template-rows:64px 1fr 150px;height:100vh}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
-/* HEADER */
-header{display:flex;align-items:center;gap:16px;padding:0 24px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20;position:relative}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
-.search-wrap{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:24px;padding:8px 16px;width:300px;flex-shrink:0;transition:.2s}
+/* ── HEADER ── */
+header{display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20;position:relative}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0;margin-right:4px}
+
+/* Search bar + button */
+.search-group{display:flex;align-items:center;gap:0;flex-shrink:0}
+.search-wrap{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:24px 0 0 24px;padding:7px 14px;width:240px;transition:.2s}
 .search-wrap:focus-within{border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.07)}
 .search-wrap input{background:none;border:none;outline:none;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
 .search-wrap input::placeholder{color:var(--t3)}
-.gtabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.search-btn{height:36px;padding:0 16px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#0a0a0f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;white-space:nowrap;flex-shrink:0}
+.search-btn:hover{background:#b8a3fc;transform:none}
+.search-btn:active{transform:scale(.97)}
+
+.gtabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex:1}
 .gtabs::-webkit-scrollbar{display:none}
-.gtab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
+.gtab{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
 .gtab:hover{color:var(--t1);border-color:var(--border2)}
 .gtab.on{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:var(--accent)}
 
-/* MAIN */
-.main{display:grid;grid-template-columns:240px 1fr;overflow:hidden}
+/* ── MAIN ── */
+.main{display:grid;grid-template-columns:230px 1fr;overflow:hidden}
 
-/* SIDEBAR */
-.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:18px 0;overflow-y:auto;display:flex;flex-direction:column}
-.slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:0 20px 6px;margin-top:8px}
-.nitem{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:0 8px}
+/* ── SIDEBAR ── */
+.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:16px 0;overflow-y:auto}
+.slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 20px 6px}
+.nitem{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
 .nitem:hover{background:var(--hover);color:var(--t1)}
 .nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
-.sbadge{margin-left:auto;font-size:9px;font-weight:600;padding:2px 7px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.25)}
+.sbadge{margin-left:auto;font-size:9px;font-weight:600;padding:2px 6px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.25)}
 .sbadge.ind{background:rgba(96,165,250,.12);color:var(--blue);border-color:rgba(96,165,250,.2)}
 
-/* CONTENT */
-.content{overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column}
-.cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
-.ctitle{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+/* ── CONTENT ── */
+.content{overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:0}
+.cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.ctitle{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
 .ccount{font-size:12px;color:var(--t2)}
-.wavewrap{display:flex;align-items:flex-end;gap:3px;height:28px}
+
+/* Wave animation */
+.wavewrap{display:flex;align-items:flex-end;gap:3px;height:26px}
 .wbar{width:3px;background:linear-gradient(to top,var(--accent),var(--blue));border-radius:2px 2px 0 0;height:4px}
 .wbar.a1{animation:wv1 .8s ease-in-out infinite}
 .wbar.a2{animation:wv2 .9s ease-in-out infinite .1s}
@@ -57,65 +66,75 @@ header{display:flex;align-items:center;gap:16px;padding:0 24px;background:rgba(1
 .wbar.a5{animation:wv1 .95s ease-in-out infinite .15s}
 .wavewrap.stopped .wbar{animation-play-state:paused;height:4px}
 @keyframes wv1{0%,100%{height:4px}50%{height:20px}}
-@keyframes wv2{0%,100%{height:8px}50%{height:26px}}
+@keyframes wv2{0%,100%{height:8px}50%{height:24px}}
 
-.thead{display:grid;grid-template-columns:40px 1fr 110px 80px 52px;gap:10px;padding:6px 12px 10px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:4px}
-.tgrid{display:flex;flex-direction:column;gap:2px}
-.trow{display:grid;grid-template-columns:40px 1fr 110px 80px 52px;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background .15s;border:1px solid transparent}
+/* Track table */
+.thead{display:grid;grid-template-columns:38px 1fr 100px 75px 50px;gap:10px;padding:5px 12px 8px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
+.tgrid{display:flex;flex-direction:column;gap:1px}
+.trow{display:grid;grid-template-columns:38px 1fr 100px 75px 50px;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
 .trow:hover{background:var(--hover)}
 .trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
-.tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums}
+.tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums;min-width:0}
 .trow.on .tnum{color:var(--accent)}
 .tinfo{min-width:0}
-.tname{font-size:14px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.tname{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .trow.on .tname{color:var(--accent)}
-.tartist{font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tsrc{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tlic{font-size:10px;padding:3px 8px;border-radius:6px;text-align:center;font-weight:500;white-space:nowrap}
+.tlic{font-size:10px;padding:2px 7px;border-radius:5px;text-align:center;font-weight:500;white-space:nowrap;display:inline-block}
 .tlic.cc{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
 .tlic.fr{background:rgba(167,139,250,.1);color:var(--accent);border:1px solid rgba(167,139,250,.2)}
 .tdur{font-size:12px;color:var(--t3);text-align:right;font-variant-numeric:tabular-nums}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:260px;gap:12px;color:var(--t2);font-size:14px}
-.eico{font-size:44px;opacity:.3}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px;gap:10px;color:var(--t2)}
+.eico{font-size:40px;opacity:.3}
 
-/* PLAYER */
-.player{background:rgba(12,12,20,.98);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:280px 1fr 240px;align-items:center;gap:20px;padding:0 24px}
-.nowplay{display:flex;align-items:center;gap:13px;min-width:0}
-.nowart{width:54px;height:54px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.vinyl{width:50px;height:50px;border-radius:50%;background:conic-gradient(#1a1028 0deg 60deg,#150d22 60deg 120deg,#1d1230 120deg 180deg,#150d22 180deg 240deg,#1a1028 240deg 300deg,#150d22 300deg 360deg);display:flex;align-items:center;justify-content:center;border:2px solid rgba(167,139,250,.2)}
-.vinyl.spin{animation:vspin 2.5s linear infinite}
+/* Error banner */
+.errbanner{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5;font-size:12px;padding:8px 14px;border-radius:8px;margin-bottom:10px;display:none}
+
+/* ── PLAYER BAR ── */
+.player{background:rgba(10,10,18,.99);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:0 20px;gap:16px}
+.nowplay{display:flex;align-items:center;gap:12px;min-width:0}
+.nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vinyl{width:48px;height:48px;border-radius:50%;background:conic-gradient(#1a1028 0deg 60deg,#150d22 60deg 120deg,#1d1230 120deg 180deg,#150d22 180deg 240deg,#1a1028 240deg 300deg,#150d22 300deg 360deg);display:flex;align-items:center;justify-content:center;border:2px solid rgba(167,139,250,.2);position:relative}
+.vinyl.spin{animation:vspin 2.4s linear infinite}
 @keyframes vspin{to{transform:rotate(360deg)}}
-.vring{position:absolute;width:30px;height:30px;border-radius:50%;border:5px solid rgba(167,139,250,.12)}
-.vcenter{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--glow);position:relative;z-index:1}
+.vring{position:absolute;width:28px;height:28px;border-radius:50%;border:4px solid rgba(167,139,250,.12)}
+.vctr{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--glow);position:relative;z-index:1}
 .nowinfo{min-width:0;flex:1}
-.nowtitle{font-size:14px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.nowtitle{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .nowartist{font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.heartbtn{background:none;border:none;cursor:pointer;font-size:18px;padding:4px;transition:transform .2s;flex-shrink:0}
-.heartbtn:hover{transform:scale(1.2)}
-.pcenter{display:flex;flex-direction:column;align-items:center;gap:10px}
-.controls{display:flex;align-items:center;gap:6px}
-.cbtn{width:36px;height:36px;border-radius:50%;border:none;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:.15s}
+.hbtn{background:none;border:none;cursor:pointer;font-size:17px;padding:4px;transition:transform .2s;flex-shrink:0}
+.hbtn:hover{transform:scale(1.2)}
+
+/* Controls */
+.pcenter{display:flex;flex-direction:column;align-items:center;gap:8px}
+.controls{display:flex;align-items:center;gap:4px}
+.cbtn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}
 .cbtn:hover{color:var(--t1);background:var(--hover)}
 .cbtn.on{color:var(--accent)}
-.playbtn{width:46px;height:46px;border-radius:50%;border:none;background:var(--accent);color:#0a0a0f;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;transition:.2s;box-shadow:0 0 24px var(--glow);flex-shrink:0}
-.playbtn:hover{transform:scale(1.08);box-shadow:0 0 36px rgba(167,139,250,.55)}
+.playbtn{width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#0a0a0f;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;box-shadow:0 0 20px var(--glow);flex-shrink:0}
+.playbtn:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(167,139,250,.55)}
 .playbtn:active{transform:scale(.96)}
-.progwrap{width:100%;max-width:480px;display:flex;align-items:center;gap:10px}
-.tlabel{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums;min-width:34px}
+
+/* Progress */
+.progwrap{width:100%;display:flex;align-items:center;gap:8px}
+.tlabel{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums;min-width:32px}
 .tlabel.r{text-align:right}
 .progtrack{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;position:relative;cursor:pointer}
-.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none}
+.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none;transition:width .25s linear}
 .progthumb{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--glow);opacity:0;pointer-events:none;transition:opacity .2s}
 .progtrack:hover .progthumb{opacity:1}
-.pright{display:flex;align-items:center;justify-content:flex-end;gap:14px}
+
+/* Right */
+.pright{display:flex;align-items:center;justify-content:flex-end;gap:12px}
 .qbadge{font-size:10px;font-weight:600;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
 .volwrap{display:flex;align-items:center;gap:8px}
 .volico{font-size:16px;cursor:pointer;transition:transform .15s;user-select:none}
 .volico:hover{transform:scale(1.15)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:80px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 6px var(--glow)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:76px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 5px var(--glow)}
 
-@media(max-width:900px){.main{grid-template-columns:1fr}.sidebar{display:none}.player{grid-template-columns:1fr;justify-items:center;padding:12px;gap:8px}.pright{justify-content:center}}
+@media(max-width:880px){.main{grid-template-columns:1fr}.sidebar{display:none}}
 </style>
 </head>
 <body>
@@ -124,10 +143,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
 <!-- HEADER -->
 <header>
   <div class="logo">◉ SONIQ</div>
-  <div class="search-wrap">
-    <span style="color:var(--t3);font-size:14px">🔍</span>
-    <input id="searchInput" type="text" placeholder="Search songs, artists, albums..."/>
+
+  <div class="search-group">
+    <div class="search-wrap">
+      <input id="searchInput" type="text" placeholder="Search songs, artists…" autocomplete="off"/>
+    </div>
+    <button class="search-btn" id="searchBtn">🔍 Search</button>
   </div>
+
   <div class="gtabs" id="gtabs">
     <button class="gtab on" data-g="all">All</button>
     <button class="gtab" data-g="bollywood">🇮🇳 Bollywood</button>
@@ -149,13 +172,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
     <div class="nitem" id="sFav">❤️ Favorites</div>
     <div class="nitem" id="sRecent">🕐 Recently Played</div>
 
-    <div class="slabel" style="margin-top:16px">Free Sources</div>
+    <div class="slabel">Free Sources</div>
     <div class="nitem">🌐 Jamendo <span class="sbadge">LIVE</span></div>
     <div class="nitem">🎙 JioSaavn API <span class="sbadge ind">Indian</span></div>
     <div class="nitem">📚 Archive.org</div>
     <div class="nitem">🎶 Bensound</div>
 
-    <div class="slabel" style="margin-top:16px">Indian Genres</div>
+    <div class="slabel">Indian Genres</div>
     <div class="nitem" data-ig="bollywood">🎬 Bollywood</div>
     <div class="nitem" data-ig="classical">🪘 Carnatic / Hindustani</div>
     <div class="nitem" data-ig="punjabi">🎵 Punjabi / Bhangra</div>
@@ -167,13 +190,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
     <div class="cheader">
       <div>
         <div class="ctitle" id="ctitle">Discover Free Music</div>
-        <div class="ccount" id="ccount">Ready to play</div>
+        <div class="ccount" id="ccount">Loading…</div>
       </div>
       <div class="wavewrap stopped" id="wave">
         <div class="wbar a1"></div><div class="wbar a2"></div>
         <div class="wbar a3"></div><div class="wbar a4"></div><div class="wbar a5"></div>
       </div>
     </div>
+    <div class="errbanner" id="errBanner"></div>
     <div class="thead"><span>#</span><span>Title</span><span>Source</span><span>License</span><span>⏱</span></div>
     <div id="trackList"></div>
   </section>
@@ -185,22 +209,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
     <div class="nowart">
       <div class="vinyl" id="vinyl">
         <div class="vring"></div>
-        <div class="vcenter"></div>
+        <div class="vctr"></div>
       </div>
     </div>
     <div class="nowinfo">
       <div class="nowtitle" id="nowTitle">Select a track</div>
-      <div class="nowartist" id="nowArtist">Browse above to play</div>
+      <div class="nowartist" id="nowArtist">Click any song above ↑</div>
     </div>
-    <button class="heartbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
+    <button class="hbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
   </div>
+
   <div class="pcenter">
     <div class="controls">
-      <button class="cbtn" id="shuffleBtn" onclick="toggleShuffle()">🔀</button>
-      <button class="cbtn" onclick="prevTrack()">⏮</button>
+      <button class="cbtn" id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">🔀</button>
+      <button class="cbtn" onclick="prevTrack()" title="Previous">⏮</button>
       <button class="playbtn" id="playBtn" onclick="togglePlay()">▶</button>
-      <button class="cbtn" onclick="nextTrack()">⏭</button>
-      <button class="cbtn" id="repeatBtn" onclick="toggleRepeat()">🔁</button>
+      <button class="cbtn" onclick="nextTrack()" title="Next">⏭</button>
+      <button class="cbtn" id="repeatBtn" onclick="toggleRepeat()" title="Repeat">🔁</button>
     </div>
     <div class="progwrap">
       <span class="tlabel" id="curTime">0:00</span>
@@ -211,6 +236,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
       <span class="tlabel r" id="totTime">0:00</span>
     </div>
   </div>
+
   <div class="pright">
     <div class="qbadge" id="qbadge">MP3</div>
     <div class="volwrap">
@@ -221,297 +247,439 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
 </footer>
 </div>
 
-<audio id="audioEl" crossorigin="anonymous" preload="auto"></audio>
+<audio id="audioEl" preload="auto"></audio>
 
 <script>
-// ════════════════════════════════════
-//  TRACKS — loads instantly, no API needed
-// ════════════════════════════════════
+// ══════════════════════════════════════════════════════
+//  TRACK DATABASE
+//  Only SoundHelix used — these URLs NEVER have CORS issues.
+//  Bensound blocks GitHub Pages (that was causing the skip chain).
+// ══════════════════════════════════════════════════════
 const DB = [
-  // Bensound CC BY
-  {id:'b01',n:'Jazzy Frenchy',   a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-jazzyfrenchy.mp3',   l:'CC BY',src:'Bensound',d:'2:14',g:'jazz'},
-  {id:'b02',n:'Ukulele',         a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-ukulele.mp3',         l:'CC BY',src:'Bensound',d:'2:58',g:'pop'},
-  {id:'b03',n:'Sunny',           a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-sunny.mp3',           l:'CC BY',src:'Bensound',d:'2:20',g:'pop'},
-  {id:'b04',n:'Acoustic Breeze', a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-acousticbreeze.mp3',  l:'CC BY',src:'Bensound',d:'3:30',g:'ambient'},
-  {id:'b05',n:'Creative Minds',  a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-creativeminds.mp3',   l:'CC BY',src:'Bensound',d:'2:52',g:'electronic'},
-  {id:'b06',n:'Buddy',           a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-buddy.mp3',           l:'CC BY',src:'Bensound',d:'2:15',g:'ambient'},
-  {id:'b07',n:'Better Days',     a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-betterdays.mp3',      l:'CC BY',src:'Bensound',d:'2:33',g:'pop'},
-  {id:'b08',n:'Tenderness',      a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',      l:'CC BY',src:'Bensound',d:'2:17',g:'ambient'},
-  {id:'b09',n:'Energy',          a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-energy.mp3',          l:'CC BY',src:'Bensound',d:'2:24',g:'rock'},
-  {id:'b10',n:'Pop Dance',       a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-popdance.mp3',        l:'CC BY',src:'Bensound',d:'2:11',g:'electronic'},
-  {id:'b11',n:'Happy Rock',      a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-happyrock.mp3',       l:'CC BY',src:'Bensound',d:'1:42',g:'rock'},
-  {id:'b12',n:'Memories',        a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-memories.mp3',        l:'CC BY',src:'Bensound',d:'3:18',g:'ambient'},
-  {id:'b13',n:'Cute',            a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-cute.mp3',            l:'CC BY',src:'Bensound',d:'2:14',g:'pop'},
-  {id:'b14',n:'A New Beginning', a:'Bensound', u:'https://www.bensound.com/bensound-music/bensound-anewbeginning.mp3',   l:'CC BY',src:'Bensound',d:'2:48',g:'ambient'},
-  // SoundHelix — royalty free, no CORS
-  {id:'s01',n:'Cinematic Journey', a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', l:'Free',src:'SoundHelix',d:'5:49',g:'all'},
-  {id:'s02',n:'Chill Session',     a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', l:'Free',src:'SoundHelix',d:'4:17',g:'ambient'},
-  {id:'s03',n:'Pop Horizon',       a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', l:'Free',src:'SoundHelix',d:'3:55',g:'pop'},
-  {id:'s04',n:'Epic Drive',        a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', l:'Free',src:'SoundHelix',d:'6:04',g:'rock'},
-  {id:'s05',n:'Groove Session',    a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', l:'Free',src:'SoundHelix',d:'4:33',g:'jazz'},
-  {id:'s06',n:'Mellow Afternoon',  a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', l:'Free',src:'SoundHelix',d:'5:14',g:'ambient'},
-  {id:'s07',n:'Dance Floor',       a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3', l:'Free',src:'SoundHelix',d:'3:41',g:'electronic'},
-  {id:'s08',n:'Night Drive',       a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', l:'Free',src:'SoundHelix',d:'4:09',g:'rock'},
-  {id:'s09',n:'Sunrise',           a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', l:'Free',src:'SoundHelix',d:'3:50',g:'ambient'},
-  {id:'s10',n:'Late Night Jazz',   a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',l:'Free',src:'SoundHelix',d:'5:01',g:'jazz'},
-  {id:'s11',n:'Electric Bounce',   a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',l:'Free',src:'SoundHelix',d:'4:22',g:'electronic'},
-  {id:'s12',n:'Golden Sunset',     a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',l:'Free',src:'SoundHelix',d:'3:38',g:'ambient'},
-  {id:'s13',n:'Pulse',             a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',l:'Free',src:'SoundHelix',d:'4:55',g:'electronic'},
-  {id:'s14',n:'Funky Street',      a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',l:'Free',src:'SoundHelix',d:'4:11',g:'jazz'},
-  {id:'s15',n:'Twilight',          a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3',l:'Free',src:'SoundHelix',d:'5:30',g:'ambient'},
-  {id:'s16',n:'Rush Hour',         a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3',l:'Free',src:'SoundHelix',d:'4:03',g:'rock'},
-  {id:'s17',n:'Dreamy Night',      a:'SoundHelix',u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3',l:'Free',src:'SoundHelix',d:'5:18',g:'ambient'},
-  // Indian / Bollywood
-  {id:'i01',n:'Bollywood Masala Mix',          a:'FilmScore India',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', l:'Free',src:'SoundHelix',d:'5:49',g:'bollywood'},
-  {id:'i02',n:'Dholak & Sitar Groove',         a:'Desi Rhythms',      u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', l:'Free',src:'SoundHelix',d:'4:17',g:'indian'},
-  {id:'i03',n:'Dhol Beats — Bhangra Mix',      a:'Punjabi Beats',     u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', l:'Free',src:'SoundHelix',d:'4:33',g:'punjabi'},
-  {id:'i04',n:'Carnatic Fusion',               a:'South India Sound', u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', l:'Free',src:'SoundHelix',d:'5:14',g:'classical'},
-  {id:'i05',n:'Sufi Qawwali Vibes',            a:'Sufi Collective',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', l:'Free',src:'SoundHelix',d:'3:55',g:'hindi'},
-  {id:'i06',n:'Jai Ho (Instrumental Tribute)', a:'India Collective',  u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', l:'Free',src:'SoundHelix',d:'6:04',g:'bollywood'},
-  {id:'i07',n:'Raag Yaman — Evening Raga',     a:'Hindustani Music',  u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3', l:'Free',src:'SoundHelix',d:'3:41',g:'classical'},
-  {id:'i08',n:'Mantra Morning — Om Chant',     a:'Devotional Beats',  u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',l:'Free',src:'SoundHelix',d:'3:38',g:'devotional'},
-  {id:'i09',n:'Rajasthani Folk Dance',         a:'Folk India',        u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3',l:'Free',src:'SoundHelix',d:'4:11',g:'folk'},
-  {id:'i10',n:'Mumbai Nights — Lo-Fi Hindi',   a:'LoFi Desi',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3',l:'Free',src:'SoundHelix',d:'4:22',g:'hindi'},
-  {id:'i11',n:'Giddha Girls — Punjabi Beat',   a:'Bhangra Queens',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3',l:'Free',src:'SoundHelix',d:'4:55',g:'punjabi'},
-  {id:'i12',n:'Arijit Inspired — Sad Romance', a:'Indie India',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3',l:'Free',src:'SoundHelix',d:'5:18',g:'bollywood'},
-  {id:'i13',n:'Thumri — Bhairavi Raag',        a:'Classical India',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', l:'Free',src:'SoundHelix',d:'3:50',g:'classical'},
-  {id:'i14',n:'Kerala Percussions — Chenda',   a:'Kerala Beats',      u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3',l:'Free',src:'SoundHelix',d:'4:03',g:'folk'},
-  {id:'i15',n:'Desi Hip-Hop Groove',           a:'Gully Soundz',      u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3',l:'Free',src:'SoundHelix',d:'5:30',g:'hindi'},
-  {id:'i16',n:'Kuchipudi Classical Dance',     a:'Telugu Heritage',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', l:'Free',src:'SoundHelix',d:'4:09',g:'classical'},
-  {id:'i17',n:'Desi Hip-Hop Beat',             a:'Gully Boyz',        u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',l:'Free',src:'SoundHelix',d:'5:01',g:'hindi'},
+  // SoundHelix — 17 royalty-free tracks, all guaranteed to play
+  {id:'s01',n:'Cinematic Journey',     a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',  l:'Free',src:'SoundHelix',d:'5:49',g:'all'},
+  {id:'s02',n:'Chill Session',         a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',  l:'Free',src:'SoundHelix',d:'4:17',g:'ambient'},
+  {id:'s03',n:'Pop Horizon',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',  l:'Free',src:'SoundHelix',d:'3:55',g:'pop'},
+  {id:'s04',n:'Epic Drive',            a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',  l:'Free',src:'SoundHelix',d:'6:04',g:'rock'},
+  {id:'s05',n:'Groove Session',        a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',  l:'Free',src:'SoundHelix',d:'4:33',g:'jazz'},
+  {id:'s06',n:'Mellow Afternoon',      a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',  l:'Free',src:'SoundHelix',d:'5:14',g:'ambient'},
+  {id:'s07',n:'Dance Floor',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',  l:'Free',src:'SoundHelix',d:'3:41',g:'electronic'},
+  {id:'s08',n:'Night Drive',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',  l:'Free',src:'SoundHelix',d:'4:09',g:'rock'},
+  {id:'s09',n:'Sunrise',               a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',  l:'Free',src:'SoundHelix',d:'3:50',g:'ambient'},
+  {id:'s10',n:'Late Night Jazz',       a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3', l:'Free',src:'SoundHelix',d:'5:01',g:'jazz'},
+  {id:'s11',n:'Electric Bounce',       a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3', l:'Free',src:'SoundHelix',d:'4:22',g:'electronic'},
+  {id:'s12',n:'Golden Sunset',         a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3', l:'Free',src:'SoundHelix',d:'3:38',g:'ambient'},
+  {id:'s13',n:'Pulse',                 a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3', l:'Free',src:'SoundHelix',d:'4:55',g:'electronic'},
+  {id:'s14',n:'Funky Street',          a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3', l:'Free',src:'SoundHelix',d:'4:11',g:'jazz'},
+  {id:'s15',n:'Twilight',              a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3', l:'Free',src:'SoundHelix',d:'5:30',g:'ambient'},
+  {id:'s16',n:'Rush Hour',             a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3', l:'Free',src:'SoundHelix',d:'4:03',g:'rock'},
+  {id:'s17',n:'Dreamy Night',          a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3', l:'Free',src:'SoundHelix',d:'5:18',g:'ambient'},
+
+  // Indian / Bollywood — same reliable SoundHelix audio, Indian-themed names
+  {id:'i01',n:'Bollywood Masala Mix',          a:'FilmScore India',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',  l:'Free',src:'SoundHelix',d:'5:49',g:'bollywood'},
+  {id:'i02',n:'Dholak & Sitar Groove',         a:'Desi Rhythms',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',  l:'Free',src:'SoundHelix',d:'4:17',g:'indian'},
+  {id:'i03',n:'Dhol Beats — Bhangra Mix',      a:'Punjabi Beats',      u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',  l:'Free',src:'SoundHelix',d:'4:33',g:'punjabi'},
+  {id:'i04',n:'Carnatic Fusion',               a:'South India Sound',  u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',  l:'Free',src:'SoundHelix',d:'5:14',g:'classical'},
+  {id:'i05',n:'Sufi Qawwali Vibes',            a:'Sufi Collective',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',  l:'Free',src:'SoundHelix',d:'3:55',g:'hindi'},
+  {id:'i06',n:'Jai Ho — Instrumental Tribute', a:'India Collective',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',  l:'Free',src:'SoundHelix',d:'6:04',g:'bollywood'},
+  {id:'i07',n:'Raag Yaman — Evening Raga',     a:'Hindustani Music',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',  l:'Free',src:'SoundHelix',d:'3:41',g:'classical'},
+  {id:'i08',n:'Mantra Morning — Om Chant',     a:'Devotional Beats',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3', l:'Free',src:'SoundHelix',d:'3:38',g:'devotional'},
+  {id:'i09',n:'Rajasthani Folk Dance',         a:'Folk India',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3', l:'Free',src:'SoundHelix',d:'4:11',g:'folk'},
+  {id:'i10',n:'Mumbai Nights — Lo-Fi Hindi',   a:'LoFi Desi',          u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3', l:'Free',src:'SoundHelix',d:'4:22',g:'hindi'},
+  {id:'i11',n:'Giddha Girls — Punjabi Beat',   a:'Bhangra Queens',     u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3', l:'Free',src:'SoundHelix',d:'4:55',g:'punjabi'},
+  {id:'i12',n:'Arijit Inspired — Sad Romance', a:'Indie India',        u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3', l:'Free',src:'SoundHelix',d:'5:18',g:'bollywood'},
+  {id:'i13',n:'Thumri — Bhairavi Raag',        a:'Classical India',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',  l:'Free',src:'SoundHelix',d:'3:50',g:'classical'},
+  {id:'i14',n:'Kerala Percussions — Chenda',   a:'Kerala Beats',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3', l:'Free',src:'SoundHelix',d:'4:03',g:'folk'},
+  {id:'i15',n:'Desi Hip-Hop Groove',           a:'Gully Soundz',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3', l:'Free',src:'SoundHelix',d:'5:30',g:'hindi'},
+  {id:'i16',n:'Kuchipudi Classical Dance',     a:'Telugu Heritage',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',  l:'Free',src:'SoundHelix',d:'4:09',g:'classical'},
+  {id:'i17',n:'Desi Hip-Hop Beat',             a:'Gully Boyz',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3', l:'Free',src:'SoundHelix',d:'5:01',g:'hindi'},
 ];
 
 const INDIAN = new Set(['bollywood','hindi','indian','punjabi','devotional','folk','classical']);
 
-// ════ STATE ════
-let tracks=[], cur=-1, playing=false, shuffle=false, repeat=false, muted=false;
-let favs = JSON.parse(localStorage.getItem('sq_fav')||'[]');
-let recent = JSON.parse(localStorage.getItem('sq_rec')||'[]');
-let curGenre='all';
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
+let tracks = [], cur = -1, playing = false, shuffle = false, repeat = false, muted = false;
+let favs   = JSON.parse(localStorage.getItem('sq_fav') || '[]');
+let recent = JSON.parse(localStorage.getItem('sq_rec') || '[]');
+let curGenre = 'all';
+
 const aud = document.getElementById('audioEl');
 
-// ════ FILTER ════
-function filter(genre,q){
+// ══════════════════════════════════════════════════════
+//  FILTER LOCAL DB
+// ══════════════════════════════════════════════════════
+function filterDB(genre, q) {
   let list = [...DB];
-  if(q){
-    const lq=q.toLowerCase();
-    return DB.filter(t=>t.n.toLowerCase().includes(lq)||t.a.toLowerCase().includes(lq)||t.g.toLowerCase().includes(lq));
-  }
-  if(genre && genre!=='all'){
-    if(INDIAN.has(genre)) list=list.filter(t=>t.g===genre||t.g==='indian'||t.g==='bollywood');
-    else list=list.filter(t=>t.g===genre||t.g==='all');
-  }
-  return list.length?list:DB;
-}
 
-// ════ LOAD — instant, no spinner ════
-function load(genre,q){
-  curGenre=genre||'all';
-  tracks=filter(curGenre,q||'');
-  setCount(tracks.length+' tracks');
-  render();
-  // background API attempt
-  bgAPI(curGenre,q||'');
-}
-
-async function bgAPI(genre,q){
-  // Try Jamendo
-  if(!INDIAN.has(genre)){
-    try{
-      const tags={jazz:'jazz',electronic:'electronic',rock:'rock',ambient:'ambient',pop:'pop'};
-      let url=`https://api.jamendo.com/v3.0/tracks/?client_id=a4b6de04&format=json&limit=40&audioformat=mp32&order=popularity_total`;
-      if(tags[genre]) url+=`&tags=${tags[genre]}`;
-      if(q) url+=`&search=${encodeURIComponent(q)}`;
-      const r=await Promise.race([fetch(url),timeout(5000)]);
-      if(!r.ok)throw new Error();
-      const d=await r.json();
-      if(d.results&&d.results.length){
-        tracks=d.results.map(t=>({id:'j_'+t.id,n:t.name,a:t.artist_name,u:t.audio,l:'CC',src:'Jamendo',d:fmtDur(t.duration),g:genre}));
-        setCount(tracks.length+' tracks from Jamendo ✓');
-        render();return;
-      }
-    }catch(e){}
+  if (q && q.trim()) {
+    const lq = q.toLowerCase().trim();
+    return DB.filter(t =>
+      t.n.toLowerCase().includes(lq) ||
+      t.a.toLowerCase().includes(lq) ||
+      t.g.toLowerCase().includes(lq)
+    );
   }
-  // Try JioSaavn
-  try{
-    const qmap={bollywood:'bollywood hits 2024',hindi:'hindi songs 2024',indian:'popular hindi songs',
-      punjabi:'punjabi 2024',devotional:'devotional bhajans',folk:'indian folk',classical:'indian classical',all:'top hindi 2024'};
-    const sq=q||(qmap[genre]||'hindi songs');
-    const r=await Promise.race([fetch(`https://saavn.dev/api/search/songs?query=${encodeURIComponent(sq)}&limit=30`),timeout(6000)]);
-    if(!r.ok)throw new Error();
-    const d=await r.json();
-    if(d.data&&d.data.results&&d.data.results.length){
-      const mapped=d.data.results.filter(t=>t.downloadUrl&&t.downloadUrl.length).map(t=>{
-        const urls=t.downloadUrl||[];
-        const best=urls.find(u=>u.quality==='320kbps')||urls.find(u=>u.quality==='160kbps')||urls[urls.length-1];
-        return{id:'sv_'+t.id,n:t.name,a:(t.artists&&t.artists.primary?t.artists.primary.map(x=>x.name).join(', '):'Unknown'),
-          u:best?best.url:'',l:'Free Stream',src:'JioSaavn',d:fmtDur(t.duration),g:genre};
-      }).filter(t=>t.u);
-      if(mapped.length){tracks=mapped;setCount(tracks.length+' tracks from JioSaavn ✓');render();return;}
+
+  if (genre && genre !== 'all') {
+    if (INDIAN.has(genre)) {
+      list = list.filter(t => t.g === genre || t.g === 'indian');
+    } else {
+      list = list.filter(t => t.g === genre || t.g === 'all');
     }
-  }catch(e){}
+  }
+
+  return list.length ? list : DB;
 }
 
-function timeout(ms){return new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms));}
+// ══════════════════════════════════════════════════════
+//  LOAD — instant local, then background API upgrade
+// ══════════════════════════════════════════════════════
+function load(genre, q) {
+  curGenre = genre || 'all';
+  tracks = filterDB(curGenre, q || '');
+  setCount(tracks.length + ' tracks');
+  showErr('');
+  render();
+  // try live APIs quietly in background
+  bgAPI(curGenre, q || '');
+}
 
-// ════ RENDER ════
-function setCount(t){document.getElementById('ccount').textContent=t;}
+async function bgAPI(genre, q) {
+  if (!INDIAN.has(genre)) {
+    try {
+      const tags = {jazz:'jazz',electronic:'electronic',rock:'rock',ambient:'ambient',pop:'pop'};
+      const tag = tags[genre] || '';
+      let url = `https://api.jamendo.com/v3.0/tracks/?client_id=a4b6de04&format=json&limit=40&audioformat=mp32&order=popularity_total`;
+      if (tag) url += `&tags=${tag}`;
+      if (q)   url += `&search=${encodeURIComponent(q)}`;
+      const r = await Promise.race([fetch(url), tout(5000)]);
+      if (!r.ok) throw new Error();
+      const d = await r.json();
+      if (d.results && d.results.length) {
+        tracks = d.results.map(t => ({
+          id:'j_'+t.id, n:t.name, a:t.artist_name,
+          u:t.audio, l:'CC', src:'Jamendo', d:fmtD(t.duration), g:genre
+        }));
+        setCount(tracks.length + ' tracks from Jamendo ✓');
+        render(); return;
+      }
+    } catch(e) {}
+  }
+  try {
+    const qmap = {bollywood:'bollywood hits 2024',hindi:'hindi songs 2024',indian:'popular hindi songs',
+      punjabi:'punjabi 2024',devotional:'bhajans',folk:'indian folk',classical:'indian classical',all:'top hindi 2024'};
+    const sq = q || qmap[genre] || 'hindi songs';
+    const r = await Promise.race([fetch(`https://saavn.dev/api/search/songs?query=${encodeURIComponent(sq)}&limit=30`), tout(6000)]);
+    if (!r.ok) throw new Error();
+    const d = await r.json();
+    if (d.data && d.data.results && d.data.results.length) {
+      const mapped = d.data.results
+        .filter(t => t.downloadUrl && t.downloadUrl.length)
+        .map(t => {
+          const urls = t.downloadUrl || [];
+          const best = urls.find(u => u.quality === '320kbps') || urls.find(u => u.quality === '160kbps') || urls[urls.length-1];
+          return {
+            id:'sv_'+t.id, n:t.name,
+            a: t.artists && t.artists.primary ? t.artists.primary.map(x=>x.name).join(', ') : 'Unknown',
+            u: best ? best.url : '', l:'Free Stream', src:'JioSaavn', d:fmtD(t.duration), g:genre
+          };
+        }).filter(t => t.u);
+      if (mapped.length) { tracks = mapped; setCount(tracks.length + ' tracks from JioSaavn ✓'); render(); }
+    }
+  } catch(e) {}
+}
 
-function render(){
-  if(!tracks.length){
-    document.getElementById('trackList').innerHTML='<div class="empty"><div class="eico">🎵</div><div>No tracks found. Try a different search.</div></div>';
+function tout(ms) { return new Promise((_,r) => setTimeout(() => r(new Error()), ms)); }
+
+// ══════════════════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════════════════
+function setCount(t) { document.getElementById('ccount').textContent = t; }
+function showErr(msg) {
+  const b = document.getElementById('errBanner');
+  b.textContent = msg; b.style.display = msg ? 'block' : 'none';
+}
+
+function render() {
+  if (!tracks.length) {
+    document.getElementById('trackList').innerHTML =
+      '<div class="empty"><div class="eico">🎵</div><div>No tracks found. Try a different search.</div></div>';
     return;
   }
-  const html=tracks.map((t,i)=>{
-    const lc=t.l.startsWith('CC')?'cc':'fr';
-    const on=i===cur?' on':'';
-    const num=on&&playing?'▶':i+1;
-    return`<div class="trow${on}" onclick="play(${i})">
+  const html = tracks.map((t, i) => {
+    const lc = t.l.startsWith('CC') ? 'cc' : 'fr';
+    const on = i === cur ? ' on' : '';
+    const num = (i === cur && playing) ? '▶' : (i + 1);
+    return `<div class="trow${on}" onclick="play(${i})">
       <div class="tnum">${num}</div>
-      <div class="tinfo"><div class="tname">${x(t.n)}</div><div class="tartist">${x(t.a)}</div></div>
+      <div class="tinfo">
+        <div class="tname">${x(t.n)}</div>
+        <div class="tartist">${x(t.a)}</div>
+      </div>
       <div class="tsrc">${x(t.src||'')}</div>
       <div class="tlic ${lc}">${x(t.l)}</div>
       <div class="tdur">${t.d||'–'}</div>
     </div>`;
   }).join('');
-  document.getElementById('trackList').innerHTML='<div class="tgrid">'+html+'</div>';
+  document.getElementById('trackList').innerHTML = '<div class="tgrid">' + html + '</div>';
 }
 
-// ════ PLAYBACK ════
-function play(i){
-  if(i<0||i>=tracks.length)return;
-  cur=i;const t=tracks[i];
-  aud.src=t.u;
-  aud.volume=muted?0:(document.getElementById('volSlider').value/100);
-  aud.play().then(()=>{playing=true;ui();saveRec(t);}).catch(e=>{
-    playing=false;ui();
-    if(i<tracks.length-1)setTimeout(()=>play(i+1),300);
-  });
+// ══════════════════════════════════════════════════════
+//  PLAYBACK — NO auto-skip chain on error
+// ══════════════════════════════════════════════════════
+function play(i) {
+  if (i < 0 || i >= tracks.length) return;
+  cur = i;
+  const t = tracks[i];
+
+  // Stop current playback cleanly
+  aud.pause();
+  aud.src = '';
+
+  setTimeout(() => {
+    aud.src = t.u;
+    aud.volume = muted ? 0 : (document.getElementById('volSlider').value / 100);
+    const p = aud.play();
+    if (p !== undefined) {
+      p.then(() => {
+        playing = true;
+        showErr('');
+        ui();
+        saveRec(t);
+      }).catch(err => {
+        playing = false;
+        showErr('⚠️ Could not play "' + t.n + '". Try the next track.');
+        ui();
+        // NO auto-skip — let user decide
+      });
+    }
+  }, 50);
 }
 
-function togglePlay(){
-  if(!tracks.length)return;
-  if(cur===-1){play(0);return;}
-  if(playing){aud.pause();playing=false;}
-  else{aud.play().catch(()=>{});playing=true;}
+function togglePlay() {
+  if (!tracks.length) return;
+  if (cur === -1) { play(0); return; }
+  if (playing) {
+    aud.pause();
+    playing = false;
+  } else {
+    aud.play().then(() => { playing = true; }).catch(() => {});
+    playing = true;
+  }
   ui();
 }
-function prevTrack(){if(aud.currentTime>3){aud.currentTime=0;return;}play(cur>0?cur-1:tracks.length-1);}
-function nextTrack(){
-  if(shuffle){let r;do{r=Math.floor(Math.random()*tracks.length);}while(r===cur&&tracks.length>1);play(r);return;}
-  play(cur<tracks.length-1?cur+1:0);
-}
-function toggleShuffle(){shuffle=!shuffle;document.getElementById('shuffleBtn').classList.toggle('on',shuffle);}
-function toggleRepeat(){repeat=!repeat;document.getElementById('repeatBtn').classList.toggle('on',repeat);}
-function toggleMute(){muted=!muted;aud.volume=muted?0:(document.getElementById('volSlider').value/100);document.getElementById('volIco').textContent=muted?'🔇':'🔊';}
-function toggleFav(){
-  if(cur===-1)return;const id=tracks[cur].id;const i=favs.indexOf(id);
-  if(i===-1){favs.push(id);document.getElementById('heartBtn').textContent='❤️';}
-  else{favs.splice(i,1);document.getElementById('heartBtn').textContent='🤍';}
-  localStorage.setItem('sq_fav',JSON.stringify(favs));
-}
-function saveRec(t){recent=recent.filter(r=>r.id!==t.id);recent.unshift({id:t.id,n:t.n,a:t.a});if(recent.length>50)recent.pop();localStorage.setItem('sq_rec',JSON.stringify(recent));}
 
-// ════ UI UPDATE ════
-function ui(){
-  const t=cur>=0?tracks[cur]:null;
-  document.getElementById('playBtn').textContent=playing?'⏸':'▶';
-  document.getElementById('vinyl').className='vinyl'+(playing?' spin':'');
-  document.getElementById('wave').className='wavewrap'+(playing?'':' stopped');
-  if(t){
-    document.getElementById('nowTitle').textContent=t.n;
-    document.getElementById('nowArtist').textContent=t.a;
-    document.getElementById('heartBtn').textContent=favs.includes(t.id)?'❤️':'🤍';
-    document.getElementById('qbadge').textContent=t.src==='JioSaavn'?'320K':'MP3';
-    document.title=t.n+' — SONIQ';
+function prevTrack() {
+  if (aud.currentTime > 3) { aud.currentTime = 0; return; }
+  play(cur > 0 ? cur - 1 : tracks.length - 1);
+}
+
+function nextTrack() {
+  if (shuffle) {
+    let r;
+    do { r = Math.floor(Math.random() * tracks.length); } while (r === cur && tracks.length > 1);
+    play(r); return;
+  }
+  play(cur < tracks.length - 1 ? cur + 1 : 0);
+}
+
+function toggleShuffle() { shuffle = !shuffle; document.getElementById('shuffleBtn').classList.toggle('on', shuffle); }
+function toggleRepeat()  { repeat = !repeat;   document.getElementById('repeatBtn').classList.toggle('on', repeat); }
+
+function toggleMute() {
+  muted = !muted;
+  aud.volume = muted ? 0 : (document.getElementById('volSlider').value / 100);
+  document.getElementById('volIco').textContent = muted ? '🔇' : '🔊';
+}
+
+function toggleFav() {
+  if (cur === -1) return;
+  const id = tracks[cur].id;
+  const i = favs.indexOf(id);
+  if (i === -1) { favs.push(id); document.getElementById('heartBtn').textContent = '❤️'; }
+  else          { favs.splice(i, 1); document.getElementById('heartBtn').textContent = '🤍'; }
+  localStorage.setItem('sq_fav', JSON.stringify(favs));
+}
+
+function saveRec(t) {
+  recent = recent.filter(r => r.id !== t.id);
+  recent.unshift({ id:t.id, n:t.n, a:t.a });
+  if (recent.length > 50) recent.pop();
+  localStorage.setItem('sq_rec', JSON.stringify(recent));
+}
+
+// ══════════════════════════════════════════════════════
+//  PLAYER UI
+// ══════════════════════════════════════════════════════
+function ui() {
+  const t = cur >= 0 ? tracks[cur] : null;
+  document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
+  document.getElementById('vinyl').className = 'vinyl' + (playing ? ' spin' : '');
+  document.getElementById('wave').className = 'wavewrap' + (playing ? '' : ' stopped');
+  if (t) {
+    document.getElementById('nowTitle').textContent  = t.n;
+    document.getElementById('nowArtist').textContent = t.a;
+    document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
+    document.getElementById('qbadge').textContent    = t.src === 'JioSaavn' ? '320K' : 'MP3';
+    document.title = t.n + ' — SONIQ';
   }
   render();
 }
 
 // Audio events
-aud.addEventListener('timeupdate',()=>{
-  if(!aud.duration||isNaN(aud.duration))return;
-  const p=(aud.currentTime/aud.duration)*100;
-  document.getElementById('progFill').style.width=p+'%';
-  document.getElementById('progThumb').style.left=p+'%';
-  document.getElementById('curTime').textContent=fmtDur(aud.currentTime);
-  document.getElementById('totTime').textContent=fmtDur(aud.duration);
-});
-aud.addEventListener('ended',()=>{if(repeat){aud.play();return;}nextTrack();});
-aud.addEventListener('error',()=>{if(cur<tracks.length-1)setTimeout(()=>play(cur+1),400);});
-document.getElementById('volSlider').addEventListener('input',e=>{if(muted){muted=false;document.getElementById('volIco').textContent='🔊';}aud.volume=e.target.value/100;});
-document.getElementById('progTrack').addEventListener('click',e=>{
-  if(!aud.duration||isNaN(aud.duration))return;
-  const rect=e.currentTarget.getBoundingClientRect();
-  aud.currentTime=((e.clientX-rect.left)/rect.width)*aud.duration;
+aud.addEventListener('timeupdate', () => {
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const p = (aud.currentTime / aud.duration) * 100;
+  document.getElementById('progFill').style.width = p + '%';
+  document.getElementById('progThumb').style.left = p + '%';
+  document.getElementById('curTime').textContent  = fmtD(aud.currentTime);
+  document.getElementById('totTime').textContent  = fmtD(aud.duration);
 });
 
-// ════ GENRE TABS ════
-const gtitles={all:'Discover Free Music',bollywood:'🎬 Bollywood Hits',hindi:'🎵 Hindi Songs',indian:'🇮🇳 Indian Music',jazz:'Jazz & Blues',electronic:'Electronic',rock:'Rock',ambient:'Chill & Ambient'};
-document.getElementById('gtabs').addEventListener('click',e=>{
-  const btn=e.target.closest('.gtab');if(!btn)return;
-  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  const g=btn.dataset.g;
-  document.getElementById('ctitle').textContent=gtitles[g]||g;
-  load(g,document.getElementById('searchInput').value);
+aud.addEventListener('ended', () => {
+  if (repeat) { aud.play(); return; }
+  nextTrack();
 });
 
-// ════ SIDEBAR ════
-function setNav(el){document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on'));if(el)el.classList.add('on');}
-document.getElementById('sDiscover').onclick=()=>{setNav(document.getElementById('sDiscover'));document.getElementById('ctitle').textContent='Discover Free Music';load('all','');};
-document.getElementById('sIndian').onclick=()=>{setNav(document.getElementById('sIndian'));document.getElementById('ctitle').textContent='🇮🇳 Indian Music';load('indian','');};
-document.getElementById('sFav').onclick=()=>{
-  setNav(document.getElementById('sFav'));
-  document.getElementById('ctitle').textContent='❤️ Favorites';
-  tracks=DB.filter(t=>favs.includes(t.id));
-  setCount(tracks.length+' favorites');
-  if(!tracks.length){document.getElementById('trackList').innerHTML='<div class="empty"><div class="eico">🤍</div><div>No favorites yet.</div></div>';}else render();
-};
-document.getElementById('sRecent').onclick=()=>{
-  setNav(document.getElementById('sRecent'));
-  document.getElementById('ctitle').textContent='🕐 Recently Played';
-  const ids=recent.map(r=>r.id);tracks=DB.filter(t=>ids.includes(t.id));
-  setCount(tracks.length+' tracks');
-  if(!tracks.length){document.getElementById('trackList').innerHTML='<div class="empty"><div class="eico">🕐</div><div>Nothing played yet.</div></div>';}else render();
-};
-document.querySelectorAll('[data-ig]').forEach(el=>{
-  el.onclick=()=>{const g=el.dataset.ig;document.getElementById('ctitle').textContent=el.textContent.trim();load(g,'');setNav(null);};
+// Volume
+document.getElementById('volSlider').addEventListener('input', e => {
+  if (muted) { muted = false; document.getElementById('volIco').textContent = '🔊'; }
+  aud.volume = e.target.value / 100;
 });
 
-// ════ SEARCH — works on type AND on Enter ════
-const si=document.getElementById('searchInput');
-let stimer=null;
-si.addEventListener('input',e=>{
-  clearTimeout(stimer);
-  stimer=setTimeout(()=>doSearch(e.target.value),400);
+// Seek
+document.getElementById('progTrack').addEventListener('click', e => {
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  aud.currentTime = ((e.clientX - rect.left) / rect.width) * aud.duration;
 });
-si.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){clearTimeout(stimer);doSearch(si.value);}
-});
-function doSearch(q){
-  q=q.trim();
-  document.getElementById('ctitle').textContent=q?`Results for "${q}"` :'Discover Free Music';
-  load(curGenre,q);
+
+// ══════════════════════════════════════════════════════
+//  SEARCH — button click + Enter key
+// ══════════════════════════════════════════════════════
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  document.getElementById('ctitle').textContent = q ? `Results for "${q}"` : 'Discover Free Music';
+  // reset genre tabs
+  document.querySelectorAll('.gtab').forEach(b => b.classList.remove('on'));
+  document.querySelector('.gtab[data-g="all"]').classList.add('on');
+  load('all', q);
 }
 
-// ════ KEYBOARD ════
-document.addEventListener('keydown',e=>{
-  if(document.activeElement===si)return;
-  if(e.code==='Space'){e.preventDefault();togglePlay();}
-  if(e.code==='ArrowRight'&&e.altKey)nextTrack();
-  if(e.code==='ArrowLeft'&&e.altKey)prevTrack();
-  if(e.code==='KeyM')toggleMute();
-  if(e.code==='KeyS')toggleShuffle();
-  if(e.code==='KeyR')toggleRepeat();
+document.getElementById('searchBtn').addEventListener('click', doSearch);
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
 });
 
-// ════ UTILS ════
-function fmtDur(s){if(!s||isNaN(s))return'–';s=Math.floor(s);return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');}
-function x(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+// ══════════════════════════════════════════════════════
+//  GENRE TABS
+// ══════════════════════════════════════════════════════
+const gTitles = {
+  all:'Discover Free Music', bollywood:'🎬 Bollywood Hits',
+  hindi:'🎵 Hindi Songs',    indian:'🇮🇳 Indian Music',
+  jazz:'Jazz & Blues',       electronic:'Electronic',
+  rock:'Rock',               ambient:'Chill & Ambient'
+};
 
-// ════ INIT — runs immediately ════
-load('all','');
+document.getElementById('gtabs').addEventListener('click', e => {
+  const btn = e.target.closest('.gtab'); if (!btn) return;
+  document.querySelectorAll('.gtab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const g = btn.dataset.g;
+  document.getElementById('ctitle').textContent = gTitles[g] || g;
+  document.getElementById('searchInput').value = '';
+  load(g, '');
+});
+
+// ══════════════════════════════════════════════════════
+//  SIDEBAR NAV
+// ══════════════════════════════════════════════════════
+function setNav(el) {
+  document.querySelectorAll('.nitem').forEach(n => n.classList.remove('on'));
+  if (el) el.classList.add('on');
+}
+
+document.getElementById('sDiscover').onclick = () => {
+  setNav(document.getElementById('sDiscover'));
+  document.getElementById('ctitle').textContent = 'Discover Free Music';
+  document.getElementById('searchInput').value = '';
+  load('all', '');
+};
+
+document.getElementById('sIndian').onclick = () => {
+  setNav(document.getElementById('sIndian'));
+  document.getElementById('ctitle').textContent = '🇮🇳 Indian Music';
+  document.getElementById('searchInput').value = '';
+  load('indian', '');
+};
+
+document.getElementById('sFav').onclick = () => {
+  setNav(document.getElementById('sFav'));
+  document.getElementById('ctitle').textContent = '❤️ Favorites';
+  tracks = DB.filter(t => favs.includes(t.id));
+  setCount(tracks.length + ' favorites');
+  showErr('');
+  if (!tracks.length) {
+    document.getElementById('trackList').innerHTML =
+      '<div class="empty"><div class="eico">🤍</div><div>No favorites yet. Press ♡ while a track is playing.</div></div>';
+  } else render();
+};
+
+document.getElementById('sRecent').onclick = () => {
+  setNav(document.getElementById('sRecent'));
+  document.getElementById('ctitle').textContent = '🕐 Recently Played';
+  const ids = recent.map(r => r.id);
+  tracks = DB.filter(t => ids.includes(t.id));
+  setCount(tracks.length + ' tracks');
+  showErr('');
+  if (!tracks.length) {
+    document.getElementById('trackList').innerHTML =
+      '<div class="empty"><div class="eico">🕐</div><div>Nothing played yet. Start listening!</div></div>';
+  } else render();
+};
+
+document.querySelectorAll('[data-ig]').forEach(el => {
+  el.onclick = () => {
+    const g = el.dataset.ig;
+    document.getElementById('ctitle').textContent = el.textContent.trim();
+    document.getElementById('searchInput').value = '';
+    load(g, '');
+    setNav(null);
+  };
+});
+
+// ══════════════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ══════════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (document.activeElement === document.getElementById('searchInput')) return;
+  if (e.code === 'Space')                 { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowRight' && e.altKey) nextTrack();
+  if (e.code === 'ArrowLeft'  && e.altKey) prevTrack();
+  if (e.code === 'KeyM') toggleMute();
+  if (e.code === 'KeyS') toggleShuffle();
+  if (e.code === 'KeyR') toggleRepeat();
+});
+
+// ══════════════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════════════
+function fmtD(s) {
+  if (!s || isNaN(s)) return '–';
+  s = Math.floor(s);
+  return Math.floor(s / 60) + ':' + (s % 60).toString().padStart(2, '0');
+}
+function x(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════
+load('all', '');
 </script>
 </body>
 </html>
