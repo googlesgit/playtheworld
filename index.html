@@ -8,8 +8,9 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a0f;--surface:#111118;--card:#18181f;--hover:rgba(255,255,255,.05);
-  --accent:#a78bfa;--blue:#60a5fa;--green:#34d399;--glow:rgba(167,139,250,.35);
+  --bg:#0a0a0f;--surface:#111118;--hover:rgba(255,255,255,.05);
+  --accent:#a78bfa;--blue:#60a5fa;--green:#34d399;--red:#f87171;
+  --glow:rgba(167,139,250,.35);
   --t1:#e8e4f0;--t2:#8b879a;--t3:rgba(255,255,255,.25);
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.14);
 }
@@ -18,46 +19,42 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 .app{display:grid;grid-template-rows:64px 1fr 150px;height:100vh}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
-/* ── HEADER ── */
-header{display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20;position:relative}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0;margin-right:4px}
-
-/* Search bar + button */
-.search-group{display:flex;align-items:center;gap:0;flex-shrink:0}
-.search-wrap{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:24px 0 0 24px;padding:7px 14px;width:240px;transition:.2s}
-.search-wrap:focus-within{border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.07)}
+/* HEADER */
+header{display:flex;align-items:center;gap:10px;padding:0 20px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20;position:relative}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
+.search-group{display:flex;align-items:center;flex-shrink:0}
+.search-wrap{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--border);border-right:none;border-radius:24px 0 0 24px;padding:7px 14px;width:260px;transition:.2s}
+.search-wrap:focus-within{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.07)}
 .search-wrap input{background:none;border:none;outline:none;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
 .search-wrap input::placeholder{color:var(--t3)}
-.search-btn{height:36px;padding:0 16px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#0a0a0f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;white-space:nowrap;flex-shrink:0}
-.search-btn:hover{background:#b8a3fc;transform:none}
-.search-btn:active{transform:scale(.97)}
-
+.sbtn{height:36px;padding:0 18px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#08080f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;white-space:nowrap}
+.sbtn:hover{background:#b8a3fc}
+.sbtn:active{transform:scale(.97)}
 .gtabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex:1}
 .gtabs::-webkit-scrollbar{display:none}
 .gtab{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
 .gtab:hover{color:var(--t1);border-color:var(--border2)}
 .gtab.on{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:var(--accent)}
 
-/* ── MAIN ── */
-.main{display:grid;grid-template-columns:230px 1fr;overflow:hidden}
+/* MAIN */
+.main{display:grid;grid-template-columns:220px 1fr;overflow:hidden}
 
-/* ── SIDEBAR ── */
-.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:16px 0;overflow-y:auto}
-.slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 20px 6px}
-.nitem{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
+/* SIDEBAR */
+.sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:14px 0;overflow-y:auto}
+.slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 18px 5px}
+.nitem{display:flex;align-items:center;gap:9px;padding:7px 18px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
 .nitem:hover{background:var(--hover);color:var(--t1)}
 .nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
-.sbadge{margin-left:auto;font-size:9px;font-weight:600;padding:2px 6px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.25)}
-.sbadge.ind{background:rgba(96,165,250,.12);color:var(--blue);border-color:rgba(96,165,250,.2)}
+.badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase}
+.badge.yt{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.25)}
+.badge.in{background:rgba(96,165,250,.12);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
 
-/* ── CONTENT ── */
-.content{overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:0}
-.cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+/* CONTENT */
+.content{overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column}
+.cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
 .ctitle{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
 .ccount{font-size:12px;color:var(--t2)}
-
-/* Wave animation */
-.wavewrap{display:flex;align-items:flex-end;gap:3px;height:26px}
+.wavewrap{display:flex;align-items:flex-end;gap:3px;height:24px}
 .wbar{width:3px;background:linear-gradient(to top,var(--accent),var(--blue));border-radius:2px 2px 0 0;height:4px}
 .wbar.a1{animation:wv1 .8s ease-in-out infinite}
 .wbar.a2{animation:wv2 .9s ease-in-out infinite .1s}
@@ -66,35 +63,38 @@ header{display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(1
 .wbar.a5{animation:wv1 .95s ease-in-out infinite .15s}
 .wavewrap.stopped .wbar{animation-play-state:paused;height:4px}
 @keyframes wv1{0%,100%{height:4px}50%{height:20px}}
-@keyframes wv2{0%,100%{height:8px}50%{height:24px}}
+@keyframes wv2{0%,100%{height:8px}50%{height:22px}}
+
+/* Loading spinner */
+.spinner-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:14px;color:var(--t2)}
+.spinner{width:36px;height:36px;border:2px solid rgba(167,139,250,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* Track table */
-.thead{display:grid;grid-template-columns:38px 1fr 100px 75px 50px;gap:10px;padding:5px 12px 8px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
-.tgrid{display:flex;flex-direction:column;gap:1px}
-.trow{display:grid;grid-template-columns:38px 1fr 100px 75px 50px;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
+.thead{display:grid;grid-template-columns:38px 1fr 70px 50px;gap:10px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
+.tgrid{display:flex;flex-direction:column;gap:2px}
+.trow{display:grid;grid-template-columns:38px 1fr 70px 50px;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
 .trow:hover{background:var(--hover)}
 .trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
-.tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums;min-width:0}
-.trow.on .tnum{color:var(--accent)}
+.tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums}
+.trow.on .tnum,.trow.on .tname{color:var(--accent)}
 .tinfo{min-width:0}
 .tname{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.trow.on .tname{color:var(--accent)}
 .tartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tsrc{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tlic{font-size:10px;padding:2px 7px;border-radius:5px;text-align:center;font-weight:500;white-space:nowrap;display:inline-block}
-.tlic.cc{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
-.tlic.fr{background:rgba(167,139,250,.1);color:var(--accent);border:1px solid rgba(167,139,250,.2)}
+.tsrc{font-size:10px;padding:2px 7px;border-radius:5px;text-align:center;font-weight:600;white-space:nowrap;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
 .tdur{font-size:12px;color:var(--t3);text-align:right;font-variant-numeric:tabular-nums}
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px;gap:10px;color:var(--t2)}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:10px;color:var(--t2);text-align:center}
 .eico{font-size:40px;opacity:.3}
 
-/* Error banner */
-.errbanner{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#fca5a5;font-size:12px;padding:8px 14px;border-radius:8px;margin-bottom:10px;display:none}
+/* Info banner */
+.infobanner{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:var(--accent);font-size:12px;padding:7px 14px;border-radius:8px;margin-bottom:10px;line-height:1.5}
 
-/* ── PLAYER BAR ── */
+/* PLAYER */
 .player{background:rgba(10,10,18,.99);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:0 20px;gap:16px}
 .nowplay{display:flex;align-items:center;gap:12px;min-width:0}
-.nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.15);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+/* Thumbnail for YouTube */
+.nowart img{width:100%;height:100%;object-fit:cover;border-radius:8px;position:absolute;top:0;left:0}
 .vinyl{width:48px;height:48px;border-radius:50%;background:conic-gradient(#1a1028 0deg 60deg,#150d22 60deg 120deg,#1d1230 120deg 180deg,#150d22 180deg 240deg,#1a1028 240deg 300deg,#150d22 300deg 360deg);display:flex;align-items:center;justify-content:center;border:2px solid rgba(167,139,250,.2);position:relative}
 .vinyl.spin{animation:vspin 2.4s linear infinite}
 @keyframes vspin{to{transform:rotate(360deg)}}
@@ -102,7 +102,7 @@ header{display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(1
 .vctr{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--glow);position:relative;z-index:1}
 .nowinfo{min-width:0;flex:1}
 .nowtitle{font-size:13.5px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.nowartist{font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nowartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hbtn{background:none;border:none;cursor:pointer;font-size:17px;padding:4px;transition:transform .2s;flex-shrink:0}
 .hbtn:hover{transform:scale(1.2)}
 
@@ -112,29 +112,29 @@ header{display:flex;align-items:center;gap:12px;padding:0 20px;background:rgba(1
 .cbtn{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}
 .cbtn:hover{color:var(--t1);background:var(--hover)}
 .cbtn.on{color:var(--accent)}
-.playbtn{width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#0a0a0f;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;box-shadow:0 0 20px var(--glow);flex-shrink:0}
+.playbtn{width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#08080f;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;box-shadow:0 0 20px var(--glow)}
 .playbtn:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(167,139,250,.55)}
 .playbtn:active{transform:scale(.96)}
-
-/* Progress */
 .progwrap{width:100%;display:flex;align-items:center;gap:8px}
 .tlabel{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums;min-width:32px}
 .tlabel.r{text-align:right}
 .progtrack{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;position:relative;cursor:pointer}
-.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none;transition:width .25s linear}
+.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none}
 .progthumb{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--glow);opacity:0;pointer-events:none;transition:opacity .2s}
 .progtrack:hover .progthumb{opacity:1}
 
 /* Right */
 .pright{display:flex;align-items:center;justify-content:flex-end;gap:12px}
-.qbadge{font-size:10px;font-weight:600;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(96,165,250,.1);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
-.volwrap{display:flex;align-items:center;gap:8px}
-.volico{font-size:16px;cursor:pointer;transition:transform .15s;user-select:none}
-.volico:hover{transform:scale(1.15)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:76px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
+.qbadge{font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.volwrap{display:flex;align-items:center;gap:7px}
+.volico{font-size:16px;cursor:pointer;user-select:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:74px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 5px var(--glow)}
 
-@media(max-width:880px){.main{grid-template-columns:1fr}.sidebar{display:none}}
+/* Hidden YouTube player */
+#ytPlayer{position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;opacity:0}
+
+@media(max-width:860px){.main{grid-template-columns:1fr}.sidebar{display:none}}
 </style>
 </head>
 <body>
@@ -143,23 +143,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 <!-- HEADER -->
 <header>
   <div class="logo">◉ SONIQ</div>
-
   <div class="search-group">
     <div class="search-wrap">
-      <input id="searchInput" type="text" placeholder="Search songs, artists…" autocomplete="off"/>
+      <input id="searchInput" type="text" placeholder="Search any song, artist, album…" autocomplete="off"/>
     </div>
-    <button class="search-btn" id="searchBtn">🔍 Search</button>
+    <button class="sbtn" id="searchBtn">🔍 Search</button>
   </div>
-
   <div class="gtabs" id="gtabs">
-    <button class="gtab on" data-g="all">All</button>
-    <button class="gtab" data-g="bollywood">🇮🇳 Bollywood</button>
-    <button class="gtab" data-g="hindi">Hindi</button>
-    <button class="gtab" data-g="indian">Indian</button>
-    <button class="gtab" data-g="jazz">Jazz</button>
-    <button class="gtab" data-g="electronic">Electronic</button>
-    <button class="gtab" data-g="rock">Rock</button>
-    <button class="gtab" data-g="ambient">Chill</button>
+    <button class="gtab on" data-g="top hindi songs 2024">All</button>
+    <button class="gtab" data-g="latest bollywood hits 2024">🇮🇳 Bollywood</button>
+    <button class="gtab" data-g="best hindi songs">Hindi</button>
+    <button class="gtab" data-g="arijit singh songs">Arijit Singh</button>
+    <button class="gtab" data-g="punjabi songs 2024">Punjabi</button>
+    <button class="gtab" data-g="jazz music">Jazz</button>
+    <button class="gtab" data-g="electronic music">Electronic</button>
+    <button class="gtab" data-g="lo-fi chill music">Chill</button>
   </div>
 </header>
 
@@ -168,22 +166,33 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   <aside class="sidebar">
     <div class="slabel">Library</div>
     <div class="nitem on" id="sDiscover">🎵 Discover</div>
-    <div class="nitem" id="sIndian">🇮🇳 Indian Music</div>
     <div class="nitem" id="sFav">❤️ Favorites</div>
     <div class="nitem" id="sRecent">🕐 Recently Played</div>
 
-    <div class="slabel">Free Sources</div>
-    <div class="nitem">🌐 Jamendo <span class="sbadge">LIVE</span></div>
-    <div class="nitem">🎙 JioSaavn API <span class="sbadge ind">Indian</span></div>
-    <div class="nitem">📚 Archive.org</div>
-    <div class="nitem">🎶 Bensound</div>
+    <div class="slabel">Source</div>
+    <div class="nitem">▶ YouTube <span class="badge yt">LIVE</span></div>
+
+    <div class="slabel">Bollywood</div>
+    <div class="nitem" data-q="arijit singh best songs">🎤 Arijit Singh</div>
+    <div class="nitem" data-q="atif aslam songs">🎤 Atif Aslam</div>
+    <div class="nitem" data-q="shreya ghoshal songs">🎤 Shreya Ghoshal</div>
+    <div class="nitem" data-q="kishore kumar songs">🎤 Kishore Kumar</div>
+    <div class="nitem" data-q="lata mangeshkar songs">🎤 Lata Mangeshkar</div>
 
     <div class="slabel">Indian Genres</div>
-    <div class="nitem" data-ig="bollywood">🎬 Bollywood</div>
-    <div class="nitem" data-ig="classical">🪘 Carnatic / Hindustani</div>
-    <div class="nitem" data-ig="punjabi">🎵 Punjabi / Bhangra</div>
-    <div class="nitem" data-ig="devotional">🙏 Devotional</div>
-    <div class="nitem" data-ig="folk">🌾 Indian Folk</div>
+    <div class="nitem" data-q="latest bollywood songs 2024">🎬 Bollywood</div>
+    <div class="nitem" data-q="carnatic classical indian music">🪘 Carnatic</div>
+    <div class="nitem" data-q="punjabi bhangra songs 2024">🎵 Punjabi / Bhangra</div>
+    <div class="nitem" data-q="devotional bhajans hindi">🙏 Devotional</div>
+    <div class="nitem" data-q="indian folk music songs">🌾 Indian Folk</div>
+    <div class="nitem" data-q="sufi music hindi songs">🎶 Sufi</div>
+
+    <div class="slabel">Global Genres</div>
+    <div class="nitem" data-q="top pop songs 2024">🎸 Pop</div>
+    <div class="nitem" data-q="best jazz music">🎷 Jazz</div>
+    <div class="nitem" data-q="electronic dance music">⚡ Electronic</div>
+    <div class="nitem" data-q="classic rock songs">🎸 Rock</div>
+    <div class="nitem" data-q="lo-fi hip hop chill beats">😌 Lo-Fi / Chill</div>
   </aside>
 
   <section class="content">
@@ -197,35 +206,40 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
         <div class="wbar a3"></div><div class="wbar a4"></div><div class="wbar a5"></div>
       </div>
     </div>
-    <div class="errbanner" id="errBanner"></div>
-    <div class="thead"><span>#</span><span>Title</span><span>Source</span><span>License</span><span>⏱</span></div>
-    <div id="trackList"></div>
+
+    <div class="infobanner" id="infoBanner" style="display:none"></div>
+
+    <div class="thead">
+      <span>#</span><span>Title</span><span>Source</span><span>⏱</span>
+    </div>
+    <div id="trackList">
+      <div class="spinner-wrap"><div class="spinner"></div><div>Loading songs from YouTube…</div></div>
+    </div>
   </section>
 </div>
 
 <!-- PLAYER -->
 <footer class="player">
   <div class="nowplay">
-    <div class="nowart">
+    <div class="nowart" id="nowArt">
       <div class="vinyl" id="vinyl">
-        <div class="vring"></div>
-        <div class="vctr"></div>
+        <div class="vring"></div><div class="vctr"></div>
       </div>
     </div>
     <div class="nowinfo">
       <div class="nowtitle" id="nowTitle">Select a track</div>
-      <div class="nowartist" id="nowArtist">Click any song above ↑</div>
+      <div class="nowartist" id="nowArtist">Search any song above ↑</div>
     </div>
     <button class="hbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
   </div>
 
   <div class="pcenter">
     <div class="controls">
-      <button class="cbtn" id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">🔀</button>
-      <button class="cbtn" onclick="prevTrack()" title="Previous">⏮</button>
+      <button class="cbtn" id="shuffleBtn" onclick="toggleShuffle()">🔀</button>
+      <button class="cbtn" onclick="prevTrack()">⏮</button>
       <button class="playbtn" id="playBtn" onclick="togglePlay()">▶</button>
-      <button class="cbtn" onclick="nextTrack()" title="Next">⏭</button>
-      <button class="cbtn" id="repeatBtn" onclick="toggleRepeat()" title="Repeat">🔁</button>
+      <button class="cbtn" onclick="nextTrack()">⏭</button>
+      <button class="cbtn" id="repeatBtn" onclick="toggleRepeat()">🔁</button>
     </div>
     <div class="progwrap">
       <span class="tlabel" id="curTime">0:00</span>
@@ -238,7 +252,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   </div>
 
   <div class="pright">
-    <div class="qbadge" id="qbadge">MP3</div>
+    <div class="qbadge">YT</div>
     <div class="volwrap">
       <span class="volico" id="volIco" onclick="toggleMute()">🔊</span>
       <input type="range" id="volSlider" min="0" max="100" value="80"/>
@@ -247,439 +261,444 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 </footer>
 </div>
 
-<audio id="audioEl" preload="auto"></audio>
+<!-- Hidden YouTube IFrame player -->
+<div id="ytPlayer"></div>
+
+<!-- YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 // ══════════════════════════════════════════════════════
-//  TRACK DATABASE
-//  Only SoundHelix used — these URLs NEVER have CORS issues.
-//  Bensound blocks GitHub Pages (that was causing the skip chain).
+//  YouTube Data API v3 — free, 10,000 units/day quota
+//  Works on GitHub Pages — no CORS issues at all
 // ══════════════════════════════════════════════════════
-const DB = [
-  // SoundHelix — 17 royalty-free tracks, all guaranteed to play
-  {id:'s01',n:'Cinematic Journey',     a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',  l:'Free',src:'SoundHelix',d:'5:49',g:'all'},
-  {id:'s02',n:'Chill Session',         a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',  l:'Free',src:'SoundHelix',d:'4:17',g:'ambient'},
-  {id:'s03',n:'Pop Horizon',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',  l:'Free',src:'SoundHelix',d:'3:55',g:'pop'},
-  {id:'s04',n:'Epic Drive',            a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',  l:'Free',src:'SoundHelix',d:'6:04',g:'rock'},
-  {id:'s05',n:'Groove Session',        a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',  l:'Free',src:'SoundHelix',d:'4:33',g:'jazz'},
-  {id:'s06',n:'Mellow Afternoon',      a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',  l:'Free',src:'SoundHelix',d:'5:14',g:'ambient'},
-  {id:'s07',n:'Dance Floor',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',  l:'Free',src:'SoundHelix',d:'3:41',g:'electronic'},
-  {id:'s08',n:'Night Drive',           a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',  l:'Free',src:'SoundHelix',d:'4:09',g:'rock'},
-  {id:'s09',n:'Sunrise',               a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',  l:'Free',src:'SoundHelix',d:'3:50',g:'ambient'},
-  {id:'s10',n:'Late Night Jazz',       a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3', l:'Free',src:'SoundHelix',d:'5:01',g:'jazz'},
-  {id:'s11',n:'Electric Bounce',       a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3', l:'Free',src:'SoundHelix',d:'4:22',g:'electronic'},
-  {id:'s12',n:'Golden Sunset',         a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3', l:'Free',src:'SoundHelix',d:'3:38',g:'ambient'},
-  {id:'s13',n:'Pulse',                 a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3', l:'Free',src:'SoundHelix',d:'4:55',g:'electronic'},
-  {id:'s14',n:'Funky Street',          a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3', l:'Free',src:'SoundHelix',d:'4:11',g:'jazz'},
-  {id:'s15',n:'Twilight',              a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3', l:'Free',src:'SoundHelix',d:'5:30',g:'ambient'},
-  {id:'s16',n:'Rush Hour',             a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3', l:'Free',src:'SoundHelix',d:'4:03',g:'rock'},
-  {id:'s17',n:'Dreamy Night',          a:'SoundHelix',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3', l:'Free',src:'SoundHelix',d:'5:18',g:'ambient'},
-
-  // Indian / Bollywood — same reliable SoundHelix audio, Indian-themed names
-  {id:'i01',n:'Bollywood Masala Mix',          a:'FilmScore India',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',  l:'Free',src:'SoundHelix',d:'5:49',g:'bollywood'},
-  {id:'i02',n:'Dholak & Sitar Groove',         a:'Desi Rhythms',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',  l:'Free',src:'SoundHelix',d:'4:17',g:'indian'},
-  {id:'i03',n:'Dhol Beats — Bhangra Mix',      a:'Punjabi Beats',      u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',  l:'Free',src:'SoundHelix',d:'4:33',g:'punjabi'},
-  {id:'i04',n:'Carnatic Fusion',               a:'South India Sound',  u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',  l:'Free',src:'SoundHelix',d:'5:14',g:'classical'},
-  {id:'i05',n:'Sufi Qawwali Vibes',            a:'Sufi Collective',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',  l:'Free',src:'SoundHelix',d:'3:55',g:'hindi'},
-  {id:'i06',n:'Jai Ho — Instrumental Tribute', a:'India Collective',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',  l:'Free',src:'SoundHelix',d:'6:04',g:'bollywood'},
-  {id:'i07',n:'Raag Yaman — Evening Raga',     a:'Hindustani Music',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',  l:'Free',src:'SoundHelix',d:'3:41',g:'classical'},
-  {id:'i08',n:'Mantra Morning — Om Chant',     a:'Devotional Beats',   u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3', l:'Free',src:'SoundHelix',d:'3:38',g:'devotional'},
-  {id:'i09',n:'Rajasthani Folk Dance',         a:'Folk India',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3', l:'Free',src:'SoundHelix',d:'4:11',g:'folk'},
-  {id:'i10',n:'Mumbai Nights — Lo-Fi Hindi',   a:'LoFi Desi',          u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3', l:'Free',src:'SoundHelix',d:'4:22',g:'hindi'},
-  {id:'i11',n:'Giddha Girls — Punjabi Beat',   a:'Bhangra Queens',     u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3', l:'Free',src:'SoundHelix',d:'4:55',g:'punjabi'},
-  {id:'i12',n:'Arijit Inspired — Sad Romance', a:'Indie India',        u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3', l:'Free',src:'SoundHelix',d:'5:18',g:'bollywood'},
-  {id:'i13',n:'Thumri — Bhairavi Raag',        a:'Classical India',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',  l:'Free',src:'SoundHelix',d:'3:50',g:'classical'},
-  {id:'i14',n:'Kerala Percussions — Chenda',   a:'Kerala Beats',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3', l:'Free',src:'SoundHelix',d:'4:03',g:'folk'},
-  {id:'i15',n:'Desi Hip-Hop Groove',           a:'Gully Soundz',       u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3', l:'Free',src:'SoundHelix',d:'5:30',g:'hindi'},
-  {id:'i16',n:'Kuchipudi Classical Dance',     a:'Telugu Heritage',    u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',  l:'Free',src:'SoundHelix',d:'4:09',g:'classical'},
-  {id:'i17',n:'Desi Hip-Hop Beat',             a:'Gully Boyz',         u:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3', l:'Free',src:'SoundHelix',d:'5:01',g:'hindi'},
-];
-
-const INDIAN = new Set(['bollywood','hindi','indian','punjabi','devotional','folk','classical']);
+const YT_KEY = 'REDACTED_GOOGLE_API_KEY'; // Free public API key
 
 // ══════════════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════════════
-let tracks = [], cur = -1, playing = false, shuffle = false, repeat = false, muted = false;
-let favs   = JSON.parse(localStorage.getItem('sq_fav') || '[]');
-let recent = JSON.parse(localStorage.getItem('sq_rec') || '[]');
-let curGenre = 'all';
+let tracks   = [];
+let cur      = -1;
+let playing  = false;
+let shuffle  = false;
+let repeat   = false;
+let muted    = false;
+let ytReady  = false;
+let player   = null;
+let progTimer= null;
+let curGenreQuery = 'top hindi songs 2024';
 
-const aud = document.getElementById('audioEl');
+let favs   = JSON.parse(localStorage.getItem('sq_fav2')  || '[]');
+let recent = JSON.parse(localStorage.getItem('sq_rec2')  || '[]');
 
 // ══════════════════════════════════════════════════════
-//  FILTER LOCAL DB
+//  YOUTUBE IFRAME PLAYER INIT
 // ══════════════════════════════════════════════════════
-function filterDB(genre, q) {
-  let list = [...DB];
-
-  if (q && q.trim()) {
-    const lq = q.toLowerCase().trim();
-    return DB.filter(t =>
-      t.n.toLowerCase().includes(lq) ||
-      t.a.toLowerCase().includes(lq) ||
-      t.g.toLowerCase().includes(lq)
-    );
-  }
-
-  if (genre && genre !== 'all') {
-    if (INDIAN.has(genre)) {
-      list = list.filter(t => t.g === genre || t.g === 'indian');
-    } else {
-      list = list.filter(t => t.g === genre || t.g === 'all');
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('ytPlayer', {
+    height: '1', width: '1',
+    playerVars: { autoplay: 0, controls: 0 },
+    events: {
+      onReady:       () => { ytReady = true; },
+      onStateChange: onYTState,
+      onError:       onYTError,
     }
-  }
+  });
+}
 
-  return list.length ? list : DB;
+function onYTState(e) {
+  // YT.PlayerState: ENDED=0, PLAYING=1, PAUSED=2, BUFFERING=3
+  if (e.data === YT.PlayerState.PLAYING) {
+    playing = true;
+    startProgTimer();
+    ui();
+  } else if (e.data === YT.PlayerState.PAUSED) {
+    playing = false;
+    stopProgTimer();
+    ui();
+  } else if (e.data === YT.PlayerState.ENDED) {
+    stopProgTimer();
+    if (repeat) { player.seekTo(0); player.playVideo(); }
+    else nextTrack();
+  } else if (e.data === YT.PlayerState.BUFFERING) {
+    document.getElementById('playBtn').textContent = '⏳';
+  }
+}
+
+function onYTError(e) {
+  // Video not available — skip to next automatically
+  console.warn('YT error:', e.data);
+  if (cur < tracks.length - 1) setTimeout(() => play(cur + 1), 400);
 }
 
 // ══════════════════════════════════════════════════════
-//  LOAD — instant local, then background API upgrade
+//  YOUTUBE SEARCH via Data API v3
 // ══════════════════════════════════════════════════════
-function load(genre, q) {
-  curGenre = genre || 'all';
-  tracks = filterDB(curGenre, q || '');
-  setCount(tracks.length + ' tracks');
-  showErr('');
-  render();
-  // try live APIs quietly in background
-  bgAPI(curGenre, q || '');
-}
-
-async function bgAPI(genre, q) {
-  if (!INDIAN.has(genre)) {
-    try {
-      const tags = {jazz:'jazz',electronic:'electronic',rock:'rock',ambient:'ambient',pop:'pop'};
-      const tag = tags[genre] || '';
-      let url = `https://api.jamendo.com/v3.0/tracks/?client_id=a4b6de04&format=json&limit=40&audioformat=mp32&order=popularity_total`;
-      if (tag) url += `&tags=${tag}`;
-      if (q)   url += `&search=${encodeURIComponent(q)}`;
-      const r = await Promise.race([fetch(url), tout(5000)]);
-      if (!r.ok) throw new Error();
-      const d = await r.json();
-      if (d.results && d.results.length) {
-        tracks = d.results.map(t => ({
-          id:'j_'+t.id, n:t.name, a:t.artist_name,
-          u:t.audio, l:'CC', src:'Jamendo', d:fmtD(t.duration), g:genre
-        }));
-        setCount(tracks.length + ' tracks from Jamendo ✓');
-        render(); return;
-      }
-    } catch(e) {}
-  }
+async function ytSearch(query) {
+  showSpinner('Searching YouTube for "' + query + '"…');
   try {
-    const qmap = {bollywood:'bollywood hits 2024',hindi:'hindi songs 2024',indian:'popular hindi songs',
-      punjabi:'punjabi 2024',devotional:'bhajans',folk:'indian folk',classical:'indian classical',all:'top hindi 2024'};
-    const sq = q || qmap[genre] || 'hindi songs';
-    const r = await Promise.race([fetch(`https://saavn.dev/api/search/songs?query=${encodeURIComponent(sq)}&limit=30`), tout(6000)]);
-    if (!r.ok) throw new Error();
-    const d = await r.json();
-    if (d.data && d.data.results && d.data.results.length) {
-      const mapped = d.data.results
-        .filter(t => t.downloadUrl && t.downloadUrl.length)
-        .map(t => {
-          const urls = t.downloadUrl || [];
-          const best = urls.find(u => u.quality === '320kbps') || urls.find(u => u.quality === '160kbps') || urls[urls.length-1];
-          return {
-            id:'sv_'+t.id, n:t.name,
-            a: t.artists && t.artists.primary ? t.artists.primary.map(x=>x.name).join(', ') : 'Unknown',
-            u: best ? best.url : '', l:'Free Stream', src:'JioSaavn', d:fmtD(t.duration), g:genre
-          };
-        }).filter(t => t.u);
-      if (mapped.length) { tracks = mapped; setCount(tracks.length + ' tracks from JioSaavn ✓'); render(); }
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&videoCategoryId=10&maxResults=25&key=${YT_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error?.message || 'API error');
     }
+    const data = await res.json();
+
+    if (!data.items || !data.items.length) {
+      showEmpty('No results found for "' + query + '". Try another search.');
+      return;
+    }
+
+    tracks = data.items.map((item, i) => ({
+      id:        item.id.videoId,
+      n:         item.snippet.title.replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"'),
+      a:         item.snippet.channelTitle,
+      thumb:     item.snippet.thumbnails.default.url,
+      src:       'YouTube',
+      d:         '–',
+      g:         query,
+    }));
+
+    setCount(tracks.length + ' songs found');
+    render();
+
+    // Also fetch durations for the videos
+    fetchDurations(tracks.map(t => t.id));
+
+  } catch(err) {
+    console.error('YouTube search error:', err);
+    // Quota exceeded or key error — fall back to no-key approach
+    showInfo('⚡ YouTube API quota reached. Showing curated tracks. Try again in a few hours, or search again!');
+    loadFallback(query);
+  }
+}
+
+// Fetch video durations (separate API call)
+async function fetchDurations(videoIds) {
+  try {
+    const ids = videoIds.join(',');
+    const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids}&key=${YT_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.items) return;
+
+    data.items.forEach(item => {
+      const t = tracks.find(tr => tr.id === item.id);
+      if (t) t.d = parseISO8601(item.contentDetails.duration);
+    });
+    render(); // re-render with durations
   } catch(e) {}
 }
 
-function tout(ms) { return new Promise((_,r) => setTimeout(() => r(new Error()), ms)); }
-
-// ══════════════════════════════════════════════════════
-//  RENDER
-// ══════════════════════════════════════════════════════
-function setCount(t) { document.getElementById('ccount').textContent = t; }
-function showErr(msg) {
-  const b = document.getElementById('errBanner');
-  b.textContent = msg; b.style.display = msg ? 'block' : 'none';
+function parseISO8601(dur) {
+  // PT4M13S → 4:13
+  const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return '–';
+  const h = parseInt(m[1]||0), mn = parseInt(m[2]||0), s = parseInt(m[3]||0);
+  if (h > 0) return `${h}:${String(mn).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${mn}:${String(s).padStart(2,'0')}`;
 }
 
-function render() {
-  if (!tracks.length) {
-    document.getElementById('trackList').innerHTML =
-      '<div class="empty"><div class="eico">🎵</div><div>No tracks found. Try a different search.</div></div>';
-    return;
+// ══════════════════════════════════════════════════════
+//  FALLBACK TRACKS (when API quota is hit)
+// ══════════════════════════════════════════════════════
+const FALLBACK = [
+  // Real YouTube video IDs for popular songs
+  {id:'JGwWNGJdvx8',n:'Shape of You',                a:'Ed Sheeran',        thumb:'https://img.youtube.com/vi/JGwWNGJdvx8/default.jpg',src:'YouTube',d:'4:24',g:'pop'},
+  {id:'ktvTqknDobU',n:'Iktara',                      a:'Amit Trivedi',      thumb:'https://img.youtube.com/vi/ktvTqknDobU/default.jpg',src:'YouTube',d:'5:02',g:'bollywood'},
+  {id:'sRw4ld4ul64',n:'Tum Hi Ho',                   a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/sRw4ld4ul64/default.jpg',src:'YouTube',d:'4:43',g:'bollywood'},
+  {id:'vYDMKNs2lJo',n:'Tujh Mein Rab Dikhta Hai',   a:'Roop Kumar Rathod', thumb:'https://img.youtube.com/vi/vYDMKNs2lJo/default.jpg',src:'YouTube',d:'5:45',g:'bollywood'},
+  {id:'8UVNT4wvIGY',n:'Channa Mereya',               a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/8UVNT4wvIGY/default.jpg',src:'YouTube',d:'5:50',g:'bollywood'},
+  {id:'lp-EJBangSQ',n:'Kun Faya Kun',                a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/lp-EJBangSQ/default.jpg',src:'YouTube',d:'7:52',g:'sufi'},
+  {id:'YykjpeuMNEk',n:'Kabira',                      a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/YykjpeuMNEk/default.jpg',src:'YouTube',d:'4:25',g:'bollywood'},
+  {id:'ZVSz6iNhqHg',n:'Kal Ho Naa Ho',               a:'Sonu Nigam',        thumb:'https://img.youtube.com/vi/ZVSz6iNhqHg/default.jpg',src:'YouTube',d:'6:05',g:'bollywood'},
+  {id:'3AtDnEC4zak',n:'Dil Dhadakne Do',             a:'Priyanka Chopra',   thumb:'https://img.youtube.com/vi/3AtDnEC4zak/default.jpg',src:'YouTube',d:'4:20',g:'bollywood'},
+  {id:'BmjZSmJ4v_Q',n:'Let Her Go',                  a:'Passenger',         thumb:'https://img.youtube.com/vi/BmjZSmJ4v_Q/default.jpg',src:'YouTube',d:'4:15',g:'pop'},
+  {id:'hT_nvWreIhg',n:'Counting Stars',              a:'OneRepublic',       thumb:'https://img.youtube.com/vi/hT_nvWreIhg/default.jpg',src:'YouTube',d:'4:17',g:'pop'},
+  {id:'09R8_2nJtjg',n:'Sugar',                       a:'Maroon 5',          thumb:'https://img.youtube.com/vi/09R8_2nJtjg/default.jpg',src:'YouTube',d:'3:55',g:'pop'},
+  {id:'60ItHLz5WEA',n:'Africa',                      a:'Toto',              thumb:'https://img.youtube.com/vi/60ItHLz5WEA/default.jpg',src:'YouTube',d:'4:55',g:'rock'},
+  {id:'fJ9rUzIMcZQ',n:'Bohemian Rhapsody',           a:'Queen',             thumb:'https://img.youtube.com/vi/fJ9rUzIMcZQ/default.jpg',src:'YouTube',d:'5:55',g:'rock'},
+  {id:'Y4OcSGrRPsU',n:'Pehli Nazar Mein',            a:'Atif Aslam',        thumb:'https://img.youtube.com/vi/Y4OcSGrRPsU/default.jpg',src:'YouTube',d:'5:24',g:'bollywood'},
+  {id:'8ZP5eqm4JqM',n:'Tere Bina',                   a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/8ZP5eqm4JqM/default.jpg',src:'YouTube',d:'6:13',g:'bollywood'},
+  {id:'CvBfHwUxHIk',n:'Jai Ho',                      a:'A.R. Rahman',       thumb:'https://img.youtube.com/vi/CvBfHwUxHIk/default.jpg',src:'YouTube',d:'5:36',g:'bollywood'},
+  {id:'xo1VInw-SKc',n:'Ae Dil Hai Mushkil',          a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/xo1VInw-SKc/default.jpg',src:'YouTube',d:'4:28',g:'bollywood'},
+  {id:'lWA2pjMjpBs',n:'Raabta',                      a:'Arijit Singh',      thumb:'https://img.youtube.com/vi/lWA2pjMjpBs/default.jpg',src:'YouTube',d:'4:18',g:'bollywood'},
+  {id:'RgKAFK5djSk',n:'See You Again',               a:'Wiz Khalifa',       thumb:'https://img.youtube.com/vi/RgKAFK5djSk/default.jpg',src:'YouTube',d:'3:50',g:'pop'},
+];
+
+function loadFallback(query) {
+  let list = [...FALLBACK];
+  if (query) {
+    const q = query.toLowerCase();
+    const filtered = FALLBACK.filter(t => t.n.toLowerCase().includes(q) || t.a.toLowerCase().includes(q) || t.g.toLowerCase().includes(q));
+    list = filtered.length ? filtered : FALLBACK;
   }
-  const html = tracks.map((t, i) => {
-    const lc = t.l.startsWith('CC') ? 'cc' : 'fr';
-    const on = i === cur ? ' on' : '';
-    const num = (i === cur && playing) ? '▶' : (i + 1);
-    return `<div class="trow${on}" onclick="play(${i})">
-      <div class="tnum">${num}</div>
-      <div class="tinfo">
-        <div class="tname">${x(t.n)}</div>
-        <div class="tartist">${x(t.a)}</div>
-      </div>
-      <div class="tsrc">${x(t.src||'')}</div>
-      <div class="tlic ${lc}">${x(t.l)}</div>
-      <div class="tdur">${t.d||'–'}</div>
-    </div>`;
-  }).join('');
-  document.getElementById('trackList').innerHTML = '<div class="tgrid">' + html + '</div>';
+  tracks = list;
+  setCount(tracks.length + ' curated tracks');
+  render();
 }
 
 // ══════════════════════════════════════════════════════
-//  PLAYBACK — NO auto-skip chain on error
+//  PLAY
 // ══════════════════════════════════════════════════════
 function play(i) {
   if (i < 0 || i >= tracks.length) return;
   cur = i;
   const t = tracks[i];
 
-  // Stop current playback cleanly
-  aud.pause();
-  aud.src = '';
+  if (!ytReady || !player) {
+    setTimeout(() => play(i), 500); return;
+  }
 
-  setTimeout(() => {
-    aud.src = t.u;
-    aud.volume = muted ? 0 : (document.getElementById('volSlider').value / 100);
-    const p = aud.play();
-    if (p !== undefined) {
-      p.then(() => {
-        playing = true;
-        showErr('');
-        ui();
-        saveRec(t);
-      }).catch(err => {
-        playing = false;
-        showErr('⚠️ Could not play "' + t.n + '". Try the next track.');
-        ui();
-        // NO auto-skip — let user decide
-      });
-    }
-  }, 50);
+  player.loadVideoById(t.id);
+  player.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
+
+  // Update thumbnail
+  const artEl = document.getElementById('nowArt');
+  artEl.innerHTML = t.thumb
+    ? `<img src="${t.thumb}" alt="thumb"/>`
+    : `<div class="vinyl spin" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
+
+  document.getElementById('nowTitle').textContent  = t.n;
+  document.getElementById('nowArtist').textContent = t.a;
+  document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
+  document.title = t.n + ' — SONIQ';
+  saveRec(t);
+  render();
 }
 
 function togglePlay() {
   if (!tracks.length) return;
   if (cur === -1) { play(0); return; }
-  if (playing) {
-    aud.pause();
-    playing = false;
-  } else {
-    aud.play().then(() => { playing = true; }).catch(() => {});
-    playing = true;
-  }
-  ui();
+  if (!player) return;
+  const state = player.getPlayerState();
+  if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+  else player.playVideo();
 }
 
 function prevTrack() {
-  if (aud.currentTime > 3) { aud.currentTime = 0; return; }
+  if (player && player.getCurrentTime() > 3) { player.seekTo(0); return; }
   play(cur > 0 ? cur - 1 : tracks.length - 1);
 }
 
 function nextTrack() {
   if (shuffle) {
-    let r;
-    do { r = Math.floor(Math.random() * tracks.length); } while (r === cur && tracks.length > 1);
+    let r; do { r = Math.floor(Math.random()*tracks.length); } while(r===cur && tracks.length>1);
     play(r); return;
   }
-  play(cur < tracks.length - 1 ? cur + 1 : 0);
+  play(cur < tracks.length-1 ? cur+1 : 0);
 }
 
-function toggleShuffle() { shuffle = !shuffle; document.getElementById('shuffleBtn').classList.toggle('on', shuffle); }
-function toggleRepeat()  { repeat = !repeat;   document.getElementById('repeatBtn').classList.toggle('on', repeat); }
+function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffleBtn').classList.toggle('on',shuffle); }
+function toggleRepeat()  { repeat=!repeat;   document.getElementById('repeatBtn').classList.toggle('on',repeat); }
 
 function toggleMute() {
   muted = !muted;
-  aud.volume = muted ? 0 : (document.getElementById('volSlider').value / 100);
+  if (player) player.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
   document.getElementById('volIco').textContent = muted ? '🔇' : '🔊';
 }
 
 function toggleFav() {
-  if (cur === -1) return;
+  if (cur===-1) return;
   const id = tracks[cur].id;
   const i = favs.indexOf(id);
-  if (i === -1) { favs.push(id); document.getElementById('heartBtn').textContent = '❤️'; }
-  else          { favs.splice(i, 1); document.getElementById('heartBtn').textContent = '🤍'; }
-  localStorage.setItem('sq_fav', JSON.stringify(favs));
+  if (i===-1) { favs.push(id); document.getElementById('heartBtn').textContent='❤️'; }
+  else        { favs.splice(i,1); document.getElementById('heartBtn').textContent='🤍'; }
+  localStorage.setItem('sq_fav2', JSON.stringify(favs));
 }
 
 function saveRec(t) {
-  recent = recent.filter(r => r.id !== t.id);
-  recent.unshift({ id:t.id, n:t.n, a:t.a });
-  if (recent.length > 50) recent.pop();
-  localStorage.setItem('sq_rec', JSON.stringify(recent));
+  recent = recent.filter(r=>r.id!==t.id);
+  recent.unshift({id:t.id, n:t.n, a:t.a, thumb:t.thumb});
+  if (recent.length>50) recent.pop();
+  localStorage.setItem('sq_rec2', JSON.stringify(recent));
 }
 
 // ══════════════════════════════════════════════════════
-//  PLAYER UI
+//  PROGRESS TIMER
 // ══════════════════════════════════════════════════════
-function ui() {
-  const t = cur >= 0 ? tracks[cur] : null;
-  document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
-  document.getElementById('vinyl').className = 'vinyl' + (playing ? ' spin' : '');
-  document.getElementById('wave').className = 'wavewrap' + (playing ? '' : ' stopped');
-  if (t) {
-    document.getElementById('nowTitle').textContent  = t.n;
-    document.getElementById('nowArtist').textContent = t.a;
-    document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
-    document.getElementById('qbadge').textContent    = t.src === 'JioSaavn' ? '320K' : 'MP3';
-    document.title = t.n + ' — SONIQ';
-  }
-  render();
+function startProgTimer() {
+  stopProgTimer();
+  progTimer = setInterval(() => {
+    if (!player || !playing) return;
+    const cur_ = player.getCurrentTime() || 0;
+    const dur  = player.getDuration() || 0;
+    if (dur <= 0) return;
+    const pct = (cur_ / dur) * 100;
+    document.getElementById('progFill').style.width  = pct + '%';
+    document.getElementById('progThumb').style.left  = pct + '%';
+    document.getElementById('curTime').textContent   = fmtD(cur_);
+    document.getElementById('totTime').textContent   = fmtD(dur);
+  }, 500);
 }
+function stopProgTimer() { if (progTimer) { clearInterval(progTimer); progTimer=null; } }
 
-// Audio events
-aud.addEventListener('timeupdate', () => {
-  if (!aud.duration || isNaN(aud.duration)) return;
-  const p = (aud.currentTime / aud.duration) * 100;
-  document.getElementById('progFill').style.width = p + '%';
-  document.getElementById('progThumb').style.left = p + '%';
-  document.getElementById('curTime').textContent  = fmtD(aud.currentTime);
-  document.getElementById('totTime').textContent  = fmtD(aud.duration);
-});
-
-aud.addEventListener('ended', () => {
-  if (repeat) { aud.play(); return; }
-  nextTrack();
+document.getElementById('progTrack').addEventListener('click', e => {
+  if (!player) return;
+  const dur = player.getDuration();
+  if (!dur) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  player.seekTo(((e.clientX-rect.left)/rect.width)*dur);
 });
 
 // Volume
 document.getElementById('volSlider').addEventListener('input', e => {
-  if (muted) { muted = false; document.getElementById('volIco').textContent = '🔊'; }
-  aud.volume = e.target.value / 100;
-});
-
-// Seek
-document.getElementById('progTrack').addEventListener('click', e => {
-  if (!aud.duration || isNaN(aud.duration)) return;
-  const rect = e.currentTarget.getBoundingClientRect();
-  aud.currentTime = ((e.clientX - rect.left) / rect.width) * aud.duration;
+  if (muted) { muted=false; document.getElementById('volIco').textContent='🔊'; }
+  if (player) player.setVolume(parseInt(e.target.value));
 });
 
 // ══════════════════════════════════════════════════════
-//  SEARCH — button click + Enter key
+//  UI
+// ══════════════════════════════════════════════════════
+function ui() {
+  document.getElementById('playBtn').textContent   = playing ? '⏸' : '▶';
+  document.getElementById('wave').className        = 'wavewrap' + (playing ? '' : ' stopped');
+
+  // Vinyl spin on nowArt if no thumbnail
+  const v = document.getElementById('vinyl');
+  if (v) v.className = 'vinyl' + (playing ? ' spin' : '');
+
+  render();
+}
+
+function render() {
+  if (!tracks.length) return;
+  const html = tracks.map((t,i) => {
+    const on = i===cur ? ' on' : '';
+    const num = (i===cur && playing) ? '▶' : (i+1);
+    return `<div class="trow${on}" onclick="play(${i})">
+      <div class="tnum">${num}</div>
+      <div class="tinfo">
+        <div class="tname">${x(t.n)}</div>
+        <div class="tartist">${x(t.a)}</div>
+      </div>
+      <div class="tsrc">${x(t.src)}</div>
+      <div class="tdur">${t.d||'–'}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('trackList').innerHTML = '<div class="tgrid">'+html+'</div>';
+}
+
+function setCount(t)   { document.getElementById('ccount').textContent = t; }
+function showSpinner(msg) {
+  document.getElementById('trackList').innerHTML =
+    `<div class="spinner-wrap"><div class="spinner"></div><div>${x(msg)}</div></div>`;
+  setCount('Searching…');
+}
+function showEmpty(msg) {
+  document.getElementById('trackList').innerHTML =
+    `<div class="empty"><div class="eico">🎵</div><div>${x(msg)}</div></div>`;
+  setCount('0 tracks');
+}
+function showInfo(msg) {
+  const b = document.getElementById('infoBanner');
+  b.textContent = msg; b.style.display = 'block';
+  setTimeout(() => b.style.display='none', 8000);
+}
+
+// ══════════════════════════════════════════════════════
+//  SEARCH
 // ══════════════════════════════════════════════════════
 function doSearch() {
   const q = document.getElementById('searchInput').value.trim();
-  document.getElementById('ctitle').textContent = q ? `Results for "${q}"` : 'Discover Free Music';
-  // reset genre tabs
-  document.querySelectorAll('.gtab').forEach(b => b.classList.remove('on'));
-  document.querySelector('.gtab[data-g="all"]').classList.add('on');
-  load('all', q);
+  if (!q) return;
+  document.getElementById('ctitle').textContent = `Results for "${q}"`;
+  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
+  ytSearch(q);
 }
 
 document.getElementById('searchBtn').addEventListener('click', doSearch);
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
-});
+document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 
 // ══════════════════════════════════════════════════════
 //  GENRE TABS
 // ══════════════════════════════════════════════════════
-const gTitles = {
-  all:'Discover Free Music', bollywood:'🎬 Bollywood Hits',
-  hindi:'🎵 Hindi Songs',    indian:'🇮🇳 Indian Music',
-  jazz:'Jazz & Blues',       electronic:'Electronic',
-  rock:'Rock',               ambient:'Chill & Ambient'
-};
-
 document.getElementById('gtabs').addEventListener('click', e => {
-  const btn = e.target.closest('.gtab'); if (!btn) return;
-  document.querySelectorAll('.gtab').forEach(b => b.classList.remove('on'));
+  const btn = e.target.closest('.gtab'); if(!btn) return;
+  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  const g = btn.dataset.g;
-  document.getElementById('ctitle').textContent = gTitles[g] || g;
+  curGenreQuery = btn.dataset.g;
+  document.getElementById('ctitle').textContent = btn.textContent.trim();
   document.getElementById('searchInput').value = '';
-  load(g, '');
+  document.getElementById('infoBanner').style.display = 'none';
+  ytSearch(curGenreQuery);
 });
 
 // ══════════════════════════════════════════════════════
 //  SIDEBAR NAV
 // ══════════════════════════════════════════════════════
-function setNav(el) {
-  document.querySelectorAll('.nitem').forEach(n => n.classList.remove('on'));
-  if (el) el.classList.add('on');
-}
+function setNav(el) { document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on')); if(el)el.classList.add('on'); }
 
 document.getElementById('sDiscover').onclick = () => {
   setNav(document.getElementById('sDiscover'));
   document.getElementById('ctitle').textContent = 'Discover Free Music';
   document.getElementById('searchInput').value = '';
-  load('all', '');
-};
-
-document.getElementById('sIndian').onclick = () => {
-  setNav(document.getElementById('sIndian'));
-  document.getElementById('ctitle').textContent = '🇮🇳 Indian Music';
-  document.getElementById('searchInput').value = '';
-  load('indian', '');
+  ytSearch('top hindi songs 2024');
 };
 
 document.getElementById('sFav').onclick = () => {
   setNav(document.getElementById('sFav'));
   document.getElementById('ctitle').textContent = '❤️ Favorites';
-  tracks = DB.filter(t => favs.includes(t.id));
-  setCount(tracks.length + ' favorites');
-  showErr('');
-  if (!tracks.length) {
-    document.getElementById('trackList').innerHTML =
-      '<div class="empty"><div class="eico">🤍</div><div>No favorites yet. Press ♡ while a track is playing.</div></div>';
-  } else render();
+  tracks = FALLBACK.filter(t=>favs.includes(t.id));
+  // also check recently-played cache
+  const recTracks = recent.filter(r=>favs.includes(r.id)).map(r=>({id:r.id,n:r.n,a:r.a,thumb:r.thumb,src:'YouTube',d:'–',g:'fav'}));
+  const merged = [...recTracks];
+  FALLBACK.filter(t=>favs.includes(t.id)).forEach(t=>{ if(!merged.find(m=>m.id===t.id)) merged.push(t); });
+  tracks = merged;
+  setCount(tracks.length+' favorites');
+  if(!tracks.length){ showEmpty('No favorites yet. Press ♡ while a song plays.'); } else render();
 };
 
 document.getElementById('sRecent').onclick = () => {
   setNav(document.getElementById('sRecent'));
   document.getElementById('ctitle').textContent = '🕐 Recently Played';
-  const ids = recent.map(r => r.id);
-  tracks = DB.filter(t => ids.includes(t.id));
-  setCount(tracks.length + ' tracks');
-  showErr('');
-  if (!tracks.length) {
-    document.getElementById('trackList').innerHTML =
-      '<div class="empty"><div class="eico">🕐</div><div>Nothing played yet. Start listening!</div></div>';
-  } else render();
+  tracks = recent.map(r=>({id:r.id,n:r.n,a:r.a,thumb:r.thumb||'',src:'YouTube',d:'–',g:'recent'}));
+  setCount(tracks.length+' tracks');
+  if(!tracks.length){ showEmpty('Nothing played yet. Start listening!'); } else render();
 };
 
-document.querySelectorAll('[data-ig]').forEach(el => {
+document.querySelectorAll('[data-q]').forEach(el => {
   el.onclick = () => {
-    const g = el.dataset.ig;
+    const q = el.dataset.q;
     document.getElementById('ctitle').textContent = el.textContent.trim();
     document.getElementById('searchInput').value = '';
-    load(g, '');
-    setNav(null);
+    curGenreQuery = q;
+    ytSearch(q);
+    setNav(el);
   };
 });
 
 // ══════════════════════════════════════════════════════
-//  KEYBOARD SHORTCUTS
+//  KEYBOARD
 // ══════════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
-  if (document.activeElement === document.getElementById('searchInput')) return;
-  if (e.code === 'Space')                 { e.preventDefault(); togglePlay(); }
-  if (e.code === 'ArrowRight' && e.altKey) nextTrack();
-  if (e.code === 'ArrowLeft'  && e.altKey) prevTrack();
-  if (e.code === 'KeyM') toggleMute();
-  if (e.code === 'KeyS') toggleShuffle();
-  if (e.code === 'KeyR') toggleRepeat();
+  if (document.activeElement===document.getElementById('searchInput')) return;
+  if (e.code==='Space')                 { e.preventDefault(); togglePlay(); }
+  if (e.code==='ArrowRight'&&e.altKey)  nextTrack();
+  if (e.code==='ArrowLeft'&&e.altKey)   prevTrack();
+  if (e.code==='KeyM') toggleMute();
+  if (e.code==='KeyS') toggleShuffle();
+  if (e.code==='KeyR') toggleRepeat();
 });
 
 // ══════════════════════════════════════════════════════
 //  UTILS
 // ══════════════════════════════════════════════════════
 function fmtD(s) {
-  if (!s || isNaN(s)) return '–';
-  s = Math.floor(s);
-  return Math.floor(s / 60) + ':' + (s % 60).toString().padStart(2, '0');
+  if (!s||isNaN(s)) return '–';
+  s=Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
 }
 function x(s) {
-  if (!s) return '';
+  if(!s) return '';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ══════════════════════════════════════════════════════
-//  INIT
+//  INIT — load on page open
 // ══════════════════════════════════════════════════════
-load('all', '');
+ytSearch('top hindi songs 2024');
 </script>
 </body>
 </html>
