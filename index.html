@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONIQ — Free Music Player</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header>
+    <div class="logo">◉ SONIQ</div>
+
+    <div class="header-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search songs, artists, albums..." />
+    </div>
+
+    <div class="genre-tabs">
+      <button class="genre-tab active" data-genre="all">All</button>
+      <button class="genre-tab" data-genre="bollywood">🇮🇳 Bollywood</button>
+      <button class="genre-tab" data-genre="hindi">Hindi</button>
+      <button class="genre-tab" data-genre="indian">Indian</button>
+      <button class="genre-tab" data-genre="jazz">Jazz</button>
+      <button class="genre-tab" data-genre="electronic">Electronic</button>
+      <button class="genre-tab" data-genre="rock">Rock</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ MAIN ════════════════════════════════ -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Library</div>
+        <div class="nav-item active" id="nav-discover">
+          <span class="nav-icon">🎵</span> Discover
+        </div>
+        <div class="nav-item" id="nav-indian">
+          <span class="nav-icon">🇮🇳</span> Indian Music
+        </div>
+        <div class="nav-item" id="nav-favorites">
+          <span class="nav-icon">❤️</span> Favorites
+        </div>
+        <div class="nav-item" id="nav-recent">
+          <span class="nav-icon">🕐</span> Recently Played
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Free Sources</div>
+        <div class="nav-item source-item" data-source="jamendo">
+          <span class="nav-icon">🌐</span> Jamendo
+          <span class="source-badge live">LIVE</span>
+        </div>
+        <div class="nav-item source-item" data-source="saavn">
+          <span class="nav-icon">🎙</span> JioSaavn API
+          <span class="source-badge">Indian</span>
+        </div>
+        <div class="nav-item source-item" data-source="archive">
+          <span class="nav-icon">📚</span> Archive.org
+        </div>
+        <div class="nav-item source-item" data-source="bensound">
+          <span class="nav-icon">🎶</span> Bensound
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Indian Genres</div>
+        <div class="nav-item" data-indian-genre="bollywood">🎬 Bollywood</div>
+        <div class="nav-item" data-indian-genre="classical">🪘 Carnatic / Hindustani</div>
+        <div class="nav-item" data-indian-genre="punjabi">🎵 Punjabi / Bhangra</div>
+        <div class="nav-item" data-indian-genre="devotional">🙏 Devotional</div>
+        <div class="nav-item" data-indian-genre="folk">🌾 Indian Folk</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Licenses</div>
+        <div class="nav-item"><span class="nav-icon">✅</span> Creative Commons</div>
+        <div class="nav-item"><span class="nav-icon">🔓</span> Public Domain</div>
+      </div>
+    </aside>
+
+    <!-- TRACK LIST -->
+    <section class="content">
+      <div class="content-header">
+        <div>
+          <div class="content-title" id="contentTitle">Discover Free Music</div>
+          <div class="tracks-count" id="tracksCount">Loading tracks...</div>
+        </div>
+        <div class="wave-visual paused" id="waveVisual">
+          <div class="wave-bar anim-1"></div>
+          <div class="wave-bar anim-2"></div>
+          <div class="wave-bar anim-3"></div>
+          <div class="wave-bar anim-4"></div>
+          <div class="wave-bar anim-5"></div>
+        </div>
+      </div>
+
+      <div class="track-list-header">
+        <span>#</span>
+        <span>Title</span>
+        <span>Source</span>
+        <span>License</span>
+        <span>⏱</span>
+      </div>
+
+      <div id="trackList">
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          <div>Fetching free music...</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════ PLAYER ═══════════════════════════════ -->
+  <footer class="player">
+
+    <!-- Now Playing Info -->
+    <div class="now-playing">
+      <div class="now-art" id="nowArt">
+        <div class="vinyl-anim" id="vinyl">
+          <div class="vinyl-ring"></div>
+          <div class="vinyl-center"></div>
+        </div>
+      </div>
+      <div class="now-info">
+        <div class="now-title" id="nowTitle">Select a track</div>
+        <div class="now-artist" id="nowArtist">Browse above to play</div>
+      </div>
+      <button class="heart-btn" id="heartBtn" onclick="toggleFavorite()" title="Add to Favorites">🤍</button>
+    </div>
+
+    <!-- Controls + Progress -->
+    <div class="player-center">
+      <div class="controls">
+        <button class="ctrl-btn" id="shuffleBtn" onclick="toggleShuffle()" title="Shuffle">🔀</button>
+        <button class="ctrl-btn" onclick="prevTrack()" title="Previous">⏮</button>
+        <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+        <button class="ctrl-btn" onclick="nextTrack()" title="Next">⏭</button>
+        <button class="ctrl-btn" id="repeatBtn" onclick="toggleRepeat()" title="Repeat">🔁</button>
+      </div>
+      <div class="progress-bar-wrapper">
+        <span class="time-label" id="currentTime">0:00</span>
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-thumb" id="progressThumb"></div>
+        </div>
+        <span class="time-label right" id="totalTime">0:00</span>
+      </div>
+    </div>
+
+    <!-- Volume + extra -->
+    <div class="player-right">
+      <div class="quality-badge" id="qualityBadge">MP3</div>
+      <div class="vol-wrap">
+        <span class="vol-icon" id="volIcon" onclick="toggleMute()">🔊</span>
+        <input type="range" id="volSlider" min="0" max="100" value="80" />
+      </div>
+    </div>
+
+  </footer>
+</div>
+
+<!-- Hidden audio element -->
+<audio id="audioEl" crossorigin="anonymous" preload="auto"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
