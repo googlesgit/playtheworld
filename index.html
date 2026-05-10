@@ -248,7 +248,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 //  Result  → Every song plays correctly, no ads, no iframes
 // ═══════════════════════════════════════════════════════════════
 
-const SAAVN   = 'https://saavn.dev/api';
+const SAAVN   = 'https://soniq-proxy-2y7m.vercel.app/api';
 const SB_URL  = 'https://jvttracfmpwwozagfpmi.supabase.co';
 const SB_KEY  = 'sb_publishable_Wvo0W3U_ZV_cUG1yZ4gxfg_rwJECx1H';
 const aud     = document.getElementById('aud');
@@ -317,7 +317,7 @@ async function loadUserData() {
 //  JIOSAAVN API — real songs, real 320kbps audio, no key needed
 // ══════════════════════════════════════════════════════════════
 async function saavnSearch(query) {
-  const url = `${SAAVN}/search/songs?query=${encodeURIComponent(query)}&page=1&limit=20`;
+  const url = `${SAAVN}/search?q=${encodeURIComponent(query)}`;
   const r = await Promise.race([
     fetch(url),
     new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 8000))
