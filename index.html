@@ -327,7 +327,7 @@ async function saavnSearch(query) {
   if (data.error) throw new Error(data.error);
   // Our proxy returns { success: true, data: [...songs] }
   const songs = data.data || [];
-  return songs.map(parseSong).filter(s => s.url);
+  return songs.map(parseSong); // show all songs, skip broken ones on play
 }
 
 async function saavnTrending(query) {
