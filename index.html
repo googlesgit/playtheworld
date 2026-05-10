@@ -386,8 +386,11 @@ function playIdx(i) {
   aud.volume = muted ? 0 : document.getElementById('volSlider').value / 100;
   aud.play().catch(e => {
     console.warn('[SONIQ] Audio error:', e.message, 'on', t.title);
-    // try next track
-    if (token === loadToken && cur < tracks.length - 1) {
+    playing = false;
+    document.getElementById('playBtn').textContent = '▶';
+    // Only auto-skip if the song had a URL (network/format error)
+    // If url was empty, stop here — don't cascade through the whole list
+    if (t.url && token === loadToken && cur < tracks.length - 1) {
       setTimeout(() => playIdx(cur + 1), 300);
     }
   });
@@ -475,8 +478,11 @@ aud.addEventListener('timeupdate', () => {
   document.getElementById('totTime').textContent   = fmtD(aud.duration);
 });
 aud.addEventListener('error', () => {
-  console.warn('[SONIQ] Audio load error on', tracks[cur]?.title);
-  if (cur < tracks.length - 1) setTimeout(() => playIdx(cur + 1), 300);
+  // Do NOT auto-skip here — the .catch() in playIdx already handles this
+  // Having both caused a double-skip cascade through all 20 songs
+  console.warn('[SONIQ] Audio error on', tracks[cur]?.title);
+  playing = false;
+  document.getElementById('playBtn').textContent = '▶';
 });
 
 document.getElementById('progTrack').addEventListener('click', e => {
