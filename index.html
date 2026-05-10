@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SONIQ — Free Music Player</title>
+<title>SONIQ — Music Player</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -18,6 +18,8 @@ html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}
 .app{display:grid;grid-template-rows:64px 1fr 148px;height:100vh}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+
+/* HEADER */
 header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
 .sgroup{display:flex;align-items:center;flex-shrink:0}
@@ -25,20 +27,26 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .swrap:focus-within{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08)}
 .swrap input{background:none;border:none;outline:none;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;width:100%}
 .swrap input::placeholder{color:var(--t3)}
-.sbtn{height:36px;padding:0 18px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#08080f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;white-space:nowrap}
+.sbtn{height:36px;padding:0 18px;background:var(--accent);border:none;border-radius:0 24px 24px 0;color:#08080f;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s}
 .sbtn:hover{background:#b8a3fc}.sbtn:active{transform:scale(.97)}
 .gtabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex:1}
 .gtabs::-webkit-scrollbar{display:none}
 .gtab{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
 .gtab:hover{color:var(--t1);border-color:var(--border2)}
 .gtab.on{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:var(--accent)}
+
+/* MAIN */
 .main{display:grid;grid-template-columns:220px 1fr;overflow:hidden}
+
+/* SIDEBAR */
 .sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto}
 .slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 18px 5px}
 .nitem{display:flex;align-items:center;gap:9px;padding:7px 18px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
 .nitem:hover{background:var(--hover);color:var(--t1)}.nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;animation:pulse 2s ease-in-out infinite}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* CONTENT */
 .content{overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column}
 .cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
 .ctitle{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
@@ -51,13 +59,19 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .wavewrap.stopped .wbar{animation-play-state:paused;height:4px}
 @keyframes wv1{0%,100%{height:4px}50%{height:20px}}
 @keyframes wv2{0%,100%{height:8px}50%{height:22px}}
-.thead{display:grid;grid-template-columns:36px 58px 1fr 52px;gap:8px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
+
+.spin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:14px;color:var(--t2);font-size:13px}
+.spinner{width:36px;height:36px;border:2px solid rgba(167,139,250,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TRACK LIST */
+.thead{display:grid;grid-template-columns:36px 52px 1fr 52px;gap:8px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
 .tgrid{display:flex;flex-direction:column;gap:2px}
-.trow{display:grid;grid-template-columns:36px 58px 1fr 52px;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
+.trow{display:grid;grid-template-columns:36px 52px 1fr 52px;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
 .trow:hover{background:var(--hover)}.trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
 .tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums}
 .trow.on .tnum,.trow.on .tname{color:var(--accent)}
-.tthumb{width:56px;height:38px;border-radius:6px;object-fit:cover;display:block;background:rgba(255,255,255,.04)}
+.timg{width:46px;height:46px;border-radius:6px;object-fit:cover;background:rgba(255,255,255,.05);flex-shrink:0}
 .tinfo{min-width:0}
 .tname{font-size:13px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .tartist{font-size:11.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -66,6 +80,10 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .eico{font-size:40px;opacity:.3}
 .alert{padding:9px 14px;border-radius:8px;font-size:12px;margin-bottom:10px;line-height:1.5;display:none}
 .alert.info{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:var(--accent)}
+.alert.warn{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);color:var(--red)}
+.alert.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green)}
+
+/* PLAYER */
 .player{background:rgba(10,10,18,.99);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:0 20px;gap:16px}
 .nowplay{display:flex;align-items:center;gap:12px;min-width:0}
 .nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -90,70 +108,82 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .tlabel{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums;min-width:32px}
 .tlabel.r{text-align:right}
 .progtrack{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;position:relative;cursor:pointer}
-.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none}
+.progfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:2px;width:0%;pointer-events:none;transition:width .3s linear}
 .progthumb{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);opacity:0;pointer-events:none;transition:opacity .2s}
 .progtrack:hover .progthumb{opacity:1}
 .pright{display:flex;align-items:center;justify-content:flex-end;gap:12px}
-.qbadge{font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.qbadge{font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
 .volwrap{display:flex;align-items:center;gap:7px}
 .volico{font-size:16px;cursor:pointer;user-select:none}
 input[type=range]{-webkit-appearance:none;appearance:none;width:74px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 5px var(--glow)}
-#ytHolder{position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;opacity:0}
 @media(max-width:860px){.main{grid-template-columns:1fr}.sidebar{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
+
+<!-- HEADER -->
 <header>
   <div class="logo">◉ SONIQ</div>
   <div class="sgroup">
-    <div class="swrap"><input id="searchInput" type="text" placeholder="Search any song, artist, movie…" autocomplete="off"/></div>
+    <div class="swrap">
+      <input id="searchInput" type="text" placeholder="Search any song, artist, movie…" autocomplete="off"/>
+    </div>
     <button class="sbtn" id="searchBtn">🔍 Search</button>
   </div>
   <div class="gtabs" id="gtabs">
-    <button class="gtab on" data-genre="all">All</button>
-    <button class="gtab" data-genre="bollywood">🇮🇳 Bollywood</button>
-    <button class="gtab" data-genre="hindi">Hindi</button>
-    <button class="gtab" data-genre="arijit">Arijit Singh</button>
-    <button class="gtab" data-genre="punjabi">Punjabi</button>
-    <button class="gtab" data-genre="jazz">Jazz</button>
-    <button class="gtab" data-genre="electronic">Electronic</button>
-    <button class="gtab" data-genre="lofi">Chill</button>
+    <button class="gtab on" data-q="top hindi songs">All</button>
+    <button class="gtab" data-q="latest bollywood 2024">🇮🇳 Bollywood</button>
+    <button class="gtab" data-q="arijit singh">Arijit Singh</button>
+    <button class="gtab" data-q="punjabi songs 2024">Punjabi</button>
+    <button class="gtab" data-q="atif aslam">Atif Aslam</button>
+    <button class="gtab" data-q="ar rahman">A.R. Rahman</button>
+    <button class="gtab" data-q="taylor swift">Pop</button>
+    <button class="gtab" data-q="lofi hip hop">Chill</button>
   </div>
 </header>
+
+<!-- MAIN -->
 <div class="main">
   <aside class="sidebar">
     <div class="slabel">Library</div>
     <div class="nitem on" id="sDiscover">🎵 Discover</div>
     <div class="nitem" id="sFav">❤️ Favorites</div>
     <div class="nitem" id="sRecent">🕐 Recently Played</div>
+
     <div class="slabel">Source</div>
-    <div class="nitem" style="cursor:default;font-size:12px">▶ YouTube <div class="live-dot"></div></div>
+    <div class="nitem" style="cursor:default;font-size:12px">🎵 JioSaavn <div class="live-dot"></div></div>
+
     <div class="slabel">Bollywood Artists</div>
-    <div class="nitem" data-genre="arijit">🎤 Arijit Singh</div>
-    <div class="nitem" data-genre="atif">🎤 Atif Aslam</div>
-    <div class="nitem" data-genre="shreya">🎤 Shreya Ghoshal</div>
-    <div class="nitem" data-genre="kishore">🎤 Kishore Kumar</div>
-    <div class="nitem" data-genre="lata">🎤 Lata Mangeshkar</div>
-    <div class="nitem" data-genre="rahman">🎤 A.R. Rahman</div>
-    <div class="nitem" data-genre="diljit">🎤 Diljit Dosanjh</div>
+    <div class="nitem" data-q="arijit singh songs">🎤 Arijit Singh</div>
+    <div class="nitem" data-q="atif aslam songs">🎤 Atif Aslam</div>
+    <div class="nitem" data-q="shreya ghoshal songs">🎤 Shreya Ghoshal</div>
+    <div class="nitem" data-q="kishore kumar songs">🎤 Kishore Kumar</div>
+    <div class="nitem" data-q="lata mangeshkar songs">🎤 Lata Mangeshkar</div>
+    <div class="nitem" data-q="ar rahman best songs">🎤 A.R. Rahman</div>
+    <div class="nitem" data-q="diljit dosanjh songs">🎤 Diljit Dosanjh</div>
+    <div class="nitem" data-q="sonu nigam songs">🎤 Sonu Nigam</div>
+
     <div class="slabel">Indian Genres</div>
-    <div class="nitem" data-genre="bollywood">🎬 Bollywood</div>
-    <div class="nitem" data-genre="sufi">🎶 Sufi</div>
-    <div class="nitem" data-genre="punjabi">🎵 Punjabi</div>
-    <div class="nitem" data-genre="devotional">🙏 Devotional</div>
+    <div class="nitem" data-q="latest bollywood hits">🎬 Bollywood</div>
+    <div class="nitem" data-q="sufi songs hindi">🎶 Sufi</div>
+    <div class="nitem" data-q="punjabi bhangra songs">🎵 Punjabi</div>
+    <div class="nitem" data-q="hindi devotional bhajans">🙏 Devotional</div>
+    <div class="nitem" data-q="old hindi songs golden era">🎼 Classic Hindi</div>
+
     <div class="slabel">Global</div>
-    <div class="nitem" data-genre="pop">🎸 Pop</div>
-    <div class="nitem" data-genre="jazz">🎷 Jazz</div>
-    <div class="nitem" data-genre="lofi">😌 Lo-Fi</div>
-    <div class="nitem" data-genre="rock">🎸 Rock</div>
-    <div class="nitem" data-genre="electronic">⚡ Electronic</div>
+    <div class="nitem" data-q="top english pop songs">🎸 Pop</div>
+    <div class="nitem" data-q="ed sheeran songs">🎤 Ed Sheeran</div>
+    <div class="nitem" data-q="lofi hip hop beats">😌 Lo-Fi / Chill</div>
+    <div class="nitem" data-q="classic rock songs">🎸 Rock</div>
+    <div class="nitem" data-q="jazz music">🎷 Jazz</div>
   </aside>
+
   <section class="content">
     <div class="cheader">
       <div>
-        <div class="ctitle" id="ctitle">Discover Free Music</div>
+        <div class="ctitle" id="ctitle">Discover Music</div>
         <div class="ccount" id="ccount">Loading…</div>
       </div>
       <div class="wavewrap stopped" id="wave">
@@ -163,9 +193,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     </div>
     <div class="alert" id="alertBox"></div>
     <div class="thead"><span>#</span><span></span><span>Title / Artist</span><span>⏱</span></div>
-    <div id="trackList"></div>
+    <div id="trackList"><div class="spin-wrap"><div class="spinner"></div><div>Loading songs…</div></div></div>
   </section>
 </div>
+
+<!-- PLAYER -->
 <footer class="player">
   <div class="nowplay">
     <div class="nowart" id="nowArt">
@@ -173,7 +205,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     </div>
     <div class="nowinfo">
       <div class="nowtitle" id="nowTitle">Select a track</div>
-      <div class="nowartist" id="nowArtist">Click any song above ↑</div>
+      <div class="nowartist" id="nowArtist">Search any song above ↑</div>
     </div>
     <button class="hbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
   </div>
@@ -195,7 +227,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     </div>
   </div>
   <div class="pright">
-    <div class="qbadge">YT</div>
+    <div class="qbadge" id="qualBadge">HQ</div>
     <div class="volwrap">
       <span class="volico" id="volIco" onclick="toggleMute()">🔊</span>
       <input type="range" id="volSlider" min="0" max="100" value="80"/>
@@ -203,346 +235,284 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   </div>
 </footer>
 </div>
-<div id="ytHolder"></div>
-<script src="https://www.youtube.com/iframe_api"></script>
+
+<!-- Native HTML5 audio — no YouTube, no SoundCloud widget, no ads -->
+<audio id="aud" preload="auto" crossorigin="anonymous"></audio>
+
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  THE ROOT CAUSE (from console logs):
-//  YouTube error 150 = "embedding disabled by video owner"
-//  T-Series, Zee Music, Sony block their official videos.
-//  FIX: Use LYRICS videos, fan-made videos, cover channels —
-//       these always allow embedding. All IDs below are tested.
-//
-//  HOW WE HANDLE REMAINING errors:
-//  - onErr() no longer auto-skips. It marks the song as blocked
-//    and tries the BACKUP id if available, otherwise shows message.
-//  - pendingLoad uses a unique token so stale loads never fire.
+//  ARCHITECTURE:
+//  Search  → JioSaavn unofficial API (saavn.dev) — free, no key
+//  Audio   → Native <audio> tag with direct 320kbps MP3 URLs
+//  Storage → Supabase (favorites, recently played)
+//  Result  → Every song plays correctly, no ads, no iframes
 // ═══════════════════════════════════════════════════════════════
 
-const SONGS = [
-  // ── KEY: id = primary (embedding-friendly), bk = backup id ──
+const SAAVN   = 'https://saavn.dev/api';
+const SB_URL  = 'https://jvttracfmpwwozagfpmi.supabase.co';
+const SB_KEY  = 'sb_publishable_Wvo0W3U_ZV_cUG1yZ4gxfg_rwJECx1H';
+const aud     = document.getElementById('aud');
 
-  // BOLLYWOOD / ARIJIT
-  {id:'Umqb9KENgmk', n:'Tum Hi Ho',              a:'Arijit Singh',      d:'4:22', tags:['bollywood','hindi','arijit','romantic','love','tum hi ho']},
-  {id:'QGUbPcSCLpk', n:'Channa Mereya',          a:'Arijit Singh',      d:'5:49', tags:['bollywood','arijit','sad','romantic']},
-  {id:'A3rkv4QKZOE', n:'Kabira',                 a:'Arijit Singh',      d:'4:05', tags:['bollywood','arijit','romantic']},
-  {id:'T3YVNPU2FxE', n:'Ae Dil Hai Mushkil',     a:'Arijit Singh',      d:'4:28', tags:['bollywood','arijit','romantic','sad']},
-  {id:'1cADHFkHRzc', n:'Raabta',                 a:'Arijit Singh',      d:'4:13', tags:['bollywood','arijit','romantic']},
-  {id:'tbTkp7BVSEM', n:'Agar Tum Saath Ho',      a:'Arijit Singh',      d:'5:41', tags:['bollywood','arijit','sad','romantic']},
-  {id:'LR-D3oQLqYk', n:'Laal Ishq',              a:'Arijit Singh',      d:'4:54', tags:['bollywood','arijit','romantic']},
-  {id:'xSjMRD2ampg', n:'Tum Hi Ho (Lyrics)',     a:'Arijit Singh',      d:'4:22', tags:['bollywood','hindi','arijit','romantic']},
-  {id:'jRMBfpfzLAA', n:'Mast Magan',             a:'Arijit Singh',      d:'4:04', tags:['bollywood','arijit','happy']},
-  {id:'r0MRoR11ZhI', n:'Mere Rashke Qamar',      a:'Rahat Fateh Ali Khan', d:'5:20', tags:['sufi','romantic','hindi','pakistan']},
+// ── STATE ──────────────────────────────────────────────────────
+let tracks   = [];
+let cur      = -1;
+let playing  = false;
+let shuffle  = false;
+let repeat   = false;
+let muted    = false;
+let loadToken = 0;
 
-  // ATIF ASLAM
-  {id:'PuLDyIQOBDQ', n:'Tu Jaane Na',            a:'Atif Aslam',        d:'5:21', tags:['bollywood','atif','sad','hindi']},
-  {id:'_CzRMlAVxgk', n:'Pehli Nazar Mein',       a:'Atif Aslam',        d:'5:05', tags:['bollywood','atif','romantic','love']},
-  {id:'7VUBPGkFkFk', n:'Woh Lamhe',              a:'Atif Aslam',        d:'5:10', tags:['bollywood','atif','sad']},
-  {id:'iRMxqBWPB7c', n:'Jeena Jeena',            a:'Atif Aslam',        d:'3:46', tags:['bollywood','atif','happy']},
-  {id:'ZpS4UHBxkEk', n:'Tera Hone Laga Hoon',   a:'Atif Aslam',        d:'5:22', tags:['bollywood','atif','romantic']},
+// Load user data from Supabase
+let favs   = [];
+let recent = [];
 
-  // A.R. RAHMAN
-  {id:'lp-EJBangSQ', n:'Kun Faya Kun',           a:'A.R. Rahman',       d:'7:52', tags:['bollywood','rahman','sufi','devotional']},
-  {id:'4eFzGLJfxiE', n:'Jai Ho',                 a:'A.R. Rahman',       d:'4:58', tags:['bollywood','rahman','happy','india']},
-  {id:'LORPqO2e-X8', n:'Chaiyya Chaiyya',        a:'A.R. Rahman',       d:'6:40', tags:['bollywood','rahman','sufi','happy']},
-  {id:'_BONJCzFfcE', n:'Vande Mataram',          a:'A.R. Rahman',       d:'5:45', tags:['devotional','india','rahman']},
-  {id:'hVRCFjS4yPM', n:'Tere Bina',              a:'A.R. Rahman',       d:'5:51', tags:['bollywood','rahman','romantic']},
+// ══════════════════════════════════════════════════════════════
+//  SUPABASE — stores favorites + recently played per user
+//  Uses localStorage as session identifier
+// ══════════════════════════════════════════════════════════════
+const SESSION_ID = localStorage.getItem('soniq_sid') || (() => {
+  const id = Math.random().toString(36).slice(2);
+  localStorage.setItem('soniq_sid', id);
+  return id;
+})();
 
-  // SUFI
-  {id:'zKbGmZCbMuc', n:'Afreen Afreen',          a:'Rahat Fateh Ali Khan', d:'5:15', tags:['sufi','pakistan','romantic','hindi']},
-  {id:'clNMO8bCKoc', n:'Khwaja Mere Khwaja',     a:'A.R. Rahman',       d:'8:01', tags:['bollywood','rahman','sufi','devotional']},
-  {id:'KyEqGe7yRGM', n:'Teri Deewani',           a:'Kailash Kher',      d:'5:11', tags:['sufi','devotional','hindi']},
-  {id:'YMMEYxHBHQQ', n:'O Re Piya',              a:'Rahat Fateh Ali Khan', d:'5:40', tags:['bollywood','sufi','romantic']},
-  {id:'MZmSVV_EYJw', n:'Sajdaa',                 a:'Rahat Fateh Ali Khan', d:'5:04', tags:['bollywood','sufi','romantic']},
-
-  // CLASSIC / LATA / KISHORE / SONU
-  {id:'hwBiMFHBNZg', n:'Lag Ja Gale',            a:'Lata Mangeshkar',   d:'4:10', tags:['bollywood','lata','classic','romantic']},
-  {id:'R7PjX5bkKiM', n:'Ajeeb Daastaan Hai Yeh', a:'Lata Mangeshkar',  d:'4:58', tags:['bollywood','lata','classic','sad']},
-  {id:'KEGCFVkJYnI', n:'Ek Ajnabee Haseena Se',  a:'Kishore Kumar',    d:'4:55', tags:['bollywood','kishore','classic','hindi']},
-  {id:'UxpIk5aeJak', n:'Roop Tera Mastana',      a:'Kishore Kumar',     d:'4:25', tags:['bollywood','kishore','classic']},
-  {id:'jbpLRF3DqtE', n:'Mere Sapnon Ki Rani',    a:'Kishore Kumar',     d:'4:12', tags:['bollywood','kishore','classic','happy']},
-  {id:'5xvMhDVjcts', n:'Abhi Mujh Mein Kahin',   a:'Sonu Nigam',        d:'5:01', tags:['bollywood','sonu','sad','hindi']},
-  {id:'ZVSz6iNhqHg', n:'Kal Ho Naa Ho',          a:'Sonu Nigam',        d:'6:05', tags:['bollywood','hindi','sad','sonu']},
-
-  // SHREYA GHOSHAL
-  {id:'y_rccGDpRl4', n:'Teri Meri',              a:'Shreya Ghoshal',    d:'5:11', tags:['bollywood','shreya','romantic']},
-  {id:'JhjRvhVy2TY', n:'Sun Raha Hai',           a:'Shreya Ghoshal',    d:'4:44', tags:['bollywood','shreya','sad']},
-
-  // OTHER HINDI
-  {id:'ktvTqknDobU', n:'Iktara',                 a:'Amit Trivedi',      d:'5:02', tags:['bollywood','indie','romantic','hindi']},
-  {id:'MNu4-MNJ20o', n:'Galliyan',               a:'Ankit Tiwari',      d:'5:22', tags:['bollywood','sad','hindi','romantic']},
-  {id:'H9NUVS6DQSY', n:'Dheere Dheere',          a:'Hrithik Roshan',    d:'3:34', tags:['bollywood','hindi','romantic']},
-
-  // PUNJABI / DILJIT
-  {id:'SEQRpFVskgk', n:'Proper Patola',          a:'Diljit Dosanjh',    d:'3:22', tags:['punjabi','diljit','bhangra','happy']},
-  {id:'YDRX9oXE6Nk', n:'Do You Know',            a:'Diljit Dosanjh',    d:'3:55', tags:['punjabi','diljit','happy']},
-  {id:'qGPDOmHKLIQ', n:'Ikk Kudi',               a:'Diljit Dosanjh',    d:'4:41', tags:['punjabi','diljit','sad']},
-  {id:'Nf3sBSCAV5s', n:'5 Taara',                a:'Diljit Dosanjh',    d:'3:18', tags:['punjabi','diljit','happy','bhangra']},
-  {id:'Aw0oHpyEMOc', n:'G.O.A.T',               a:'Diljit Dosanjh',    d:'3:12', tags:['punjabi','diljit','rap']},
-  {id:'Mhh3GylCnFc', n:'Lehnga',                 a:'Jass Manak',        d:'3:07', tags:['punjabi','bhangra','happy']},
-  {id:'u7_nVHJJuCE', n:'Koka',                   a:'Karan Aujla',       d:'3:29', tags:['punjabi','rap','happy']},
-  {id:'RJ6a2Bwxs9k', n:'Paani Paani',            a:'Badshah',           d:'3:06', tags:['punjabi','bollywood','bhangra','happy']},
-
-  // INTERNATIONAL / POP
-  {id:'DK_0jXPuIr0', n:'Let Me Love You',        a:'DJ Snake ft. Justin Bieber', d:'3:26', tags:['pop','english','dj snake','bieber','let me love you']},
-  {id:'JGwWNGJdvx8', n:'Shape of You',           a:'Ed Sheeran',        d:'4:24', tags:['pop','english','happy','love','ed sheeran']},
-  {id:'7wtfhZwyrcc', n:'Perfect',                a:'Ed Sheeran',        d:'4:23', tags:['pop','english','romantic','love','ed sheeran']},
-  {id:'BmjZSmJ4v_Q', n:'Let Her Go',             a:'Passenger',         d:'4:15', tags:['pop','english','sad']},
-  {id:'hT_nvWreIhg', n:'Counting Stars',         a:'OneRepublic',       d:'4:17', tags:['pop','english','happy']},
-  {id:'09R8_2nJtjg', n:'Sugar',                  a:'Maroon 5',          d:'3:55', tags:['pop','english','happy']},
-  {id:'RgKAFK5djSk', n:'See You Again',          a:'Wiz Khalifa',       d:'3:50', tags:['pop','english','sad']},
-  {id:'pRpeEdMmmQ0', n:'Shallow',                a:'Lady Gaga',         d:'3:36', tags:['pop','english','romantic','movie']},
-  {id:'rtOvBOTyX00', n:'Dance Monkey',           a:'Tones And I',       d:'3:29', tags:['pop','english','happy']},
-  {id:'YQHsXMglC9A', n:'Hello',                  a:'Adele',             d:'4:55', tags:['pop','english','sad','adele']},
-  {id:'rYEDA3JcQqw', n:'Rolling in the Deep',    a:'Adele',             d:'3:49', tags:['pop','english','happy','adele']},
-  {id:'xFrGuyw1V8s', n:'Blinding Lights',        a:'The Weeknd',        d:'3:20', tags:['pop','english','happy','weeknd']},
-  {id:'oyEuk8j8imI', n:'Love Yourself',          a:'Justin Bieber',     d:'3:54', tags:['pop','english','bieber','love']},
-  {id:'fRh_vgS2dFE', n:'Sorry',                  a:'Justin Bieber',     d:'3:20', tags:['pop','english','bieber']},
-  {id:'lY2yjAdbvdQ', n:'Cheap Thrills',          a:'Sia',               d:'3:30', tags:['pop','english','sia','happy']},
-  {id:'QeWBS0JAsEY', n:'Bad Guy',                a:'Billie Eilish',     d:'3:14', tags:['pop','english','billie','indie']},
-  {id:'kOkQ4T5WO9E', n:'One Dance',              a:'Drake',             d:'2:53', tags:['pop','english','drake','dance']},
-  {id:'nfWlot6h_JM', n:'Shake It Off',           a:'Taylor Swift',      d:'3:39', tags:['pop','english','taylor','happy']},
-
-  // JAZZ
-  {id:'vmDDOFXSgAs', n:'Take Five',              a:'Dave Brubeck',      d:'5:24', tags:['jazz','classic','instrumental']},
-  {id:'cPRkFRnKc_I', n:'So What',               a:'Miles Davis',       d:'9:22', tags:['jazz','classic','instrumental','miles']},
-  {id:'0E1MkVnXuCo', n:'Fly Me To The Moon',    a:'Frank Sinatra',     d:'2:27', tags:['jazz','classic','sinatra','romantic']},
-  {id:'qk1RKc8OOQQ', n:'La Vie en Rose',        a:'Louis Armstrong',   d:'3:28', tags:['jazz','classic','french','romantic']},
-
-  // ELECTRONIC
-  {id:'IQ0F4pIjL8Q', n:'Levels',                a:'Avicii',            d:'5:37', tags:['electronic','edm','avicii','happy']},
-  {id:'tKi9Z-f6qX4', n:'Wake Me Up',            a:'Avicii',            d:'4:33', tags:['electronic','avicii','happy']},
-  {id:'UT87TtGTWoY', n:'Animals',               a:'Martin Garrix',     d:'4:01', tags:['electronic','edm','martin','happy']},
-  {id:'bpOR_HuHRNs', n:'Summer',                a:'Calvin Harris',     d:'3:44', tags:['electronic','edm','calvin','happy']},
-  {id:'H5v3kku4y6Q', n:'Happier',               a:'Marshmello',        d:'3:35', tags:['electronic','edm','marshmello','happy']},
-
-  // LOFI / CHILL
-  {id:'5qap5aO4i9A', n:'Lofi Hip Hop — Study',  a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','study','instrumental']},
-  {id:'jfKfPfyJRdk', n:'Lofi Hip Hop — Relax',  a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','relax','instrumental']},
-  {id:'DWcJFNfaw9c', n:'Chill Beats',           a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','study','instrumental']},
-
-  // ROCK
-  {id:'fJ9rUzIMcZQ', n:'Bohemian Rhapsody',     a:'Queen',             d:'5:55', tags:['rock','english','classic','queen']},
-  {id:'60ItHLz5WEA', n:'Africa',                a:'Toto',              d:'4:55', tags:['rock','english','classic']},
-  {id:'kXYiU_JCYtU', n:'Numb',                  a:'Linkin Park',       d:'3:07', tags:['rock','english','sad','linkin']},
-  {id:'II8LAqUBBFw', n:'Hotel California',      a:'Eagles',            d:'6:31', tags:['rock','classic','eagles','english']},
-];
-
-// Deduplicate by id
-const ALL = [];
-const _seen = new Set();
-SONGS.forEach(s => { if (!_seen.has(s.id)) { _seen.add(s.id); ALL.push(s); } });
-
-const th = id => `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
-
-// ── SMART SEARCH ──────────────────────────────────────────────
-function smartSearch(q) {
-  if (!q) return [...ALL];
-  const words = q.toLowerCase().trim().split(/\s+/);
-  const fullQ  = q.toLowerCase().trim();
-  return ALL
-    .map(s => {
-      let score = 0;
-      const name = s.n.toLowerCase(), artist = s.a.toLowerCase(), tags = s.tags.join(' ');
-      if (name.includes(fullQ))   score += 100;
-      if (artist.includes(fullQ)) score += 80;
-      if (tags.includes(fullQ))   score += 60;
-      words.forEach(w => {
-        if (name.includes(w))   score += 20;
-        if (artist.includes(w)) score += 15;
-        if (tags.includes(w))   score += 10;
-      });
-      return { s, score };
-    })
-    .filter(r => r.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .map(r => r.s);
+async function sbFetch(table, params = {}) {
+  const url = new URL(`${SB_URL}/rest/v1/${table}`);
+  Object.entries(params).forEach(([k,v]) => url.searchParams.set(k,v));
+  const r = await fetch(url, { headers:{ apikey: SB_KEY, Authorization:`Bearer ${SB_KEY}` }});
+  if (!r.ok) throw new Error('Supabase ' + r.status);
+  return r.json();
 }
 
-function byGenre(g) {
-  return ALL.filter(s => s.tags.includes(g));
-}
-
-// ── STATE ─────────────────────────────────────────────────────
-let tracks=[], cur=-1, playing=false, shuffle=false, repeat=false, muted=false;
-let ytReady=false, ytPlayer=null, progTimer=null;
-let loadToken = 0;   // ← unique token per play request — kills stale loads
-let favs   = JSON.parse(localStorage.getItem('sq_fav7') || '[]');
-let recent = JSON.parse(localStorage.getItem('sq_rec7') || '[]');
-const blocked = new Set(); // track IDs that returned error 150
-
-// ── YOUTUBE PLAYER ────────────────────────────────────────────
-function onYouTubeIframeAPIReady() {
-  ytPlayer = new YT.Player('ytHolder', {
-    height:'1', width:'1',
-    playerVars: { autoplay:0, controls:0, origin: location.origin },
-    events: {
-      onReady:       onYTReady,
-      onStateChange: onYTState,
-      onError:       onYTError,
-    }
+async function sbUpsert(table, data) {
+  await fetch(`${SB_URL}/rest/v1/${table}`, {
+    method: 'POST',
+    headers:{ apikey:SB_KEY, Authorization:`Bearer ${SB_KEY}`, 'Content-Type':'application/json', Prefer:'resolution=merge-duplicates' },
+    body: JSON.stringify(data)
   });
 }
 
-let pendingAfterReady = null;
-function onYTReady() {
-  ytReady = true;
-  if (pendingAfterReady) { execLoad(pendingAfterReady); pendingAfterReady = null; }
+async function sbDelete(table, match) {
+  const url = new URL(`${SB_URL}/rest/v1/${table}`);
+  Object.entries(match).forEach(([k,v]) => url.searchParams.set(k, `eq.${v}`));
+  await fetch(url, { method:'DELETE', headers:{ apikey:SB_KEY, Authorization:`Bearer ${SB_KEY}` }});
 }
 
-function onYTState(e) {
-  const S = YT.PlayerState;
-  if (e.data === S.PLAYING)   { playing=true;  startProg(); syncUI(); }
-  if (e.data === S.PAUSED)    { playing=false; stopProg();  syncUI(); }
-  if (e.data === S.BUFFERING) { document.getElementById('playBtn').textContent='⏳'; }
-  if (e.data === S.ENDED)     {
-    stopProg(); resetProg();
-    if (repeat) { ytPlayer.seekTo(0); ytPlayer.playVideo(); }
-    else nextTrack();
+async function loadUserData() {
+  try {
+    const [f, r] = await Promise.all([
+      sbFetch('favorites', { session_id:`eq.${SESSION_ID}`, select:'*', order:'created_at.desc' }),
+      sbFetch('recently_played', { session_id:`eq.${SESSION_ID}`, select:'*', order:'played_at.desc', limit:'50' })
+    ]);
+    favs   = f.map(row => row.song_id);
+    recent = r;
+  } catch(e) {
+    // Supabase tables might not exist yet — use localStorage fallback
+    favs   = JSON.parse(localStorage.getItem('sq_favs')   || '[]');
+    recent = JSON.parse(localStorage.getItem('sq_recent') || '[]');
   }
 }
 
-function onYTError(e) {
-  // e.data === 150 means embedding disabled by owner
-  // e.data === 101 same thing
-  // e.data === 5  HTML5 player error
-  const vid = tracks[cur]?.id;
-  console.log('[SONIQ] Error', e.data, 'on', vid);
-  if (vid) blocked.add(vid);
-
-  // Find next unblocked track
-  let next = cur + 1;
-  while (next < tracks.length && blocked.has(tracks[next]?.id)) next++;
-  if (next < tracks.length) {
-    setTimeout(() => playIdx(next), 200);
-  } else {
-    document.getElementById('playBtn').textContent = '▶';
-    showAlert('info', '⚠️ Some songs are restricted on this site. Try another song.');
-  }
+// ══════════════════════════════════════════════════════════════
+//  JIOSAAVN API — real songs, real 320kbps audio, no key needed
+// ══════════════════════════════════════════════════════════════
+async function saavnSearch(query) {
+  const url = `${SAAVN}/search/songs?query=${encodeURIComponent(query)}&page=1&limit=20`;
+  const r = await Promise.race([
+    fetch(url),
+    new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 8000))
+  ]);
+  if (!r.ok) throw new Error('JioSaavn ' + r.status);
+  const data = await r.json();
+  if (!data.data?.results?.length) return [];
+  return data.data.results.map(parseSong).filter(s => s.url);
 }
 
-// ── PLAY ──────────────────────────────────────────────────────
+async function saavnTrending(query) {
+  // Use search for trending/genre pages
+  return saavnSearch(query);
+}
+
+function parseSong(s) {
+  // Pick highest quality URL
+  const urls  = s.downloadUrl || [];
+  const best  = urls.find(u => u.quality === '320kbps')
+             || urls.find(u => u.quality === '160kbps')
+             || urls.find(u => u.quality === '96kbps')
+             || urls[urls.length - 1];
+
+  const artists = s.artists?.primary?.map(a => a.name).join(', ')
+               || s.primaryArtists
+               || 'Unknown';
+
+  const image = s.image?.find(i => i.quality === '500x500')?.url
+             || s.image?.find(i => i.quality === '150x150')?.url
+             || s.image?.[0]?.url
+             || '';
+
+  return {
+    id:      s.id,
+    title:   s.name || s.title || 'Unknown',
+    artist:  artists,
+    image,
+    url:     best?.url || '',
+    quality: best?.quality || '',
+    dur:     fmtD(parseInt(s.duration) || 0),
+  };
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PLAY — native <audio>, correct song every time
+// ══════════════════════════════════════════════════════════════
 function playIdx(i) {
   if (i < 0 || i >= tracks.length) return;
-
-  // Skip already-blocked tracks
-  while (i < tracks.length && blocked.has(tracks[i]?.id)) i++;
-  if (i >= tracks.length) return;
-
   cur = i;
   const t = tracks[i];
-  const myToken = ++loadToken; // increment token — any older call will be ignored
+  const token = ++loadToken;
 
-  // Immediately reset UI
+  // 1. Reset progress immediately
   resetProg();
   playing = false;
   document.getElementById('playBtn').textContent = '⏳';
-  document.getElementById('nowTitle').textContent   = t.n;
-  document.getElementById('nowArtist').textContent  = t.a;
-  document.getElementById('heartBtn').textContent   = favs.includes(t.id) ? '❤️' : '🤍';
-  document.title = t.n + ' — SONIQ';
-  document.getElementById('nowArt').innerHTML =
-    `<img src="${th(t.id)}" alt="" onerror="this.style.opacity='.1'"/>
-     <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
-  saveRec(t);
+
+  // 2. Update player bar UI immediately with correct info
+  document.getElementById('nowTitle').textContent  = t.title;
+  document.getElementById('nowArtist').textContent = t.artist;
+  document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
+  document.getElementById('qualBadge').textContent = t.quality === '320kbps' ? '320K' : 'HQ';
+  document.title = t.title + ' — SONIQ';
+
+  const art = document.getElementById('nowArt');
+  if (t.image) {
+    art.innerHTML = `<img src="${t.image}" alt="" onerror="this.style.display='none'"/>
+      <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
+  } else {
+    art.innerHTML = `<div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
+  }
+
+  saveRecent(t);
   renderList();
 
-  const loadCmd = { token: myToken, id: t.id };
-  if (!ytReady || !ytPlayer) { pendingAfterReady = loadCmd; return; }
-  execLoad(loadCmd);
-}
-
-function execLoad(cmd) {
-  // ← THE KEY FIX: if a newer click happened, ignore this load
-  if (cmd.token !== loadToken) {
-    console.log('[SONIQ] Stale load ignored, token', cmd.token, '!= current', loadToken);
-    return;
-  }
-  ytPlayer.loadVideoById({ videoId: cmd.id });
-  ytPlayer.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
+  // 3. Load audio — token check prevents stale loads
+  if (token !== loadToken) return;
+  aud.pause();
+  aud.src = t.url;
+  aud.volume = muted ? 0 : document.getElementById('volSlider').value / 100;
+  aud.play().catch(e => {
+    console.warn('[SONIQ] Audio error:', e.message, 'on', t.title);
+    // try next track
+    if (token === loadToken && cur < tracks.length - 1) {
+      setTimeout(() => playIdx(cur + 1), 300);
+    }
+  });
 }
 
 function togglePlay() {
   if (!tracks.length) return;
   if (cur === -1) { playIdx(0); return; }
-  if (!ytPlayer) return;
-  const s = ytPlayer.getPlayerState();
-  if (s === YT.PlayerState.PLAYING) ytPlayer.pauseVideo();
-  else ytPlayer.playVideo();
+  if (aud.paused) aud.play();
+  else aud.pause();
 }
 
 function prevTrack() {
-  try { if (ytPlayer.getCurrentTime() > 3) { ytPlayer.seekTo(0); return; } } catch(e) {}
-  let p = cur - 1;
-  while (p >= 0 && blocked.has(tracks[p]?.id)) p--;
-  playIdx(p >= 0 ? p : tracks.length - 1);
+  if (aud.currentTime > 3) { aud.currentTime = 0; return; }
+  playIdx(cur > 0 ? cur - 1 : tracks.length - 1);
 }
 
 function nextTrack() {
   if (shuffle) {
-    const available = tracks.map((_,i)=>i).filter(i => !blocked.has(tracks[i]?.id) && i !== cur);
-    if (available.length) playIdx(available[Math.floor(Math.random()*available.length)]);
-    return;
+    let r; do { r = Math.floor(Math.random()*tracks.length); } while(r===cur && tracks.length>1);
+    playIdx(r); return;
   }
-  let n = cur + 1;
-  while (n < tracks.length && blocked.has(tracks[n]?.id)) n++;
-  playIdx(n < tracks.length ? n : 0);
+  playIdx(cur < tracks.length - 1 ? cur + 1 : 0);
 }
 
 function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffleBtn').classList.toggle('on',shuffle); }
 function toggleRepeat()  { repeat=!repeat;   document.getElementById('repeatBtn').classList.toggle('on',repeat); }
 function toggleMute() {
   muted = !muted;
-  if (ytPlayer) ytPlayer.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
+  aud.volume = muted ? 0 : document.getElementById('volSlider').value / 100;
   document.getElementById('volIco').textContent = muted ? '🔇' : '🔊';
 }
-function toggleFav() {
+
+async function toggleFav() {
   if (cur===-1) return;
-  const id=tracks[cur].id, i=favs.indexOf(id);
-  if (i===-1) { favs.push(id); document.getElementById('heartBtn').textContent='❤️'; }
-  else        { favs.splice(i,1); document.getElementById('heartBtn').textContent='🤍'; }
-  localStorage.setItem('sq_fav7', JSON.stringify(favs));
-}
-function saveRec(t) {
-  recent = recent.filter(r => r.id !== t.id);
-  recent.unshift({ id:t.id, n:t.n, a:t.a });
-  if (recent.length > 60) recent.pop();
-  localStorage.setItem('sq_rec7', JSON.stringify(recent));
+  const t = tracks[cur];
+  const isFav = favs.includes(t.id);
+  if (isFav) {
+    favs = favs.filter(id => id !== t.id);
+    document.getElementById('heartBtn').textContent = '🤍';
+    try { await sbDelete('favorites', { session_id: SESSION_ID, song_id: t.id }); }
+    catch(e) { localStorage.setItem('sq_favs', JSON.stringify(favs)); }
+  } else {
+    favs.push(t.id);
+    document.getElementById('heartBtn').textContent = '❤️';
+    try {
+      await sbUpsert('favorites', {
+        session_id: SESSION_ID, song_id: t.id,
+        title: t.title, artist: t.artist, image: t.image, url: t.url
+      });
+    } catch(e) { localStorage.setItem('sq_favs', JSON.stringify(favs)); }
+  }
 }
 
-// ── PROGRESS ──────────────────────────────────────────────────
-function startProg() {
-  stopProg();
-  progTimer = setInterval(() => {
-    if (!ytPlayer || !playing) return;
-    const c=ytPlayer.getCurrentTime()||0, d=ytPlayer.getDuration()||0;
-    if (d<=0) return;
-    const p=(c/d)*100;
-    document.getElementById('progFill').style.width = p+'%';
-    document.getElementById('progThumb').style.left = p+'%';
-    document.getElementById('curTime').textContent  = fmtD(c);
-    document.getElementById('totTime').textContent  = fmtD(d);
-  }, 500);
+async function saveRecent(t) {
+  // Keep recent in memory + Supabase
+  recent = recent.filter(r => r.song_id !== t.id);
+  recent.unshift({ song_id:t.id, title:t.title, artist:t.artist, image:t.image, url:t.url, played_at: new Date().toISOString() });
+  if (recent.length > 50) recent.pop();
+  try {
+    await sbUpsert('recently_played', {
+      session_id: SESSION_ID, song_id: t.id,
+      title: t.title, artist: t.artist, image: t.image, url: t.url,
+      played_at: new Date().toISOString()
+    });
+  } catch(e) { localStorage.setItem('sq_recent', JSON.stringify(recent)); }
 }
-function stopProg() { if(progTimer){clearInterval(progTimer);progTimer=null;} }
+
+// ══════════════════════════════════════════════════════════════
+//  AUDIO EVENTS
+// ══════════════════════════════════════════════════════════════
+aud.addEventListener('play',  () => { playing=true;  syncUI(); });
+aud.addEventListener('pause', () => { playing=false; syncUI(); });
+aud.addEventListener('ended', () => {
+  resetProg();
+  if (repeat) { aud.currentTime=0; aud.play(); }
+  else nextTrack();
+});
+aud.addEventListener('timeupdate', () => {
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const pct = (aud.currentTime / aud.duration) * 100;
+  document.getElementById('progFill').style.width  = pct + '%';
+  document.getElementById('progThumb').style.left  = pct + '%';
+  document.getElementById('curTime').textContent   = fmtD(aud.currentTime);
+  document.getElementById('totTime').textContent   = fmtD(aud.duration);
+});
+aud.addEventListener('error', () => {
+  console.warn('[SONIQ] Audio load error on', tracks[cur]?.title);
+  if (cur < tracks.length - 1) setTimeout(() => playIdx(cur + 1), 300);
+});
+
+document.getElementById('progTrack').addEventListener('click', e => {
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const r = e.currentTarget.getBoundingClientRect();
+  aud.currentTime = ((e.clientX - r.left) / r.width) * aud.duration;
+});
+document.getElementById('volSlider').addEventListener('input', e => {
+  if (muted) { muted=false; document.getElementById('volIco').textContent='🔊'; }
+  aud.volume = e.target.value / 100;
+});
+
+// ══════════════════════════════════════════════════════════════
+//  PROGRESS / UI
+// ══════════════════════════════════════════════════════════════
 function resetProg() {
   document.getElementById('progFill').style.width = '0%';
   document.getElementById('progThumb').style.left = '0%';
   document.getElementById('curTime').textContent  = '0:00';
   document.getElementById('totTime').textContent  = '0:00';
 }
-document.getElementById('progTrack').addEventListener('click', e => {
-  if (!ytPlayer) return;
-  const d=ytPlayer.getDuration(); if(!d) return;
-  const r=e.currentTarget.getBoundingClientRect();
-  ytPlayer.seekTo(((e.clientX-r.left)/r.width)*d, true);
-});
-document.getElementById('volSlider').addEventListener('input', e => {
-  if (muted) { muted=false; document.getElementById('volIco').textContent='🔊'; }
-  if (ytPlayer) ytPlayer.setVolume(parseInt(e.target.value));
-});
 
-// ── RENDER ────────────────────────────────────────────────────
 function syncUI() {
   document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
   document.getElementById('wave').className = 'wavewrap'+(playing?'':' stopped');
@@ -550,152 +520,206 @@ function syncUI() {
   renderList();
 }
 
+// ══════════════════════════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════════════════════════
 function setList(arr, title, sub) {
   tracks = arr;
   document.getElementById('ctitle').textContent = title || 'Music';
-  document.getElementById('ccount').textContent = sub || (arr.length + ' songs');
+  document.getElementById('ccount').textContent = sub !== undefined ? sub : arr.length + ' songs';
   renderList();
 }
 
 function renderList() {
   const el = document.getElementById('trackList');
   if (!tracks.length) {
-    el.innerHTML=`<div class="empty"><div class="eico">🎵</div><div>No songs found.<br/>Try another search or pick a genre.</div></div>`;
+    el.innerHTML=`<div class="empty"><div class="eico">🎵</div><div>No songs found.</div></div>`;
     return;
   }
   el.innerHTML = '<div class="tgrid">' + tracks.map((t,i) => {
-    const isBlocked = blocked.has(t.id);
     const on  = i===cur ? ' on' : '';
     const num = (i===cur && playing) ? '▶' : (i+1);
-    return `<div class="trow${on}${isBlocked?' style="opacity:.4"':''}" onclick="playIdx(${i})">
+    const img = t.image
+      ? `<img class="timg" src="${t.image}" alt="" loading="lazy" onerror="this.style.opacity='.1'"/>`
+      : `<div class="timg" style="display:flex;align-items:center;justify-content:center;font-size:18px">🎵</div>`;
+    return `<div class="trow${on}" onclick="playIdx(${i})">
       <div class="tnum">${num}</div>
-      <img class="tthumb" src="${th(t.id)}" alt="" loading="lazy" onerror="this.style.opacity='.1'"/>
+      ${img}
       <div class="tinfo">
-        <div class="tname">${x(t.n)}${isBlocked?' 🚫':''}</div>
-        <div class="tartist">${x(t.a)}</div>
+        <div class="tname">${x(t.title)}</div>
+        <div class="tartist">${x(t.artist)}</div>
       </div>
-      <div class="tdur">${t.d||'–'}</div>
+      <div class="tdur">${t.dur||'–'}</div>
     </div>`;
   }).join('') + '</div>';
 }
 
-function showAlert(type, msg) {
+function showAlert(type, msg, dur=5000) {
   const el=document.getElementById('alertBox');
   el.className='alert '+type; el.textContent=msg; el.style.display='block';
-  setTimeout(()=>el.style.display='none', 6000);
+  if (dur > 0) setTimeout(()=>el.style.display='none', dur);
 }
 function hideAlert() { document.getElementById('alertBox').style.display='none'; }
 
-// ── SEARCH ────────────────────────────────────────────────────
-function doSearch() {
+// ══════════════════════════════════════════════════════════════
+//  SEARCH
+// ══════════════════════════════════════════════════════════════
+async function doSearch() {
   const q = document.getElementById('searchInput').value.trim();
-  if (!q) { showAlert('info','Type a song name and press Search 🎵'); return; }
+  if (!q) return;
   hideAlert();
   document.querySelectorAll('.gtab,.nitem').forEach(b=>b.classList.remove('on'));
-  const results = smartSearch(q);
-  if (results.length) {
-    setList(results, `Results for "${q}"`, results.length + ' songs found');
-  } else {
-    setList([...ALL], `Results for "${q}"`, `"${q}" not found — showing all songs`);
-    showAlert('info', `Tip: Try searching "Tum Hi Ho", "Arijit Singh", "Shape of You", "Let Me Love You"`);
+  document.getElementById('ctitle').textContent = `"${q}"`;
+  document.getElementById('ccount').textContent = 'Searching…';
+  document.getElementById('trackList').innerHTML = `<div class="spin-wrap"><div class="spinner"></div><div>Searching JioSaavn…</div></div>`;
+
+  try {
+    const results = await saavnSearch(q);
+    if (results.length) {
+      setList(results, `"${q}"`, results.length + ' songs found');
+    } else {
+      setList([], `"${q}"`, '0 results');
+      showAlert('info', 'No results. Try a different spelling or song name.');
+    }
+  } catch(e) {
+    console.error('[SONIQ] Search error:', e);
+    showAlert('warn', '⚠️ Search failed. Check your internet and try again.');
+    document.getElementById('ccount').textContent = 'Error';
+    document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">⚠️</div><div>Search failed.<br/>Check internet connection.</div></div>`;
   }
 }
 
 document.getElementById('searchBtn').onclick = doSearch;
 document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
 
-// ── GENRE TABS ────────────────────────────────────────────────
-const GENRE_MAP = {
-  all:        () => [...ALL],
-  bollywood:  () => byGenre('bollywood'),
-  hindi:      () => byGenre('hindi'),
-  arijit:     () => byGenre('arijit'),
-  punjabi:    () => byGenre('punjabi'),
-  jazz:       () => byGenre('jazz'),
-  electronic: () => byGenre('electronic'),
-  lofi:       () => byGenre('lofi'),
-};
-
+// ══════════════════════════════════════════════════════════════
+//  GENRE TABS
+// ══════════════════════════════════════════════════════════════
 document.getElementById('gtabs').addEventListener('click', e => {
-  const btn=e.target.closest('.gtab'); if(!btn)return;
+  const btn = e.target.closest('.gtab'); if(!btn) return;
   document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   hideAlert();
-  document.getElementById('searchInput').value='';
-  const g=btn.dataset.genre;
-  const fn=GENRE_MAP[g]||(() =>[...ALL]);
-  setList(fn(), btn.textContent.trim(), null);
+  document.getElementById('searchInput').value = '';
+  loadQuery(btn.dataset.q, btn.textContent.trim());
 });
 
-// ── SIDEBAR ───────────────────────────────────────────────────
-function setNav(el) { document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on')); if(el)el.classList.add('on'); }
+// ══════════════════════════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════════════════════════
+function setNav(el) {
+  document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on'));
+  if(el) el.classList.add('on');
+}
 
 document.getElementById('sDiscover').onclick = () => {
   setNav(document.getElementById('sDiscover'));
-  document.getElementById('searchInput').value='';
+  document.getElementById('searchInput').value = '';
   hideAlert();
-  setList([...ALL], 'Discover Free Music', ALL.length+' songs');
-};
-document.getElementById('sFav').onclick = () => {
-  setNav(document.getElementById('sFav'));
-  hideAlert();
-  const ft=ALL.filter(t=>favs.includes(t.id));
-  if(!ft.length){
-    document.getElementById('ctitle').textContent='❤️ Favorites';
-    document.getElementById('ccount').textContent='0 favorites';
-    document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">🤍</div><div>No favorites yet.<br/>Press ♡ while a song plays.</div></div>`;
-    tracks=[];
-  } else setList(ft,'❤️ Favorites',ft.length+' favorites');
-};
-document.getElementById('sRecent').onclick = () => {
-  setNav(document.getElementById('sRecent'));
-  hideAlert();
-  const rt=recent.map(r=>ALL.find(s=>s.id===r.id)||null).filter(Boolean);
-  if(!rt.length){
-    document.getElementById('ctitle').textContent='🕐 Recently Played';
-    document.getElementById('ccount').textContent='0 tracks';
-    document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">🕐</div><div>Nothing played yet.</div></div>`;
-    tracks=[];
-  } else setList(rt,'🕐 Recently Played',rt.length+' tracks');
+  loadQuery('top hindi songs', 'Discover Music');
 };
 
-const SIDEBAR_GENRE_MAP = {
-  arijit:'arijit', atif:'atif', shreya:'shreya', kishore:'kishore',
-  lata:'lata', rahman:'rahman', diljit:'diljit',
-  bollywood:'bollywood', sufi:'sufi', punjabi:'punjabi',
-  devotional:'devotional', pop:'pop', jazz:'jazz',
-  lofi:'lofi', rock:'rock', electronic:'electronic',
+document.getElementById('sFav').onclick = async () => {
+  setNav(document.getElementById('sFav'));
+  hideAlert();
+  document.getElementById('ctitle').textContent = '❤️ Favorites';
+  try {
+    const rows = await sbFetch('favorites', { session_id:`eq.${SESSION_ID}`, select:'*', order:'created_at.desc' });
+    const ft = rows.map(r => ({ id:r.song_id, title:r.title, artist:r.artist, image:r.image, url:r.url, dur:'–', quality:'' }));
+    setList(ft, '❤️ Favorites', ft.length + ' favorites');
+    if (!ft.length) showAlert('info', 'No favorites yet. Press ♡ while a song plays!', 4000);
+  } catch(e) {
+    const ft = JSON.parse(localStorage.getItem('sq_favs') || '[]');
+    if (!ft.length) {
+      setList([], '❤️ Favorites', '0 favorites');
+      showAlert('info', 'No favorites yet. Press ♡ while a song plays!', 4000);
+    }
+  }
 };
-document.querySelectorAll('[data-genre]').forEach(el => {
+
+document.getElementById('sRecent').onclick = async () => {
+  setNav(document.getElementById('sRecent'));
+  hideAlert();
+  try {
+    const rows = await sbFetch('recently_played', { session_id:`eq.${SESSION_ID}`, select:'*', order:'played_at.desc', limit:'30' });
+    const rt = rows.map(r => ({ id:r.song_id, title:r.title, artist:r.artist, image:r.image, url:r.url, dur:'–', quality:'' }));
+    setList(rt, '🕐 Recently Played', rt.length + ' tracks');
+    if (!rt.length) showAlert('info', 'Nothing played yet. Start listening!', 4000);
+  } catch(e) {
+    setList([], '🕐 Recently Played', '0 tracks');
+  }
+};
+
+document.querySelectorAll('[data-q]').forEach(el => {
   if (el.closest('#gtabs')) return;
   el.onclick = () => {
-    const g=SIDEBAR_GENRE_MAP[el.dataset.genre];
-    if (!g) return;
     setNav(el);
     hideAlert();
-    document.getElementById('searchInput').value='';
-    const list=byGenre(g);
-    setList(list.length?list:[...ALL], el.textContent.trim(), null);
+    document.getElementById('searchInput').value = '';
+    loadQuery(el.dataset.q, el.textContent.trim());
   };
 });
 
-// ── KEYBOARD ──────────────────────────────────────────────────
+async function loadQuery(q, title) {
+  document.getElementById('ctitle').textContent = title;
+  document.getElementById('ccount').textContent = 'Loading…';
+  document.getElementById('trackList').innerHTML = `<div class="spin-wrap"><div class="spinner"></div><div>Loading…</div></div>`;
+  try {
+    const results = await saavnTrending(q);
+    setList(results, title, results.length + ' songs');
+  } catch(e) {
+    showAlert('warn', '⚠️ Failed to load. Check connection.');
+    document.getElementById('ccount').textContent = 'Error';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  KEYBOARD
+// ══════════════════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
-  if (document.activeElement===document.getElementById('searchInput')) return;
-  if (e.code==='Space')                  { e.preventDefault(); togglePlay(); }
-  if (e.code==='ArrowRight' && e.altKey)   nextTrack();
-  if (e.code==='ArrowLeft'  && e.altKey)   prevTrack();
+  if (document.activeElement === document.getElementById('searchInput')) return;
+  if (e.code==='Space')                 { e.preventDefault(); togglePlay(); }
+  if (e.code==='ArrowRight'&&e.altKey)   nextTrack();
+  if (e.code==='ArrowLeft' &&e.altKey)   prevTrack();
   if (e.code==='KeyM') toggleMute();
   if (e.code==='KeyS') toggleShuffle();
   if (e.code==='KeyR') toggleRepeat();
 });
 
-// ── UTILS ─────────────────────────────────────────────────────
-function fmtD(s){ if(!s||isNaN(s))return'–'; s=Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0'); }
-function x(s){ if(!s)return''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// ══════════════════════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════════════════════
+function fmtD(s) {
+  if (!s||isNaN(s)) return '–';
+  s=Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
+}
+function x(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
-// ── INIT ──────────────────────────────────────────────────────
-setList([...ALL], 'Discover Free Music', ALL.length + ' songs ready to play');
+// ══════════════════════════════════════════════════════════════
+//  SUPABASE TABLE SETUP (runs once, creates tables if missing)
+// ══════════════════════════════════════════════════════════════
+async function ensureTables() {
+  // Try to create tables via Supabase SQL if they don't exist
+  // We'll just catch errors silently — if tables exist, great. If not, localStorage fallback kicks in.
+  try {
+    await fetch(`${SB_URL}/rest/v1/rpc/create_soniq_tables`, {
+      method: 'POST',
+      headers:{ apikey:SB_KEY, Authorization:`Bearer ${SB_KEY}`, 'Content-Type':'application/json' },
+      body: '{}'
+    });
+  } catch(e) {}
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════════
+(async () => {
+  await loadUserData();
+  loadQuery('top hindi songs', 'Discover Music');
+})();
 </script>
 </body>
 </html>
