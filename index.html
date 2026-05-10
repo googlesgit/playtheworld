@@ -320,43 +320,29 @@ async function saavnSearch(query) {
   const url = `${SAAVN}/search?q=${encodeURIComponent(query)}`;
   const r = await Promise.race([
     fetch(url),
-    new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 8000))
+    new Promise((_,reject) => setTimeout(() => reject(new Error('timeout')), 10000))
   ]);
-  if (!r.ok) throw new Error('JioSaavn ' + r.status);
+  if (!r.ok) throw new Error('Proxy error ' + r.status);
   const data = await r.json();
-  if (!data.data?.results?.length) return [];
-  return data.data.results.map(parseSong).filter(s => s.url);
+  if (data.error) throw new Error(data.error);
+  // Our proxy returns { success: true, data: [...songs] }
+  const songs = data.data || [];
+  return songs.map(parseSong).filter(s => s.url);
 }
 
 async function saavnTrending(query) {
-  // Use search for trending/genre pages
   return saavnSearch(query);
 }
 
 function parseSong(s) {
-  // Pick highest quality URL
-  const urls  = s.downloadUrl || [];
-  const best  = urls.find(u => u.quality === '320kbps')
-             || urls.find(u => u.quality === '160kbps')
-             || urls.find(u => u.quality === '96kbps')
-             || urls[urls.length - 1];
-
-  const artists = s.artists?.primary?.map(a => a.name).join(', ')
-               || s.primaryArtists
-               || 'Unknown';
-
-  const image = s.image?.find(i => i.quality === '500x500')?.url
-             || s.image?.find(i => i.quality === '150x150')?.url
-             || s.image?.[0]?.url
-             || '';
-
+  // Proxy returns: id, name, artist, album, image, duration, url, quality
   return {
     id:      s.id,
-    title:   s.name || s.title || 'Unknown',
-    artist:  artists,
-    image,
-    url:     best?.url || '',
-    quality: best?.quality || '',
+    title:   s.name   || s.title  || 'Unknown',
+    artist:  s.artist || 'Unknown',
+    image:   s.image  || '',
+    url:     s.url    || '',
+    quality: s.quality || '',
     dur:     fmtD(parseInt(s.duration) || 0),
   };
 }
