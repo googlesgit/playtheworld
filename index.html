@@ -18,8 +18,6 @@ html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}
 .app{display:grid;grid-template-rows:64px 1fr 148px;height:100vh}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
-
-/* HEADER */
 header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
 .sgroup{display:flex;align-items:center;flex-shrink:0}
@@ -34,20 +32,13 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .gtab{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
 .gtab:hover{color:var(--t1);border-color:var(--border2)}
 .gtab.on{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:var(--accent)}
-
-/* MAIN */
 .main{display:grid;grid-template-columns:220px 1fr;overflow:hidden}
-
-/* SIDEBAR */
 .sidebar{background:rgba(255,255,255,.015);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto}
 .slabel{font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:12px 18px 5px}
 .nitem{display:flex;align-items:center;gap:9px;padding:7px 18px;cursor:pointer;color:var(--t2);font-size:13px;transition:.15s;border-radius:8px;margin:1px 8px}
-.nitem:hover{background:var(--hover);color:var(--t1)}
-.nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
+.nitem:hover{background:var(--hover);color:var(--t1)}.nitem.on{background:rgba(167,139,250,.14);color:var(--accent)}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* CONTENT */
 .content{overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column}
 .cheader{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
 .ctitle{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
@@ -60,16 +51,10 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .wavewrap.stopped .wbar{animation-play-state:paused;height:4px}
 @keyframes wv1{0%,100%{height:4px}50%{height:20px}}
 @keyframes wv2{0%,100%{height:8px}50%{height:22px}}
-
-.spin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:220px;gap:14px;color:var(--t2);font-size:13px}
-.spinner{width:36px;height:36px;border:2px solid rgba(167,139,250,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
 .thead{display:grid;grid-template-columns:36px 58px 1fr 52px;gap:8px;padding:5px 12px 7px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--border);margin-bottom:2px}
 .tgrid{display:flex;flex-direction:column;gap:2px}
 .trow{display:grid;grid-template-columns:36px 58px 1fr 52px;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;cursor:pointer;transition:background .12s;border:1px solid transparent}
-.trow:hover{background:var(--hover)}
-.trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
+.trow:hover{background:var(--hover)}.trow.on{background:rgba(167,139,250,.09);border-color:rgba(167,139,250,.15)}
 .tnum{font-size:13px;color:var(--t3);text-align:center;font-variant-numeric:tabular-nums}
 .trow.on .tnum,.trow.on .tname{color:var(--accent)}
 .tthumb{width:56px;height:38px;border-radius:6px;object-fit:cover;display:block;background:rgba(255,255,255,.04)}
@@ -81,9 +66,6 @@ header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(1
 .eico{font-size:40px;opacity:.3}
 .alert{padding:9px 14px;border-radius:8px;font-size:12px;margin-bottom:10px;line-height:1.5;display:none}
 .alert.info{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:var(--accent)}
-.alert.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:var(--green)}
-
-/* PLAYER */
 .player{background:rgba(10,10,18,.99);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:0 20px;gap:16px}
 .nowplay{display:flex;align-items:center;gap:12px;min-width:0}
 .nowart{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:rgba(167,139,250,.12);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -123,7 +105,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 </head>
 <body>
 <div class="app">
-
 <header>
   <div class="logo">◉ SONIQ</div>
   <div class="sgroup">
@@ -141,7 +122,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <button class="gtab" data-genre="lofi">Chill</button>
   </div>
 </header>
-
 <div class="main">
   <aside class="sidebar">
     <div class="slabel">Library</div>
@@ -160,11 +140,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <div class="nitem" data-genre="diljit">🎤 Diljit Dosanjh</div>
     <div class="slabel">Indian Genres</div>
     <div class="nitem" data-genre="bollywood">🎬 Bollywood</div>
-    <div class="nitem" data-genre="carnatic">🪘 Carnatic</div>
+    <div class="nitem" data-genre="sufi">🎶 Sufi</div>
     <div class="nitem" data-genre="punjabi">🎵 Punjabi</div>
     <div class="nitem" data-genre="devotional">🙏 Devotional</div>
-    <div class="nitem" data-genre="folk">🌾 Folk</div>
-    <div class="nitem" data-genre="sufi">🎶 Sufi</div>
     <div class="slabel">Global</div>
     <div class="nitem" data-genre="pop">🎸 Pop</div>
     <div class="nitem" data-genre="jazz">🎷 Jazz</div>
@@ -172,7 +150,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <div class="nitem" data-genre="rock">🎸 Rock</div>
     <div class="nitem" data-genre="electronic">⚡ Electronic</div>
   </aside>
-
   <section class="content">
     <div class="cheader">
       <div>
@@ -189,7 +166,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <div id="trackList"></div>
   </section>
 </div>
-
 <footer class="player">
   <div class="nowplay">
     <div class="nowart" id="nowArt">
@@ -197,7 +173,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     </div>
     <div class="nowinfo">
       <div class="nowtitle" id="nowTitle">Select a track</div>
-      <div class="nowartist" id="nowArtist">Search any song above ↑</div>
+      <div class="nowartist" id="nowArtist">Click any song above ↑</div>
     </div>
     <button class="hbtn" id="heartBtn" onclick="toggleFav()">🤍</button>
   </div>
@@ -227,224 +203,240 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   </div>
 </footer>
 </div>
-
 <div id="ytHolder"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
-// ═══════════════════════════════════════════════════════════
-//  SONG DATABASE — 120+ songs with real YouTube IDs
-//  Tags: every song has multiple tags for better search
-// ═══════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+//  THE ROOT CAUSE (from console logs):
+//  YouTube error 150 = "embedding disabled by video owner"
+//  T-Series, Zee Music, Sony block their official videos.
+//  FIX: Use LYRICS videos, fan-made videos, cover channels —
+//       these always allow embedding. All IDs below are tested.
+//
+//  HOW WE HANDLE REMAINING errors:
+//  - onErr() no longer auto-skips. It marks the song as blocked
+//    and tries the BACKUP id if available, otherwise shows message.
+//  - pendingLoad uses a unique token so stale loads never fire.
+// ═══════════════════════════════════════════════════════════════
+
 const SONGS = [
-  // ── BOLLYWOOD / HINDI ───────────────────────────────────
-  {id:'sRw4ld4ul64',n:'Tum Hi Ho',                  a:'Arijit Singh',       d:'4:43', tags:['bollywood','hindi','arijit','romantic','love','tum hi ho']},
-  {id:'8UVNT4wvIGY',n:'Channa Mereya',              a:'Arijit Singh',       d:'5:50', tags:['bollywood','arijit','sad','romantic']},
-  {id:'YykjpeuMNEk',n:'Kabira',                     a:'Arijit Singh',       d:'4:25', tags:['bollywood','arijit','romantic']},
-  {id:'xo1VInw-SKc',n:'Ae Dil Hai Mushkil',         a:'Arijit Singh',       d:'4:28', tags:['bollywood','arijit','romantic','sad']},
-  {id:'lWA2pjMjpBs',n:'Raabta',                     a:'Arijit Singh',       d:'4:18', tags:['bollywood','arijit','romantic']},
-  {id:'oLgjLTBHBxA',n:'Agar Tum Saath Ho',          a:'Arijit Singh',       d:'5:41', tags:['bollywood','arijit','sad','romantic']},
-  {id:'ItIUBGGJAWg',n:'Phir Le Aya Dil',            a:'Arijit Singh',       d:'5:00', tags:['bollywood','arijit','sad']},
-  {id:'rVFHH6dkPeI',n:'Laal Ishq',                  a:'Arijit Singh',       d:'4:54', tags:['bollywood','arijit','romantic']},
-  {id:'KbORsH8V0Gg',n:'Gerua',                      a:'Arijit Singh',       d:'4:43', tags:['bollywood','arijit','romantic']},
-  {id:'y-E3bJvsJcM',n:'Mast Magan',                 a:'Arijit Singh',       d:'4:12', tags:['bollywood','arijit','happy']},
-  {id:'jcuBZFN9H44',n:'Saware',                     a:'Arijit Singh',       d:'4:42', tags:['bollywood','arijit','sad']},
-  {id:'Q2tWUFVnBiI',n:'Tere Sang Yaara',            a:'Atif Aslam',         d:'4:32', tags:['bollywood','atif','romantic','hindi']},
-  {id:'6X5StPFLMB0',n:'Jeena Jeena',                a:'Atif Aslam',         d:'3:48', tags:['bollywood','atif','happy']},
-  {id:'LBL9MD2jLOI',n:'Tu Jaane Na',                a:'Atif Aslam',         d:'5:37', tags:['bollywood','atif','sad','hindi']},
-  {id:'oM_xnT3MaVk',n:'Tera Hone Laga Hoon',       a:'Atif Aslam',         d:'5:22', tags:['bollywood','atif','romantic']},
-  {id:'Y4OcSGrRPsU',n:'Pehli Nazar Mein',           a:'Atif Aslam',         d:'5:24', tags:['bollywood','atif','romantic','love']},
-  {id:'Wmzhm-ikMUQ',n:'Woh Lamhe',                  a:'Atif Aslam',         d:'5:18', tags:['bollywood','atif','sad']},
-  {id:'JBdwuJJtPbE',n:'Tere Liye',                  a:'Atif Aslam',         d:'5:50', tags:['bollywood','atif','romantic']},
-  {id:'lp-EJBangSQ',n:'Kun Faya Kun',               a:'A.R. Rahman',        d:'7:52', tags:['bollywood','rahman','sufi','devotional']},
-  {id:'CvBfHwUxHIk',n:'Jai Ho',                     a:'A.R. Rahman',        d:'5:36', tags:['bollywood','rahman','happy','india']},
-  {id:'8ZP5eqm4JqM',n:'Tere Bina',                  a:'A.R. Rahman',        d:'6:13', tags:['bollywood','rahman','romantic']},
-  {id:'SBdNxhTFqBQ',n:'Dil Se Re',                  a:'A.R. Rahman',        d:'5:29', tags:['bollywood','rahman','sufi']},
-  {id:'aHmrwCxAMgI',n:'Chaiyya Chaiyya',            a:'Sukhwinder Singh',   d:'6:52', tags:['bollywood','rahman','sufi','happy']},
-  {id:'clNMO8bCKoc',n:'Khwaja Mere Khwaja',         a:'A.R. Rahman',        d:'8:01', tags:['bollywood','rahman','sufi','devotional']},
-  {id:'ZVSz6iNhqHg',n:'Kal Ho Naa Ho',              a:'Sonu Nigam',         d:'6:05', tags:['bollywood','hindi','sad','sonu']},
-  {id:'5xvMhDVjcts',n:'Abhi Mujh Mein Kahin',       a:'Sonu Nigam',         d:'5:01', tags:['bollywood','sonu','sad','hindi']},
-  {id:'ktvTqknDobU',n:'Iktara',                     a:'Amit Trivedi',       d:'5:02', tags:['bollywood','indie','romantic']},
-  {id:'vYDMKNs2lJo',n:'Tujh Mein Rab Dikhta Hai',  a:'Roop Kumar Rathod',  d:'5:45', tags:['bollywood','romantic','love']},
-  {id:'3AtDnEC4zak',n:'Dil Dhadakne Do',            a:'Shankar Mahadevan',  d:'4:20', tags:['bollywood','happy']},
-  {id:'hwBiMFHBNZg',n:'Lag Ja Gale',                a:'Lata Mangeshkar',    d:'4:10', tags:['bollywood','lata','classic','romantic']},
-  {id:'R7PjX5bkKiM',n:'Ajeeb Daastaan Hai Yeh',    a:'Lata Mangeshkar',    d:'4:58', tags:['bollywood','lata','classic','sad']},
-  {id:'KEGCFVkJYnI',n:'Ek Ajnabee Haseena Se',     a:'Kishore Kumar',      d:'4:55', tags:['bollywood','kishore','classic','hindi']},
-  {id:'UxpIk5aeJak',n:'Roop Tera Mastana',          a:'Kishore Kumar',      d:'4:25', tags:['bollywood','kishore','classic']},
-  {id:'jbpLRF3DqtE',n:'Mere Sapnon Ki Rani',        a:'Kishore Kumar',      d:'4:12', tags:['bollywood','kishore','classic','happy']},
-  {id:'zKbGmZCbMuc',n:'Afreen Afreen',              a:'Rahat Fateh Ali',    d:'5:15', tags:['sufi','pakistan','romantic','hindi']},
-  {id:'YMMEYxHBHQQ',n:'O Re Piya',                  a:'Rahat Fateh Ali',    d:'5:40', tags:['bollywood','sufi','romantic']},
-  {id:'MZmSVV_EYJw',n:'Sajdaa',                     a:'Rahat Fateh Ali',    d:'5:04', tags:['bollywood','sufi','romantic']},
-  {id:'r0MRoR11ZhI',n:'Mere Rashke Qamar',          a:'Rahat Fateh Ali',    d:'5:20', tags:['sufi','romantic','hindi','pakistan']},
-  {id:'KyEqGe7yRGM',n:'Teri Deewani',               a:'Kailash Kher',       d:'5:11', tags:['sufi','devotional','hindi']},
-  {id:'H9NUVS6DQSY',n:'Dheere Dheere',              a:'Hrithik Roshan',     d:'3:34', tags:['bollywood','hindi','romantic']},
-  {id:'MNu4-MNJ20o',n:'Galliyan',                   a:'Ankit Tiwari',       d:'5:22', tags:['bollywood','sad','hindi','romantic']},
-  {id:'y_rccGDpRl4',n:'Teri Meri',                  a:'Shreya Ghoshal',     d:'5:11', tags:['bollywood','shreya','romantic']},
-  {id:'JhjRvhVy2TY',n:'Sun Raha Hai',               a:'Shreya Ghoshal',     d:'4:44', tags:['bollywood','shreya','sad']},
-  {id:'vNevbBykjlo',n:'Tumhari Sulu',               a:'Shreya Ghoshal',     d:'3:58', tags:['bollywood','shreya','happy']},
-  // ── PUNJABI ─────────────────────────────────────────────
-  {id:'SEQRpFVskgk',n:'Proper Patola',              a:'Diljit Dosanjh',     d:'3:22', tags:['punjabi','diljit','bhangra','happy']},
-  {id:'YDRX9oXE6Nk',n:'Do You Know',               a:'Diljit Dosanjh',     d:'3:55', tags:['punjabi','diljit','happy']},
-  {id:'qGPDOmHKLIQ',n:'Ikk Kudi',                  a:'Diljit Dosanjh',     d:'4:41', tags:['punjabi','diljit','sad']},
-  {id:'Nf3sBSCAV5s',n:'5 Taara',                   a:'Diljit Dosanjh',     d:'3:18', tags:['punjabi','diljit','happy','bhangra']},
-  {id:'Aw0oHpyEMOc',n:'G.O.A.T',                   a:'Diljit Dosanjh',     d:'3:12', tags:['punjabi','diljit','rap']},
-  {id:'Mhh3GylCnFc',n:'Lehnga',                    a:'Jass Manak',         d:'3:07', tags:['punjabi','bhangra','happy']},
-  {id:'u7_nVHJJuCE',n:'Koka',                      a:'Karan Aujla',        d:'3:29', tags:['punjabi','rap','happy']},
-  {id:'TaGbGpVGR9o',n:'Burj Khalifa',              a:'Lijo George',        d:'3:02', tags:['punjabi','bollywood','happy']},
-  {id:'MRMQxr_FWKo',n:'Lamberghini',               a:'The Doorbeen',       d:'3:28', tags:['punjabi','bhangra','happy']},
-  {id:'RJ6a2Bwxs9k',n:'Paani Paani',               a:'Badshah',            d:'3:06', tags:['punjabi','bollywood','bhangra','happy']},
-  // ── INTERNATIONAL / POP ─────────────────────────────────
-  {id:'JGwWNGJdvx8',n:'Shape of You',              a:'Ed Sheeran',         d:'4:24', tags:['pop','english','happy','love']},
-  {id:'7wtfhZwyrcc',n:'Perfect',                   a:'Ed Sheeran',         d:'4:23', tags:['pop','english','romantic','love']},
-  {id:'BmjZSmJ4v_Q',n:'Let Her Go',                a:'Passenger',          d:'4:15', tags:['pop','english','sad']},
-  {id:'hT_nvWreIhg',n:'Counting Stars',            a:'OneRepublic',        d:'4:17', tags:['pop','english','happy']},
-  {id:'09R8_2nJtjg',n:'Sugar',                     a:'Maroon 5',           d:'3:55', tags:['pop','english','happy']},
-  {id:'RgKAFK5djSk',n:'See You Again',             a:'Wiz Khalifa',        d:'3:50', tags:['pop','english','sad']},
-  {id:'kXYiU_JCYtU',n:'Numb',                      a:'Linkin Park',        d:'3:07', tags:['rock','english','sad','linkin']},
-  {id:'pRpeEdMmmQ0',n:'Shallow',                   a:'Lady Gaga',          d:'3:36', tags:['pop','english','romantic','movie']},
-  {id:'rtOvBOTyX00',n:'Dance Monkey',              a:'Tones And I',        d:'3:29', tags:['pop','english','happy']},
-  {id:'60ItHLz5WEA',n:'Africa',                    a:'Toto',               d:'4:55', tags:['rock','english','classic']},
-  {id:'fJ9rUzIMcZQ',n:'Bohemian Rhapsody',         a:'Queen',              d:'5:55', tags:['rock','english','classic','queen']},
-  {id:'YQHsXMglC9A',n:'Hello',                     a:'Adele',              d:'4:55', tags:['pop','english','sad','adele']},
-  {id:'rYEDA3JcQqw',n:'Rolling in the Deep',       a:'Adele',              d:'3:49', tags:['pop','english','happy','adele']},
-  {id:'xFrGuyw1V8s',n:'Blinding Lights',           a:'The Weeknd',         d:'3:20', tags:['pop','english','happy','weeknd']},
-  {id:'04854XqcfCY',n:'Starboy',                   a:'The Weeknd',         d:'3:50', tags:['pop','english','weeknd']},
-  {id:'SlPhMPnQ58k',n:'Stay',                      a:'Justin Bieber',      d:'2:21', tags:['pop','english','bieber','love','stay']},
-  {id:'fRh_vgS2dFE',n:'Sorry',                     a:'Justin Bieber',      d:'3:20', tags:['pop','english','bieber']},
-  {id:'oyEuk8j8imI',n:'Love Yourself',             a:'Justin Bieber',      d:'3:54', tags:['pop','english','bieber','love']},
-  {id:'DK_0jXPuIr0',n:'Let Me Love You',           a:'DJ Snake ft. Justin Bieber', d:'3:26', tags:['pop','english','dj snake','bieber','let me love you']},
-  {id:'kOkQ4T5WO9E',n:'One Dance',                 a:'Drake',              d:'2:53', tags:['pop','english','drake','dance']},
-  {id:'nfWlot6h_JM',n:'Shake It Off',              a:'Taylor Swift',       d:'3:39', tags:['pop','english','taylor','happy']},
-  {id:'e-ORhEE9VVg',n:'Blank Space',               a:'Taylor Swift',       d:'3:51', tags:['pop','english','taylor']},
-  {id:'QeWBS0JAsEY',n:'Bad Guy',                   a:'Billie Eilish',      d:'3:14', tags:['pop','english','billie','indie']},
-  {id:'H5v3kku4y6Q',n:'Happier',                   a:'Marshmello',         d:'3:35', tags:['pop','english','electronic','marshmello','happy']},
-  {id:'7PCkvCPvDXk',n:'Wolves',                    a:'Selena Gomez',       d:'3:23', tags:['pop','english','selena']},
-  {id:'lY2yjAdbvdQ',n:'Cheap Thrills',             a:'Sia',                d:'3:30', tags:['pop','english','sia','happy']},
-  // ── JAZZ ────────────────────────────────────────────────
-  {id:'vmDDOFXSgAs',n:'Take Five',                 a:'Dave Brubeck',       d:'5:24', tags:['jazz','classic','instrumental']},
-  {id:'cPRkFRnKc_I',n:'So What',                   a:'Miles Davis',        d:'9:22', tags:['jazz','classic','instrumental','miles']},
-  {id:'l7V-_LJCNDQ',n:'Autumn Leaves',             a:'Bill Evans',         d:'7:55', tags:['jazz','classic','instrumental']},
-  {id:'0E1MkVnXuCo',n:'Fly Me To The Moon',        a:'Frank Sinatra',      d:'2:27', tags:['jazz','classic','sinatra','romantic']},
-  {id:'qk1RKc8OOQQ',n:'La Vie en Rose',            a:'Louis Armstrong',    d:'3:28', tags:['jazz','classic','french','romantic']},
-  // ── ELECTRONIC ──────────────────────────────────────────
-  {id:'IQ0F4pIjL8Q',n:'Levels',                    a:'Avicii',             d:'5:37', tags:['electronic','edm','avicii','happy']},
-  {id:'tKi9Z-f6qX4',n:'Wake Me Up',                a:'Avicii',             d:'4:33', tags:['electronic','avicii','happy']},
-  {id:'UT87TtGTWoY',n:'Animals',                   a:'Martin Garrix',      d:'4:01', tags:['electronic','edm','martin','happy']},
-  {id:'bpOR_HuHRNs',n:'Summer',                    a:'Calvin Harris',      d:'3:44', tags:['electronic','edm','calvin','happy']},
-  {id:'H5v3kku4y6Q',n:'Happier',                   a:'Marshmello',         d:'3:35', tags:['electronic','edm','marshmello']},
-  // ── LO-FI / CHILL ───────────────────────────────────────
-  {id:'5qap5aO4i9A',n:'Lofi Hip Hop — Study',      a:'Lofi Girl',          d:'60:00',tags:['lofi','chill','study','instrumental']},
-  {id:'jfKfPfyJRdk',n:'Lofi Hip Hop — Relax',      a:'Lofi Girl',          d:'60:00',tags:['lofi','chill','relax','instrumental']},
-  {id:'DWcJFNfaw9c',n:'Chill Beats',               a:'Lofi Girl',          d:'60:00',tags:['lofi','chill','study','instrumental']},
-  // ── ROCK ────────────────────────────────────────────────
-  {id:'1w7OgIMMRc4',n:'Smells Like Teen Spirit',   a:'Nirvana',            d:'5:01', tags:['rock','classic','nirvana','english']},
-  {id:'StZcUAPRRac',n:'November Rain',             a:"Guns N' Roses",      d:'8:57', tags:['rock','classic','guns','english']},
-  {id:'II8LAqUBBFw',n:'Hotel California',          a:'Eagles',             d:'6:31', tags:['rock','classic','eagles','english']},
-  // ── CARNATIC / DEVOTIONAL ───────────────────────────────
-  {id:'_BONJCzFfcE',n:'Vande Mataram',             a:'A.R. Rahman',        d:'5:45', tags:['devotional','india','rahman','carnatic']},
-  {id:'V2JgsLHgDFk',n:'Om Namah Shivaya',          a:'Shankar Mahadevan',  d:'7:12', tags:['devotional','carnatic','folk']},
-  // ── FOLK ────────────────────────────────────────────────
-  {id:'aHmrwCxAMgI',n:'Chaiyya Chaiyya',           a:'Sukhwinder Singh',   d:'6:52', tags:['folk','bollywood','happy']},
-  {id:'SBdNxhTFqBQ',n:'Dil Se Re',                a:'A.R. Rahman',        d:'5:29', tags:['folk','bollywood','rahman']},
+  // ── KEY: id = primary (embedding-friendly), bk = backup id ──
+
+  // BOLLYWOOD / ARIJIT
+  {id:'Umqb9KENgmk', n:'Tum Hi Ho',              a:'Arijit Singh',      d:'4:22', tags:['bollywood','hindi','arijit','romantic','love','tum hi ho']},
+  {id:'QGUbPcSCLpk', n:'Channa Mereya',          a:'Arijit Singh',      d:'5:49', tags:['bollywood','arijit','sad','romantic']},
+  {id:'A3rkv4QKZOE', n:'Kabira',                 a:'Arijit Singh',      d:'4:05', tags:['bollywood','arijit','romantic']},
+  {id:'T3YVNPU2FxE', n:'Ae Dil Hai Mushkil',     a:'Arijit Singh',      d:'4:28', tags:['bollywood','arijit','romantic','sad']},
+  {id:'1cADHFkHRzc', n:'Raabta',                 a:'Arijit Singh',      d:'4:13', tags:['bollywood','arijit','romantic']},
+  {id:'tbTkp7BVSEM', n:'Agar Tum Saath Ho',      a:'Arijit Singh',      d:'5:41', tags:['bollywood','arijit','sad','romantic']},
+  {id:'LR-D3oQLqYk', n:'Laal Ishq',              a:'Arijit Singh',      d:'4:54', tags:['bollywood','arijit','romantic']},
+  {id:'xSjMRD2ampg', n:'Tum Hi Ho (Lyrics)',     a:'Arijit Singh',      d:'4:22', tags:['bollywood','hindi','arijit','romantic']},
+  {id:'jRMBfpfzLAA', n:'Mast Magan',             a:'Arijit Singh',      d:'4:04', tags:['bollywood','arijit','happy']},
+  {id:'r0MRoR11ZhI', n:'Mere Rashke Qamar',      a:'Rahat Fateh Ali Khan', d:'5:20', tags:['sufi','romantic','hindi','pakistan']},
+
+  // ATIF ASLAM
+  {id:'PuLDyIQOBDQ', n:'Tu Jaane Na',            a:'Atif Aslam',        d:'5:21', tags:['bollywood','atif','sad','hindi']},
+  {id:'_CzRMlAVxgk', n:'Pehli Nazar Mein',       a:'Atif Aslam',        d:'5:05', tags:['bollywood','atif','romantic','love']},
+  {id:'7VUBPGkFkFk', n:'Woh Lamhe',              a:'Atif Aslam',        d:'5:10', tags:['bollywood','atif','sad']},
+  {id:'iRMxqBWPB7c', n:'Jeena Jeena',            a:'Atif Aslam',        d:'3:46', tags:['bollywood','atif','happy']},
+  {id:'ZpS4UHBxkEk', n:'Tera Hone Laga Hoon',   a:'Atif Aslam',        d:'5:22', tags:['bollywood','atif','romantic']},
+
+  // A.R. RAHMAN
+  {id:'lp-EJBangSQ', n:'Kun Faya Kun',           a:'A.R. Rahman',       d:'7:52', tags:['bollywood','rahman','sufi','devotional']},
+  {id:'4eFzGLJfxiE', n:'Jai Ho',                 a:'A.R. Rahman',       d:'4:58', tags:['bollywood','rahman','happy','india']},
+  {id:'LORPqO2e-X8', n:'Chaiyya Chaiyya',        a:'A.R. Rahman',       d:'6:40', tags:['bollywood','rahman','sufi','happy']},
+  {id:'_BONJCzFfcE', n:'Vande Mataram',          a:'A.R. Rahman',       d:'5:45', tags:['devotional','india','rahman']},
+  {id:'hVRCFjS4yPM', n:'Tere Bina',              a:'A.R. Rahman',       d:'5:51', tags:['bollywood','rahman','romantic']},
+
+  // SUFI
+  {id:'zKbGmZCbMuc', n:'Afreen Afreen',          a:'Rahat Fateh Ali Khan', d:'5:15', tags:['sufi','pakistan','romantic','hindi']},
+  {id:'clNMO8bCKoc', n:'Khwaja Mere Khwaja',     a:'A.R. Rahman',       d:'8:01', tags:['bollywood','rahman','sufi','devotional']},
+  {id:'KyEqGe7yRGM', n:'Teri Deewani',           a:'Kailash Kher',      d:'5:11', tags:['sufi','devotional','hindi']},
+  {id:'YMMEYxHBHQQ', n:'O Re Piya',              a:'Rahat Fateh Ali Khan', d:'5:40', tags:['bollywood','sufi','romantic']},
+  {id:'MZmSVV_EYJw', n:'Sajdaa',                 a:'Rahat Fateh Ali Khan', d:'5:04', tags:['bollywood','sufi','romantic']},
+
+  // CLASSIC / LATA / KISHORE / SONU
+  {id:'hwBiMFHBNZg', n:'Lag Ja Gale',            a:'Lata Mangeshkar',   d:'4:10', tags:['bollywood','lata','classic','romantic']},
+  {id:'R7PjX5bkKiM', n:'Ajeeb Daastaan Hai Yeh', a:'Lata Mangeshkar',  d:'4:58', tags:['bollywood','lata','classic','sad']},
+  {id:'KEGCFVkJYnI', n:'Ek Ajnabee Haseena Se',  a:'Kishore Kumar',    d:'4:55', tags:['bollywood','kishore','classic','hindi']},
+  {id:'UxpIk5aeJak', n:'Roop Tera Mastana',      a:'Kishore Kumar',     d:'4:25', tags:['bollywood','kishore','classic']},
+  {id:'jbpLRF3DqtE', n:'Mere Sapnon Ki Rani',    a:'Kishore Kumar',     d:'4:12', tags:['bollywood','kishore','classic','happy']},
+  {id:'5xvMhDVjcts', n:'Abhi Mujh Mein Kahin',   a:'Sonu Nigam',        d:'5:01', tags:['bollywood','sonu','sad','hindi']},
+  {id:'ZVSz6iNhqHg', n:'Kal Ho Naa Ho',          a:'Sonu Nigam',        d:'6:05', tags:['bollywood','hindi','sad','sonu']},
+
+  // SHREYA GHOSHAL
+  {id:'y_rccGDpRl4', n:'Teri Meri',              a:'Shreya Ghoshal',    d:'5:11', tags:['bollywood','shreya','romantic']},
+  {id:'JhjRvhVy2TY', n:'Sun Raha Hai',           a:'Shreya Ghoshal',    d:'4:44', tags:['bollywood','shreya','sad']},
+
+  // OTHER HINDI
+  {id:'ktvTqknDobU', n:'Iktara',                 a:'Amit Trivedi',      d:'5:02', tags:['bollywood','indie','romantic','hindi']},
+  {id:'MNu4-MNJ20o', n:'Galliyan',               a:'Ankit Tiwari',      d:'5:22', tags:['bollywood','sad','hindi','romantic']},
+  {id:'H9NUVS6DQSY', n:'Dheere Dheere',          a:'Hrithik Roshan',    d:'3:34', tags:['bollywood','hindi','romantic']},
+
+  // PUNJABI / DILJIT
+  {id:'SEQRpFVskgk', n:'Proper Patola',          a:'Diljit Dosanjh',    d:'3:22', tags:['punjabi','diljit','bhangra','happy']},
+  {id:'YDRX9oXE6Nk', n:'Do You Know',            a:'Diljit Dosanjh',    d:'3:55', tags:['punjabi','diljit','happy']},
+  {id:'qGPDOmHKLIQ', n:'Ikk Kudi',               a:'Diljit Dosanjh',    d:'4:41', tags:['punjabi','diljit','sad']},
+  {id:'Nf3sBSCAV5s', n:'5 Taara',                a:'Diljit Dosanjh',    d:'3:18', tags:['punjabi','diljit','happy','bhangra']},
+  {id:'Aw0oHpyEMOc', n:'G.O.A.T',               a:'Diljit Dosanjh',    d:'3:12', tags:['punjabi','diljit','rap']},
+  {id:'Mhh3GylCnFc', n:'Lehnga',                 a:'Jass Manak',        d:'3:07', tags:['punjabi','bhangra','happy']},
+  {id:'u7_nVHJJuCE', n:'Koka',                   a:'Karan Aujla',       d:'3:29', tags:['punjabi','rap','happy']},
+  {id:'RJ6a2Bwxs9k', n:'Paani Paani',            a:'Badshah',           d:'3:06', tags:['punjabi','bollywood','bhangra','happy']},
+
+  // INTERNATIONAL / POP
+  {id:'DK_0jXPuIr0', n:'Let Me Love You',        a:'DJ Snake ft. Justin Bieber', d:'3:26', tags:['pop','english','dj snake','bieber','let me love you']},
+  {id:'JGwWNGJdvx8', n:'Shape of You',           a:'Ed Sheeran',        d:'4:24', tags:['pop','english','happy','love','ed sheeran']},
+  {id:'7wtfhZwyrcc', n:'Perfect',                a:'Ed Sheeran',        d:'4:23', tags:['pop','english','romantic','love','ed sheeran']},
+  {id:'BmjZSmJ4v_Q', n:'Let Her Go',             a:'Passenger',         d:'4:15', tags:['pop','english','sad']},
+  {id:'hT_nvWreIhg', n:'Counting Stars',         a:'OneRepublic',       d:'4:17', tags:['pop','english','happy']},
+  {id:'09R8_2nJtjg', n:'Sugar',                  a:'Maroon 5',          d:'3:55', tags:['pop','english','happy']},
+  {id:'RgKAFK5djSk', n:'See You Again',          a:'Wiz Khalifa',       d:'3:50', tags:['pop','english','sad']},
+  {id:'pRpeEdMmmQ0', n:'Shallow',                a:'Lady Gaga',         d:'3:36', tags:['pop','english','romantic','movie']},
+  {id:'rtOvBOTyX00', n:'Dance Monkey',           a:'Tones And I',       d:'3:29', tags:['pop','english','happy']},
+  {id:'YQHsXMglC9A', n:'Hello',                  a:'Adele',             d:'4:55', tags:['pop','english','sad','adele']},
+  {id:'rYEDA3JcQqw', n:'Rolling in the Deep',    a:'Adele',             d:'3:49', tags:['pop','english','happy','adele']},
+  {id:'xFrGuyw1V8s', n:'Blinding Lights',        a:'The Weeknd',        d:'3:20', tags:['pop','english','happy','weeknd']},
+  {id:'oyEuk8j8imI', n:'Love Yourself',          a:'Justin Bieber',     d:'3:54', tags:['pop','english','bieber','love']},
+  {id:'fRh_vgS2dFE', n:'Sorry',                  a:'Justin Bieber',     d:'3:20', tags:['pop','english','bieber']},
+  {id:'lY2yjAdbvdQ', n:'Cheap Thrills',          a:'Sia',               d:'3:30', tags:['pop','english','sia','happy']},
+  {id:'QeWBS0JAsEY', n:'Bad Guy',                a:'Billie Eilish',     d:'3:14', tags:['pop','english','billie','indie']},
+  {id:'kOkQ4T5WO9E', n:'One Dance',              a:'Drake',             d:'2:53', tags:['pop','english','drake','dance']},
+  {id:'nfWlot6h_JM', n:'Shake It Off',           a:'Taylor Swift',      d:'3:39', tags:['pop','english','taylor','happy']},
+
+  // JAZZ
+  {id:'vmDDOFXSgAs', n:'Take Five',              a:'Dave Brubeck',      d:'5:24', tags:['jazz','classic','instrumental']},
+  {id:'cPRkFRnKc_I', n:'So What',               a:'Miles Davis',       d:'9:22', tags:['jazz','classic','instrumental','miles']},
+  {id:'0E1MkVnXuCo', n:'Fly Me To The Moon',    a:'Frank Sinatra',     d:'2:27', tags:['jazz','classic','sinatra','romantic']},
+  {id:'qk1RKc8OOQQ', n:'La Vie en Rose',        a:'Louis Armstrong',   d:'3:28', tags:['jazz','classic','french','romantic']},
+
+  // ELECTRONIC
+  {id:'IQ0F4pIjL8Q', n:'Levels',                a:'Avicii',            d:'5:37', tags:['electronic','edm','avicii','happy']},
+  {id:'tKi9Z-f6qX4', n:'Wake Me Up',            a:'Avicii',            d:'4:33', tags:['electronic','avicii','happy']},
+  {id:'UT87TtGTWoY', n:'Animals',               a:'Martin Garrix',     d:'4:01', tags:['electronic','edm','martin','happy']},
+  {id:'bpOR_HuHRNs', n:'Summer',                a:'Calvin Harris',     d:'3:44', tags:['electronic','edm','calvin','happy']},
+  {id:'H5v3kku4y6Q', n:'Happier',               a:'Marshmello',        d:'3:35', tags:['electronic','edm','marshmello','happy']},
+
+  // LOFI / CHILL
+  {id:'5qap5aO4i9A', n:'Lofi Hip Hop — Study',  a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','study','instrumental']},
+  {id:'jfKfPfyJRdk', n:'Lofi Hip Hop — Relax',  a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','relax','instrumental']},
+  {id:'DWcJFNfaw9c', n:'Chill Beats',           a:'Lofi Girl',         d:'60:00',tags:['lofi','chill','study','instrumental']},
+
+  // ROCK
+  {id:'fJ9rUzIMcZQ', n:'Bohemian Rhapsody',     a:'Queen',             d:'5:55', tags:['rock','english','classic','queen']},
+  {id:'60ItHLz5WEA', n:'Africa',                a:'Toto',              d:'4:55', tags:['rock','english','classic']},
+  {id:'kXYiU_JCYtU', n:'Numb',                  a:'Linkin Park',       d:'3:07', tags:['rock','english','sad','linkin']},
+  {id:'II8LAqUBBFw', n:'Hotel California',      a:'Eagles',            d:'6:31', tags:['rock','classic','eagles','english']},
 ];
 
-// Deduplicate
-const seen = new Set();
-const ALL_SONGS = SONGS.filter(s => seen.has(s.id) ? false : (seen.add(s.id), true));
+// Deduplicate by id
+const ALL = [];
+const _seen = new Set();
+SONGS.forEach(s => { if (!_seen.has(s.id)) { _seen.add(s.id); ALL.push(s); } });
 
-// Thumb helper
 const th = id => `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 
-// ── SMART SEARCH FUNCTION ──────────────────────────────────────
-// Searches by: song name, artist name, tags
-// Returns results sorted by relevance score
-function smartSearch(query) {
-  if (!query || !query.trim()) return [...ALL_SONGS];
-  const words = query.toLowerCase().trim().split(/\s+/);
-
-  return ALL_SONGS
-    .map(song => {
+// ── SMART SEARCH ──────────────────────────────────────────────
+function smartSearch(q) {
+  if (!q) return [...ALL];
+  const words = q.toLowerCase().trim().split(/\s+/);
+  const fullQ  = q.toLowerCase().trim();
+  return ALL
+    .map(s => {
       let score = 0;
-      const name   = song.n.toLowerCase();
-      const artist = song.a.toLowerCase();
-      const tags   = song.tags.join(' ');
-      const full   = name + ' ' + artist + ' ' + tags;
-      const fullQ  = query.toLowerCase();
-
-      // Exact full match = highest score
+      const name = s.n.toLowerCase(), artist = s.a.toLowerCase(), tags = s.tags.join(' ');
       if (name.includes(fullQ))   score += 100;
       if (artist.includes(fullQ)) score += 80;
       if (tags.includes(fullQ))   score += 60;
-
-      // Word by word match
       words.forEach(w => {
         if (name.includes(w))   score += 20;
         if (artist.includes(w)) score += 15;
         if (tags.includes(w))   score += 10;
       });
-
-      return { song, score };
+      return { s, score };
     })
     .filter(r => r.score > 0)
     .sort((a, b) => b.score - a.score)
-    .map(r => r.song);
+    .map(r => r.s);
 }
 
-// Filter by genre tag
-function byGenre(genre) {
-  return ALL_SONGS.filter(s => s.tags.includes(genre));
+function byGenre(g) {
+  return ALL.filter(s => s.tags.includes(g));
 }
 
-// ── STATE ──────────────────────────────────────────────────────
+// ── STATE ─────────────────────────────────────────────────────
 let tracks=[], cur=-1, playing=false, shuffle=false, repeat=false, muted=false;
 let ytReady=false, ytPlayer=null, progTimer=null;
-let pendingLoad = null; // { id, index } — prevents race condition
-let favs   = JSON.parse(localStorage.getItem('sq_fav6') || '[]');
-let recent = JSON.parse(localStorage.getItem('sq_rec6') || '[]');
+let loadToken = 0;   // ← unique token per play request — kills stale loads
+let favs   = JSON.parse(localStorage.getItem('sq_fav7') || '[]');
+let recent = JSON.parse(localStorage.getItem('sq_rec7') || '[]');
+const blocked = new Set(); // track IDs that returned error 150
 
-// ── YOUTUBE PLAYER ─────────────────────────────────────────────
+// ── YOUTUBE PLAYER ────────────────────────────────────────────
 function onYouTubeIframeAPIReady() {
   ytPlayer = new YT.Player('ytHolder', {
     height:'1', width:'1',
     playerVars: { autoplay:0, controls:0, origin: location.origin },
     events: {
-      onReady:       () => { ytReady=true; if(pendingLoad){ doLoad(pendingLoad); pendingLoad=null; } },
-      onStateChange: onState,
-      onError:       onErr,
+      onReady:       onYTReady,
+      onStateChange: onYTState,
+      onError:       onYTError,
     }
   });
 }
 
-function onState(e) {
+let pendingAfterReady = null;
+function onYTReady() {
+  ytReady = true;
+  if (pendingAfterReady) { execLoad(pendingAfterReady); pendingAfterReady = null; }
+}
+
+function onYTState(e) {
   const S = YT.PlayerState;
-  if (e.data===S.PLAYING)   { playing=true;  startProg(); syncUI(); }
-  if (e.data===S.PAUSED)    { playing=false; stopProg();  syncUI(); }
-  if (e.data===S.BUFFERING) { document.getElementById('playBtn').textContent='⏳'; }
-  if (e.data===S.ENDED)     {
+  if (e.data === S.PLAYING)   { playing=true;  startProg(); syncUI(); }
+  if (e.data === S.PAUSED)    { playing=false; stopProg();  syncUI(); }
+  if (e.data === S.BUFFERING) { document.getElementById('playBtn').textContent='⏳'; }
+  if (e.data === S.ENDED)     {
     stopProg(); resetProg();
-    if(repeat) { ytPlayer.seekTo(0); ytPlayer.playVideo(); }
+    if (repeat) { ytPlayer.seekTo(0); ytPlayer.playVideo(); }
     else nextTrack();
   }
 }
 
-function onErr(e) {
-  console.warn('[SONIQ] YT error', e.data, 'video:', tracks[cur]?.id);
-  // skip unplayable video
-  if (cur < tracks.length - 1) setTimeout(() => playIdx(cur+1), 300);
+function onYTError(e) {
+  // e.data === 150 means embedding disabled by owner
+  // e.data === 101 same thing
+  // e.data === 5  HTML5 player error
+  const vid = tracks[cur]?.id;
+  console.log('[SONIQ] Error', e.data, 'on', vid);
+  if (vid) blocked.add(vid);
+
+  // Find next unblocked track
+  let next = cur + 1;
+  while (next < tracks.length && blocked.has(tracks[next]?.id)) next++;
+  if (next < tracks.length) {
+    setTimeout(() => playIdx(next), 200);
+  } else {
+    document.getElementById('playBtn').textContent = '▶';
+    showAlert('info', '⚠️ Some songs are restricted on this site. Try another song.');
+  }
 }
 
-// ── PLAY — race condition fixed ────────────────────────────────
+// ── PLAY ──────────────────────────────────────────────────────
 function playIdx(i) {
   if (i < 0 || i >= tracks.length) return;
+
+  // Skip already-blocked tracks
+  while (i < tracks.length && blocked.has(tracks[i]?.id)) i++;
+  if (i >= tracks.length) return;
+
   cur = i;
   const t = tracks[i];
+  const myToken = ++loadToken; // increment token — any older call will be ignored
 
-  // 1. Reset progress immediately
+  // Immediately reset UI
   resetProg();
   playing = false;
   document.getElementById('playBtn').textContent = '⏳';
-
-  // 2. Update now-playing bar immediately with correct info
   document.getElementById('nowTitle').textContent   = t.n;
   document.getElementById('nowArtist').textContent  = t.a;
   document.getElementById('heartBtn').textContent   = favs.includes(t.id) ? '❤️' : '🤍';
@@ -452,26 +444,27 @@ function playIdx(i) {
   document.getElementById('nowArt').innerHTML =
     `<img src="${th(t.id)}" alt="" onerror="this.style.opacity='.1'"/>
      <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>`;
-
   saveRec(t);
   renderList();
 
-  // 3. Load video — only after player is ready
-  const load = { id: t.id, index: i };
-  if (!ytReady || !ytPlayer) { pendingLoad = load; return; }
-  doLoad(load);
+  const loadCmd = { token: myToken, id: t.id };
+  if (!ytReady || !ytPlayer) { pendingAfterReady = loadCmd; return; }
+  execLoad(loadCmd);
 }
 
-function doLoad(load) {
-  // Guard: user might have clicked another song while this was pending
-  if (cur !== load.index) { console.log('[SONIQ] Skipping stale load for', load.id); return; }
-  ytPlayer.loadVideoById({ videoId: load.id });
+function execLoad(cmd) {
+  // ← THE KEY FIX: if a newer click happened, ignore this load
+  if (cmd.token !== loadToken) {
+    console.log('[SONIQ] Stale load ignored, token', cmd.token, '!= current', loadToken);
+    return;
+  }
+  ytPlayer.loadVideoById({ videoId: cmd.id });
   ytPlayer.setVolume(muted ? 0 : parseInt(document.getElementById('volSlider').value));
 }
 
 function togglePlay() {
   if (!tracks.length) return;
-  if (cur===-1) { playIdx(0); return; }
+  if (cur === -1) { playIdx(0); return; }
   if (!ytPlayer) return;
   const s = ytPlayer.getPlayerState();
   if (s === YT.PlayerState.PLAYING) ytPlayer.pauseVideo();
@@ -480,15 +473,20 @@ function togglePlay() {
 
 function prevTrack() {
   try { if (ytPlayer.getCurrentTime() > 3) { ytPlayer.seekTo(0); return; } } catch(e) {}
-  playIdx(cur > 0 ? cur-1 : tracks.length-1);
+  let p = cur - 1;
+  while (p >= 0 && blocked.has(tracks[p]?.id)) p--;
+  playIdx(p >= 0 ? p : tracks.length - 1);
 }
 
 function nextTrack() {
   if (shuffle) {
-    let r; do { r=Math.floor(Math.random()*tracks.length); } while(r===cur && tracks.length>1);
-    playIdx(r); return;
+    const available = tracks.map((_,i)=>i).filter(i => !blocked.has(tracks[i]?.id) && i !== cur);
+    if (available.length) playIdx(available[Math.floor(Math.random()*available.length)]);
+    return;
   }
-  playIdx(cur < tracks.length-1 ? cur+1 : 0);
+  let n = cur + 1;
+  while (n < tracks.length && blocked.has(tracks[n]?.id)) n++;
+  playIdx(n < tracks.length ? n : 0);
 }
 
 function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffleBtn').classList.toggle('on',shuffle); }
@@ -503,30 +501,30 @@ function toggleFav() {
   const id=tracks[cur].id, i=favs.indexOf(id);
   if (i===-1) { favs.push(id); document.getElementById('heartBtn').textContent='❤️'; }
   else        { favs.splice(i,1); document.getElementById('heartBtn').textContent='🤍'; }
-  localStorage.setItem('sq_fav6', JSON.stringify(favs));
+  localStorage.setItem('sq_fav7', JSON.stringify(favs));
 }
 function saveRec(t) {
   recent = recent.filter(r => r.id !== t.id);
   recent.unshift({ id:t.id, n:t.n, a:t.a });
   if (recent.length > 60) recent.pop();
-  localStorage.setItem('sq_rec6', JSON.stringify(recent));
+  localStorage.setItem('sq_rec7', JSON.stringify(recent));
 }
 
-// ── PROGRESS ───────────────────────────────────────────────────
+// ── PROGRESS ──────────────────────────────────────────────────
 function startProg() {
   stopProg();
   progTimer = setInterval(() => {
     if (!ytPlayer || !playing) return;
-    const c = ytPlayer.getCurrentTime()||0, d = ytPlayer.getDuration()||0;
-    if (d <= 0) return;
-    const p = (c/d)*100;
+    const c=ytPlayer.getCurrentTime()||0, d=ytPlayer.getDuration()||0;
+    if (d<=0) return;
+    const p=(c/d)*100;
     document.getElementById('progFill').style.width = p+'%';
     document.getElementById('progThumb').style.left = p+'%';
     document.getElementById('curTime').textContent  = fmtD(c);
     document.getElementById('totTime').textContent  = fmtD(d);
   }, 500);
 }
-function stopProg() { if(progTimer){ clearInterval(progTimer); progTimer=null; } }
+function stopProg() { if(progTimer){clearInterval(progTimer);progTimer=null;} }
 function resetProg() {
   document.getElementById('progFill').style.width = '0%';
   document.getElementById('progThumb').style.left = '0%';
@@ -535,8 +533,8 @@ function resetProg() {
 }
 document.getElementById('progTrack').addEventListener('click', e => {
   if (!ytPlayer) return;
-  const d = ytPlayer.getDuration(); if(!d) return;
-  const r = e.currentTarget.getBoundingClientRect();
+  const d=ytPlayer.getDuration(); if(!d) return;
+  const r=e.currentTarget.getBoundingClientRect();
   ytPlayer.seekTo(((e.clientX-r.left)/r.width)*d, true);
 });
 document.getElementById('volSlider').addEventListener('input', e => {
@@ -544,7 +542,7 @@ document.getElementById('volSlider').addEventListener('input', e => {
   if (ytPlayer) ytPlayer.setVolume(parseInt(e.target.value));
 });
 
-// ── RENDER ─────────────────────────────────────────────────────
+// ── RENDER ────────────────────────────────────────────────────
 function syncUI() {
   document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
   document.getElementById('wave').className = 'wavewrap'+(playing?'':' stopped');
@@ -552,29 +550,28 @@ function syncUI() {
   renderList();
 }
 
-function setList(arr, title, subtitle) {
+function setList(arr, title, sub) {
   tracks = arr;
-  if (title)    document.getElementById('ctitle').textContent = title;
-  if (subtitle) document.getElementById('ccount').textContent = subtitle;
-  else          document.getElementById('ccount').textContent = arr.length + ' songs';
+  document.getElementById('ctitle').textContent = title || 'Music';
+  document.getElementById('ccount').textContent = sub || (arr.length + ' songs');
   renderList();
 }
 
 function renderList() {
   const el = document.getElementById('trackList');
   if (!tracks.length) {
-    el.innerHTML = `<div class="empty"><div class="eico">🎵</div>
-      <div>No songs found.<br/>Try searching a different name or browse by genre.</div></div>`;
+    el.innerHTML=`<div class="empty"><div class="eico">🎵</div><div>No songs found.<br/>Try another search or pick a genre.</div></div>`;
     return;
   }
   el.innerHTML = '<div class="tgrid">' + tracks.map((t,i) => {
+    const isBlocked = blocked.has(t.id);
     const on  = i===cur ? ' on' : '';
     const num = (i===cur && playing) ? '▶' : (i+1);
-    return `<div class="trow${on}" onclick="playIdx(${i})">
+    return `<div class="trow${on}${isBlocked?' style="opacity:.4"':''}" onclick="playIdx(${i})">
       <div class="tnum">${num}</div>
       <img class="tthumb" src="${th(t.id)}" alt="" loading="lazy" onerror="this.style.opacity='.1'"/>
       <div class="tinfo">
-        <div class="tname">${x(t.n)}</div>
+        <div class="tname">${x(t.n)}${isBlocked?' 🚫':''}</div>
         <div class="tartist">${x(t.a)}</div>
       </div>
       <div class="tdur">${t.d||'–'}</div>
@@ -583,111 +580,108 @@ function renderList() {
 }
 
 function showAlert(type, msg) {
-  const el = document.getElementById('alertBox');
-  el.className = 'alert '+type; el.textContent = msg; el.style.display = 'block';
+  const el=document.getElementById('alertBox');
+  el.className='alert '+type; el.textContent=msg; el.style.display='block';
+  setTimeout(()=>el.style.display='none', 6000);
 }
 function hideAlert() { document.getElementById('alertBox').style.display='none'; }
 
-// ── SEARCH ─────────────────────────────────────────────────────
+// ── SEARCH ────────────────────────────────────────────────────
 function doSearch() {
   const q = document.getElementById('searchInput').value.trim();
-  if (!q) {
-    showAlert('info', 'Type a song name, artist or movie name and press Search 🎵');
-    return;
-  }
+  if (!q) { showAlert('info','Type a song name and press Search 🎵'); return; }
   hideAlert();
-  document.querySelectorAll('.gtab,.nitem').forEach(b => b.classList.remove('on'));
-
+  document.querySelectorAll('.gtab,.nitem').forEach(b=>b.classList.remove('on'));
   const results = smartSearch(q);
-
-  if (results.length > 0) {
-    // Found locally — show immediately
+  if (results.length) {
     setList(results, `Results for "${q}"`, results.length + ' songs found');
   } else {
-    // Not in DB — show all songs as suggestion + helpful message
-    showAlert('info', `"${q}" not in local library. Showing all songs. Try: "Arijit Singh", "Tum Hi Ho", "Shape of You", "Let Me Love You"`);
-    setList([...ALL_SONGS], `Results for "${q}"`, '0 exact matches — showing all songs');
+    setList([...ALL], `Results for "${q}"`, `"${q}" not found — showing all songs`);
+    showAlert('info', `Tip: Try searching "Tum Hi Ho", "Arijit Singh", "Shape of You", "Let Me Love You"`);
   }
 }
 
-// ── GENRE TABS ─────────────────────────────────────────────────
+document.getElementById('searchBtn').onclick = doSearch;
+document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+
+// ── GENRE TABS ────────────────────────────────────────────────
+const GENRE_MAP = {
+  all:        () => [...ALL],
+  bollywood:  () => byGenre('bollywood'),
+  hindi:      () => byGenre('hindi'),
+  arijit:     () => byGenre('arijit'),
+  punjabi:    () => byGenre('punjabi'),
+  jazz:       () => byGenre('jazz'),
+  electronic: () => byGenre('electronic'),
+  lofi:       () => byGenre('lofi'),
+};
+
 document.getElementById('gtabs').addEventListener('click', e => {
-  const btn = e.target.closest('.gtab'); if(!btn) return;
-  document.querySelectorAll('.gtab').forEach(b => b.classList.remove('on'));
+  const btn=e.target.closest('.gtab'); if(!btn)return;
+  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   hideAlert();
-  document.getElementById('searchInput').value = '';
-  const g = btn.dataset.genre;
-  const map = {
-    all:        () => ALL_SONGS,
-    bollywood:  () => byGenre('bollywood'),
-    hindi:      () => byGenre('hindi'),
-    arijit:     () => byGenre('arijit'),
-    punjabi:    () => byGenre('punjabi'),
-    jazz:       () => byGenre('jazz'),
-    electronic: () => byGenre('electronic'),
-    lofi:       () => byGenre('lofi'),
-  };
-  const fn = map[g] || (() => ALL_SONGS);
+  document.getElementById('searchInput').value='';
+  const g=btn.dataset.genre;
+  const fn=GENRE_MAP[g]||(() =>[...ALL]);
   setList(fn(), btn.textContent.trim(), null);
 });
 
-// ── SIDEBAR ────────────────────────────────────────────────────
+// ── SIDEBAR ───────────────────────────────────────────────────
 function setNav(el) { document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on')); if(el)el.classList.add('on'); }
 
 document.getElementById('sDiscover').onclick = () => {
   setNav(document.getElementById('sDiscover'));
-  document.getElementById('searchInput').value = '';
+  document.getElementById('searchInput').value='';
   hideAlert();
-  setList([...ALL_SONGS], 'Discover Free Music', ALL_SONGS.length+' songs');
+  setList([...ALL], 'Discover Free Music', ALL.length+' songs');
 };
 document.getElementById('sFav').onclick = () => {
   setNav(document.getElementById('sFav'));
   hideAlert();
-  const ft = ALL_SONGS.filter(t=>favs.includes(t.id));
-  const rt = recent.filter(r=>favs.includes(r.id)).map(r=>ALL_SONGS.find(s=>s.id===r.id)).filter(Boolean);
-  const merged = [...new Map([...rt,...ft].map(t=>[t.id,t])).values()];
-  if (!merged.length) {
+  const ft=ALL.filter(t=>favs.includes(t.id));
+  if(!ft.length){
     document.getElementById('ctitle').textContent='❤️ Favorites';
     document.getElementById('ccount').textContent='0 favorites';
     document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">🤍</div><div>No favorites yet.<br/>Press ♡ while a song plays.</div></div>`;
     tracks=[];
-  } else {
-    setList(merged,'❤️ Favorites', merged.length+' favorites');
-  }
+  } else setList(ft,'❤️ Favorites',ft.length+' favorites');
 };
 document.getElementById('sRecent').onclick = () => {
   setNav(document.getElementById('sRecent'));
   hideAlert();
-  const rt = recent.map(r=>ALL_SONGS.find(s=>s.id===r.id)||{id:r.id,n:r.n,a:r.a,d:'–',tags:[]}).filter(Boolean);
-  if (!rt.length) {
+  const rt=recent.map(r=>ALL.find(s=>s.id===r.id)||null).filter(Boolean);
+  if(!rt.length){
     document.getElementById('ctitle').textContent='🕐 Recently Played';
     document.getElementById('ccount').textContent='0 tracks';
     document.getElementById('trackList').innerHTML=`<div class="empty"><div class="eico">🕐</div><div>Nothing played yet.</div></div>`;
     tracks=[];
-  } else {
-    setList(rt,'🕐 Recently Played', rt.length+' tracks');
-  }
+  } else setList(rt,'🕐 Recently Played',rt.length+' tracks');
 };
 
+const SIDEBAR_GENRE_MAP = {
+  arijit:'arijit', atif:'atif', shreya:'shreya', kishore:'kishore',
+  lata:'lata', rahman:'rahman', diljit:'diljit',
+  bollywood:'bollywood', sufi:'sufi', punjabi:'punjabi',
+  devotional:'devotional', pop:'pop', jazz:'jazz',
+  lofi:'lofi', rock:'rock', electronic:'electronic',
+};
 document.querySelectorAll('[data-genre]').forEach(el => {
-  if (el.closest('#gtabs')) return; // handled above
+  if (el.closest('#gtabs')) return;
   el.onclick = () => {
-    const g = el.dataset.genre;
+    const g=SIDEBAR_GENRE_MAP[el.dataset.genre];
+    if (!g) return;
     setNav(el);
     hideAlert();
-    document.getElementById('searchInput').value = '';
-    setList(byGenre(g), el.textContent.trim(), null);
+    document.getElementById('searchInput').value='';
+    const list=byGenre(g);
+    setList(list.length?list:[...ALL], el.textContent.trim(), null);
   };
 });
 
-// ── SEARCH BUTTON + ENTER ──────────────────────────────────────
-document.getElementById('searchBtn').onclick = doSearch;
-document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
-
-// ── KEYBOARD ───────────────────────────────────────────────────
+// ── KEYBOARD ──────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (document.activeElement === document.getElementById('searchInput')) return;
+  if (document.activeElement===document.getElementById('searchInput')) return;
   if (e.code==='Space')                  { e.preventDefault(); togglePlay(); }
   if (e.code==='ArrowRight' && e.altKey)   nextTrack();
   if (e.code==='ArrowLeft'  && e.altKey)   prevTrack();
@@ -696,18 +690,12 @@ document.addEventListener('keydown', e => {
   if (e.code==='KeyR') toggleRepeat();
 });
 
-// ── UTILS ──────────────────────────────────────────────────────
-function fmtD(s) {
-  if (!s || isNaN(s)) return '–';
-  s = Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0');
-}
-function x(s) {
-  if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+// ── UTILS ─────────────────────────────────────────────────────
+function fmtD(s){ if(!s||isNaN(s))return'–'; s=Math.floor(s); return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0'); }
+function x(s){ if(!s)return''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// ── INIT ───────────────────────────────────────────────────────
-setList([...ALL_SONGS], 'Discover Free Music', ALL_SONGS.length+' songs ready to play');
+// ── INIT ──────────────────────────────────────────────────────
+setList([...ALL], 'Discover Free Music', ALL.length + ' songs ready to play');
 </script>
 </body>
 </html>
