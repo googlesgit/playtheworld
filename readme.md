@@ -154,13 +154,13 @@ Save to localStorage: sq_favs key
 
 ---
 
-## What Broke and How I Fixed It
+## What Broke and How We Fixed It
 
 ### The Problem
 
-The proxy was not calling JioSaavn directly. Instead, it was calling a third-party JioSaavn API wrapper (`jiosaavn-api-2-liard.vercel.app`) that handled decryption on its end. That wrapper Int offline (404). Every other public JioSaavn wrapper was also dead.
+The proxy was not calling JioSaavn directly. Instead, it was calling a third-party JioSaavn API wrapper (`jiosaavn-api-2-liard.vercel.app`) that handled decryption on its end. That wrapper went offline (404). Every other public JioSaavn wrapper was also dead.
 
-When the proxy got a 404 from the wrapper, it crashed before the JavaScript handler could run. Because the CORS headers (`Access-Control-Allow-Origin: *`) Ire only set inside the handler function, the error response from Vercel had no CORS headers. The browser blocked the response and shoId:
+When the proxy got a 404 from the wrapper, it crashed before the JavaScript handler could run. Because the CORS headers (`Access-Control-Allow-Origin: *`) were only set inside the handler function, the error response from Vercel had no CORS headers. The browser blocked the response and showed:
 
 ```
 Access to fetch has been blocked by CORS policy:
@@ -171,7 +171,7 @@ This looked like an internet connection problem even though the internet was wor
 
 ### The Fix
 
-Three files Ire changed in the `soniq-proxy` repo:
+Three files were changed in the `soniq-proxy` repo:
 
 **`api/search.js`**
 - Removed the call to the dead third-party wrapper
@@ -222,7 +222,7 @@ Music App/
 - Volume control and mute
 - Vinyl spinning animation when playing
 - Waveform animation in header
-- 320 kbps audio when available, falls back to loIr quality
+- 320 kbps audio when available, falls back to lower quality
 - Keyboard shortcuts: `Space` play/pause, `Alt+→` next, `Alt+←` previous, `M` mute, `S` shuffle, `R` repeat
 
 ---
