@@ -574,12 +574,19 @@ async function saavnTrending(query) {
   return saavnSearch(query);
 }
 
+function decodeHtml(str) {
+  if (!str) return '';
+  const t = document.createElement('textarea');
+  t.innerHTML = str;
+  return t.value;
+}
+
 function parseSong(s) {
   // Proxy returns: id, name, artist, album, image, duration, url, quality
   return {
     id:      s.id,
-    title:   s.name   || s.title  || 'Unknown',
-    artist:  s.artist || 'Unknown',
+    title:   decodeHtml(s.name   || s.title  || 'Unknown'),
+    artist:  decodeHtml(s.artist || 'Unknown'),
     image:   s.image  || '',
     url:     s.url    || '',
     quality: s.quality || '',
@@ -620,7 +627,7 @@ function playIdx(i) {
   saveRecent(t);
   renderList();
   if (cinemaOpen) updateCinema(t);
-  if (lyricsOpen) loadLyrics(t); else resetLyrics();
+  if (lyricsOpen || cinLyricsOpen) loadLyrics(t); else resetLyrics();
 
   // 3. Load audio — token check prevents stale loads
   if (token !== loadToken) return;
@@ -951,6 +958,8 @@ async function loadLyrics(t) {
   badge.style.display = 'none';
   document.getElementById('lyricBody').innerHTML =
     '<div class="lyric-empty"><div class="lyric-spin"></div><div>Loading lyrics…</div></div>';
+  if (cinLyricsOpen) document.getElementById('cinLyricBody').innerHTML =
+    '<div style="color:rgba(255,255,255,.4);text-align:center;width:100%;padding:60px 0;font-size:15px">Loading lyrics…</div>';
 
   try {
     const url = `${SAAVN}/lyrics?id=${encodeURIComponent(t.id)}&title=${encodeURIComponent(t.title)}&artist=${encodeURIComponent(t.artist)}`;
@@ -977,6 +986,7 @@ async function loadLyrics(t) {
     document.getElementById('lyricBody').innerHTML =
       '<div class="lyric-empty"><div class="eico">🎤</div><div>No lyrics found for this song.</div></div>';
     document.getElementById('lyricBadge').style.display = 'none';
+    if (cinLyricsOpen) renderCinemaLyrics();
   }
 }
 
@@ -1037,6 +1047,8 @@ function resetLyrics() {
     '<div class="lyric-empty"><div class="eico">🎤</div><div>Play a song to see lyrics</div></div>';
   document.getElementById('lyricBadge').style.display = 'none';
   document.getElementById('lyricSongTitle').textContent = 'Lyrics';
+  document.getElementById('cinLyricBody').innerHTML =
+    '<div style="color:rgba(255,255,255,.35);text-align:center;width:100%;padding:60px 0;font-size:15px">Play a song to see lyrics</div>';
 }
 
 // ══════════════════════════════════════════════════════════════
