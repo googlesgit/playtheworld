@@ -166,18 +166,25 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 .cinema-prog{z-index:1;width:min(420px,78vw);display:flex;align-items:center;gap:9px}
 .cinema-prog .progtrack{flex:1}
 .cinema-btns{z-index:1;display:flex;align-items:center;gap:5px}
-.cinema-close{position:absolute;top:18px;right:18px;z-index:2;background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;backdrop-filter:blur(8px);transition:.15s;display:flex;align-items:center;justify-content:center}
+.cinema-close{position:absolute;top:18px;right:18px;z-index:4;background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;backdrop-filter:blur(8px);transition:.15s;display:flex;align-items:center;justify-content:center}
 .cinema-close:hover{background:rgba(255,255,255,.2)}
-.cinema-lyric-panel{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;padding:70px 20px 110px;opacity:0;pointer-events:none;transition:opacity .3s}
-.cinema-lyric-panel.open{opacity:1;pointer-events:all}
-.cinema-lyric-scroll{overflow-y:auto;width:100%;max-width:660px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;scrollbar-width:none}
+
+/* Split layout when lyrics open */
+.cinema-art,.cinema-meta,.cinema-lyric,.cinema-prog,.cinema-btns{transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .3s}
+.cinema.lyr-open .cinema-art,.cinema.lyr-open .cinema-meta,.cinema.lyr-open .cinema-prog,.cinema.lyr-open .cinema-btns{transform:translateX(-24vw)}
+.cinema.lyr-open .cinema-lyric{transform:translateX(-24vw);opacity:0}
+
+/* Lyrics slide-in panel (right side) */
+.cinema-lyric-panel{position:absolute;top:0;right:0;bottom:0;width:55%;z-index:3;background:rgba(0,0,0,.6);backdrop-filter:blur(22px);border-left:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;padding:58px 28px 40px;pointer-events:none;transform:translateX(100%);transition:transform .38s cubic-bezier(.4,0,.2,1)}
+.cinema-lyric-panel.open{transform:translateX(0);pointer-events:all}
+.cinema-lyric-scroll{overflow-y:auto;width:100%;flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:2px;scrollbar-width:none}
 .cinema-lyric-scroll::-webkit-scrollbar{display:none}
-.cinema-lyric-panel .lyric-line{font-size:22px;color:rgba(255,255,255,.22)}
+.cinema-lyric-panel .lyric-line{font-size:18px;color:rgba(255,255,255,.22);line-height:1.65}
 .cinema-lyric-panel .lyric-line.ll-past{color:rgba(255,255,255,.42)}
-.cinema-lyric-panel .lyric-line.ll-active{font-size:30px;font-weight:800;color:#fff}
-.cinema-lyric-panel .lyric-line.ll-static{font-size:16px;color:var(--t1);cursor:default}
+.cinema-lyric-panel .lyric-line.ll-active{font-size:25px;font-weight:800;color:#fff}
+.cinema-lyric-panel .lyric-line.ll-static{font-size:15px;color:var(--t1);cursor:default}
 .cinema-lyric-panel .lyric-line.ll-static:hover{color:var(--t1)}
-.cin-lyric-close{position:absolute;top:18px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);border-radius:20px;padding:6px 20px;font-size:12px;letter-spacing:.5px;cursor:pointer;backdrop-filter:blur(8px);transition:.15s}
+.cin-lyric-close{position:absolute;top:14px;left:20px;background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);border-radius:20px;padding:5px 14px;font-size:11px;letter-spacing:.5px;cursor:pointer;backdrop-filter:blur(8px);transition:.15s}
 .cin-lyric-close:hover{background:rgba(255,255,255,.18);color:#fff}
 
 /* SLEEP TIMER */
@@ -367,7 +374,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <button class="cbtn" id="cinLyricsBtn" onclick="toggleCinemaLyrics()">🎤</button>
   </div>
   <div class="cinema-lyric-panel" id="cinLyricPanel">
-    <button class="cin-lyric-close" onclick="toggleCinemaLyrics()">▼ Back to player</button>
+    <button class="cin-lyric-close" onclick="toggleCinemaLyrics()">← Close lyrics</button>
     <div class="cinema-lyric-scroll" id="cinLyricBody">
       <div style="color:rgba(255,255,255,.35);text-align:center;width:100%;padding:60px 0;font-size:15px">Play a song to see lyrics</div>
     </div>
@@ -1038,6 +1045,7 @@ function toggleCinema() {
   if (!cinemaOpen) {
     cinLyricsOpen = false;
     document.getElementById('cinLyricPanel').classList.remove('open');
+    document.getElementById('cinema').classList.remove('lyr-open');
     document.getElementById('cinLyricsBtn').classList.remove('on');
   }
   if (cinemaOpen && cur >= 0) updateCinema(tracks[cur]);
@@ -1046,6 +1054,7 @@ function toggleCinema() {
 function toggleCinemaLyrics() {
   cinLyricsOpen = !cinLyricsOpen;
   document.getElementById('cinLyricPanel').classList.toggle('open', cinLyricsOpen);
+  document.getElementById('cinema').classList.toggle('lyr-open', cinLyricsOpen);
   document.getElementById('cinLyricsBtn').classList.toggle('on', cinLyricsOpen);
   if (cinLyricsOpen) {
     if (lyricsData) renderCinemaLyrics();
