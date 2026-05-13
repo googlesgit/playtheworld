@@ -196,6 +196,100 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 .sleep-opt.on{color:var(--accent)}
 .sleep-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;color:var(--t3);padding:6px 16px 2px;text-transform:uppercase}
 .sleep-countdown{font-size:10px;color:var(--green);font-weight:600;min-width:34px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+button,input{touch-action:manipulation}
+
+/* Tablet (≤860px) — sidebar already hidden by earlier rule */
+@media(max-width:860px){
+  .player{grid-template-columns:1fr 1.5fr 0.8fr}
+}
+
+/* Mobile (≤600px) */
+@media(max-width:600px){
+  /* Shell */
+  .app{grid-template-rows:auto 1fr auto;height:100dvh}
+
+  /* Header — logo+tabs on row 1, search full-width on row 2 */
+  header{flex-wrap:wrap;padding:10px 12px 8px;gap:6px;height:auto}
+  .logo{font-size:16px;order:1}
+  .gtabs{order:2;flex:1;gap:4px}
+  .gtab{padding:4px 10px;font-size:11px}
+  .sgroup{order:3;width:100%}
+  .swrap{flex:1;width:0;border-radius:24px 0 0 24px}
+  .sbtn{padding:0 14px;font-size:12px}
+
+  /* Content */
+  .content{padding:10px 12px}
+  .ctitle{font-size:16px}
+  .cheader{margin-bottom:8px}
+
+  /* Track list — hide # column, tighten */
+  .thead{display:none}
+  .trow{grid-template-columns:42px 1fr 36px;gap:6px;padding:7px 10px}
+  .tnum{display:none}
+  .timg{width:42px;height:42px}
+  .tname{font-size:12.5px}
+  .tartist{font-size:11px}
+  .tdur{font-size:11px}
+
+  /* Player — stacked column */
+  .player{display:flex;flex-direction:column;padding:8px 14px 12px;gap:6px;height:auto}
+  #vizCanvas{display:none}
+  .nowplay{gap:10px}
+  .nowart,.vinyl{width:44px;height:44px}
+  .vinyl{width:40px;height:40px}
+  .nowtitle{font-size:13px}
+  .nowartist{font-size:11px}
+  .hbtn{font-size:16px}
+  .pcenter{width:100%;gap:6px}
+  .controls{gap:3px}
+  .cbtn{width:32px;height:32px;font-size:14px}
+  .playbtn{width:42px;height:42px;font-size:17px}
+  .progwrap{gap:5px}
+  .tlabel{font-size:10px;min-width:28px}
+  /* Right section: hide quality badge, sleep, cinema; keep only mute */
+  .pright{justify-content:flex-end;gap:8px}
+  .qbadge,.sleep-wrap,#cinemaBtn{display:none}
+  input[type=range]{display:none}
+
+  /* Lyrics panel */
+  .lyric-hdr{padding:12px 16px 10px}
+  .lyric-body{padding:18px 16px 50px;gap:4px}
+  .lyric-line{font-size:18px}
+  .lyric-line.ll-active{font-size:24px}
+  .lyric-line.ll-static{font-size:14px}
+
+  /* Cinema — no split layout on mobile, lyrics go full screen */
+  .cinema{gap:12px}
+  .cinema-art{width:min(190px,52vw);height:min(190px,52vw)}
+  .cinema-title{font-size:18px}
+  .cinema-lyric{font-size:16px;padding:0 20px}
+  .cinema-prog{width:90vw}
+  .cinema-lyric-panel{width:100%}
+  .cinema.lyr-open .cinema-art,
+  .cinema.lyr-open .cinema-meta,
+  .cinema.lyr-open .cinema-prog,
+  .cinema.lyr-open .cinema-btns{transform:none}
+  .cinema.lyr-open .cinema-lyric{transform:none;opacity:0}
+  .cinema-lyric-panel .lyric-line{font-size:17px}
+  .cinema-lyric-panel .lyric-line.ll-active{font-size:22px}
+
+  /* Misc */
+  .spin-wrap,.empty{height:160px}
+  ::-webkit-scrollbar{width:2px}
+}
+
+/* Very small phones (≤360px) */
+@media(max-width:360px){
+  .gtab{padding:4px 8px;font-size:10px}
+  .controls{gap:1px}
+  .cbtn{width:28px;height:28px;font-size:13px}
+  .playbtn{width:38px;height:38px;font-size:15px}
+  .nowtitle{font-size:12px}
+}
 </style>
 </head>
 <body>
