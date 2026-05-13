@@ -142,6 +142,39 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 .lyric-empty .eico{font-size:40px;opacity:.25}
 .lyric-spin{width:28px;height:28px;border:2px solid rgba(167,139,250,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
 @media(max-width:860px){.lyrics-panel{left:0}}
+
+/* DYNAMIC THEMING */
+.playbtn{transition:background .5s,box-shadow .5s}
+
+/* VISUALIZER */
+.player{position:relative;overflow:hidden}
+#vizCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.15;pointer-events:none;z-index:0}
+.nowplay,.pcenter,.pright{position:relative;z-index:1}
+
+/* CINEMA MODE */
+.cinema{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;pointer-events:none;transition:opacity .35s}
+.cinema.open{opacity:1;pointer-events:all}
+.cinema-bg{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(70px) brightness(.2);z-index:0;transform:scale(1.15)}
+.cinema-art{width:min(280px,60vw);height:min(280px,60vw);border-radius:16px;object-fit:cover;z-index:1;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.cinema-meta{z-index:1;text-align:center}
+.cinema-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
+.cinema-artist{font-size:13px;color:rgba(255,255,255,.5)}
+.cinema-lyric{z-index:1;font-size:19px;font-weight:700;color:#fff;text-align:center;max-width:580px;padding:0 28px;min-height:30px;text-shadow:0 2px 12px rgba(0,0,0,.9);transition:opacity .2s}
+.cinema-prog{z-index:1;width:min(420px,78vw);display:flex;align-items:center;gap:9px}
+.cinema-prog .progtrack{flex:1}
+.cinema-btns{z-index:1;display:flex;align-items:center;gap:5px}
+.cinema-close{position:absolute;top:18px;right:18px;z-index:2;background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;backdrop-filter:blur(8px);transition:.15s;display:flex;align-items:center;justify-content:center}
+.cinema-close:hover{background:rgba(255,255,255,.2)}
+
+/* SLEEP TIMER */
+.sleep-wrap{position:relative;display:flex;align-items:center;gap:4px}
+.sleep-menu{position:absolute;bottom:calc(100% + 8px);right:0;background:#18131f;border:1px solid var(--border2);border-radius:10px;padding:4px 0;display:none;z-index:50;min-width:130px;box-shadow:0 8px 24px rgba(0,0,0,.7)}
+.sleep-menu.open{display:block}
+.sleep-opt{padding:8px 16px;cursor:pointer;font-size:13px;color:var(--t2);transition:.12s}
+.sleep-opt:hover{background:var(--hover);color:var(--t1)}
+.sleep-opt.on{color:var(--accent)}
+.sleep-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;color:var(--t3);padding:6px 16px 2px;text-transform:uppercase}
+.sleep-countdown{font-size:10px;color:var(--green);font-weight:600;min-width:34px;text-align:right;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -202,6 +235,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <div class="nitem" data-q="lofi hip hop beats">😌 Lo-Fi / Chill</div>
     <div class="nitem" data-q="classic rock songs">🎸 Rock</div>
     <div class="nitem" data-q="jazz music">🎷 Jazz</div>
+
+    <div class="slabel">Moods</div>
+    <div class="nitem" data-q="romantic hindi songs love">💝 Romantic</div>
+    <div class="nitem" data-q="happy bollywood dance songs">😊 Happy</div>
+    <div class="nitem" data-q="sad emotional hindi songs">😢 Sad</div>
+    <div class="nitem" data-q="party songs dance bollywood">🎉 Party</div>
+    <div class="nitem" data-q="instrumental focus study music">🎯 Focus</div>
+    <div class="nitem" data-q="workout gym motivation songs">💪 Workout</div>
   </aside>
 
   <section class="content">
@@ -235,6 +276,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 
 <!-- PLAYER -->
 <footer class="player">
+  <canvas id="vizCanvas"></canvas>
   <div class="nowplay">
     <div class="nowart" id="nowArt">
       <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>
@@ -265,12 +307,51 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   </div>
   <div class="pright">
     <div class="qbadge" id="qualBadge">HQ</div>
+    <div class="sleep-wrap">
+      <span class="sleep-countdown" id="sleepCountdown"></span>
+      <button class="cbtn" id="sleepBtn" onclick="toggleSleepMenu()" title="Sleep Timer">🌙</button>
+      <div class="sleep-menu" id="sleepMenu">
+        <div class="sleep-lbl">Sleep Timer</div>
+        <div class="sleep-opt" data-min="15">15 minutes</div>
+        <div class="sleep-opt" data-min="30">30 minutes</div>
+        <div class="sleep-opt" data-min="45">45 minutes</div>
+        <div class="sleep-opt" data-min="60">60 minutes</div>
+        <div class="sleep-opt" data-min="0">Off</div>
+      </div>
+    </div>
+    <button class="cbtn" id="cinemaBtn" onclick="toggleCinema()" title="Cinema Mode">🎬</button>
     <div class="volwrap">
       <span class="volico" id="volIco" onclick="toggleMute()">🔊</span>
       <input type="range" id="volSlider" min="0" max="100" value="80"/>
     </div>
   </div>
 </footer>
+</div>
+
+<!-- CINEMA MODE OVERLAY -->
+<div id="cinema" class="cinema">
+  <div class="cinema-bg" id="cinemaBg"></div>
+  <img class="cinema-art" id="cinemaArt" src="" alt=""/>
+  <div class="cinema-meta">
+    <div class="cinema-title" id="cinemaTitle">RagaSync</div>
+    <div class="cinema-artist" id="cinemaArtist"></div>
+  </div>
+  <div class="cinema-lyric" id="cinemaLyric"></div>
+  <div class="cinema-prog">
+    <span class="tlabel" id="cinCurTime">0:00</span>
+    <div class="progtrack" id="cinProgTrack">
+      <div class="progfill" id="cinProgFill"></div>
+      <div class="progthumb" id="cinProgThumb"></div>
+    </div>
+    <span class="tlabel r" id="cinTotTime">0:00</span>
+  </div>
+  <div class="cinema-btns">
+    <button class="cbtn" onclick="prevTrack()">⏮</button>
+    <button class="playbtn" id="cinPlayBtn" onclick="togglePlay()">▶</button>
+    <button class="cbtn" onclick="nextTrack()">⏭</button>
+    <button class="cbtn" onclick="toggleLyrics()">🎤</button>
+  </div>
+  <button class="cinema-close" onclick="toggleCinema()">✕</button>
 </div>
 
 <!-- Native HTML5 audio — no YouTube, no SoundCloud widget, no ads -->
@@ -404,6 +485,7 @@ function playIdx(i) {
   document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
   document.getElementById('qualBadge').textContent = t.quality === '320kbps' ? '320K' : 'HQ';
   document.title = t.title + ' — RagaSync';
+  applyTheme(t);
 
   const art = document.getElementById('nowArt');
   if (t.image) {
@@ -415,6 +497,7 @@ function playIdx(i) {
 
   saveRecent(t);
   renderList();
+  if (cinemaOpen) updateCinema(t);
   if (lyricsOpen) loadLyrics(t); else resetLyrics();
 
   // 3. Load audio — token check prevents stale loads
@@ -515,6 +598,7 @@ aud.addEventListener('timeupdate', () => {
   document.getElementById('curTime').textContent   = fmtD(aud.currentTime);
   document.getElementById('totTime').textContent   = fmtD(aud.duration);
   if (lyricsOpen) syncLyricsAt(aud.currentTime);
+  updateCinemaProg();
 });
 aud.addEventListener('error', () => {
   // Do NOT auto-skip here — the .catch() in playIdx already handles this
@@ -548,6 +632,7 @@ function syncUI() {
   document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
   document.getElementById('wave').className = 'wavewrap'+(playing?'':' stopped');
   const v = document.getElementById('vinyl'); if(v) v.className='vinyl'+(playing?' spin':'');
+  const cpb = document.getElementById('cinPlayBtn'); if(cpb) cpb.textContent = playing ? '⏸' : '▶';
   renderList();
 }
 
@@ -831,6 +916,166 @@ function x(s) {
   if (!s) return '';
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+// ══════════════════════════════════════════════════════════════
+//  DYNAMIC COLOR THEMING — hash-based per-song accent color
+// ══════════════════════════════════════════════════════════════
+const PALETTE = [
+  { h:252, s:85, l:72 },  // violet
+  { h:217, s:88, l:68 },  // blue
+  { h:162, s:72, l:56 },  // teal
+  { h:338, s:78, l:68 },  // pink
+  { h:35,  s:88, l:63 },  // orange
+  { h:48,  s:90, l:58 },  // gold
+  { h:145, s:65, l:54 },  // green
+  { h:280, s:80, l:67 },  // purple
+];
+let vizAccent = '#a78bfa';
+
+function applyTheme(t) {
+  let hash = 0;
+  for (let i = 0; i < t.id.length; i++) hash = (hash * 31 + t.id.charCodeAt(i)) >>> 0;
+  const c = PALETTE[hash % PALETTE.length];
+  vizAccent = `hsl(${c.h},${c.s}%,${c.l}%)`;
+  const glow = `hsla(${c.h},${c.s}%,${c.l}%,.35)`;
+  document.documentElement.style.setProperty('--accent', vizAccent);
+  document.documentElement.style.setProperty('--glow', glow);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  VISUALIZER — simulated waveform on canvas in player bar
+// ══════════════════════════════════════════════════════════════
+const vizCanvas = document.getElementById('vizCanvas');
+const vizCtx    = vizCanvas.getContext('2d');
+let vizFrame    = 0;
+
+function vizResize() {
+  vizCanvas.width  = (vizCanvas.offsetWidth  || 800) * devicePixelRatio;
+  vizCanvas.height = (vizCanvas.offsetHeight || 148) * devicePixelRatio;
+}
+vizResize();
+new ResizeObserver(vizResize).observe(vizCanvas.parentElement);
+
+function vizTick() {
+  requestAnimationFrame(vizTick);
+  vizFrame++;
+  const W = vizCanvas.width, H = vizCanvas.height;
+  if (!W || !H) return;
+  vizCtx.clearRect(0, 0, W, H);
+  const bars = 52;
+  const barW = W / bars;
+  for (let i = 0; i < bars; i++) {
+    const phase = (i / bars) * Math.PI * 6 + vizFrame * 0.05;
+    const w1    = Math.sin(phase) * 0.5 + 0.5;
+    const w2    = Math.sin(phase * 1.8 + 1.4) * 0.3 + 0.3;
+    const amp   = playing ? (w1 * 0.65 + w2 * 0.35) : (w1 * 0.06);
+    const bh    = Math.max(2, amp * H * 0.88);
+    const bx    = i * barW + barW * 0.1;
+    const bw    = barW * 0.8;
+    vizCtx.globalAlpha = 0.5 + w1 * 0.5;
+    vizCtx.fillStyle   = vizAccent;
+    vizCtx.fillRect(bx, H - bh, bw, bh);
+  }
+  vizCtx.globalAlpha = 1;
+}
+requestAnimationFrame(vizTick);
+
+// ══════════════════════════════════════════════════════════════
+//  CINEMA MODE
+// ══════════════════════════════════════════════════════════════
+let cinemaOpen = false;
+
+function toggleCinema() {
+  cinemaOpen = !cinemaOpen;
+  document.getElementById('cinema').classList.toggle('open', cinemaOpen);
+  document.getElementById('cinemaBtn').classList.toggle('on', cinemaOpen);
+  if (cinemaOpen && cur >= 0) updateCinema(tracks[cur]);
+}
+
+function updateCinema(t) {
+  if (!t) return;
+  document.getElementById('cinemaTitle').textContent  = t.title;
+  document.getElementById('cinemaArtist').textContent = t.artist;
+  const art = document.getElementById('cinemaArt');
+  art.src = t.image || '';
+  document.getElementById('cinemaBg').style.backgroundImage = t.image ? `url(${t.image})` : 'none';
+  document.getElementById('cinPlayBtn').textContent = playing ? '⏸' : '▶';
+  const activeLl = document.getElementById('ll' + activeLyricIdx);
+  document.getElementById('cinemaLyric').textContent = activeLl?.textContent || '';
+}
+
+function updateCinemaProg() {
+  if (!cinemaOpen) return;
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const pct = (aud.currentTime / aud.duration) * 100;
+  document.getElementById('cinProgFill').style.width = pct + '%';
+  document.getElementById('cinCurTime').textContent  = fmtD(aud.currentTime);
+  document.getElementById('cinTotTime').textContent  = fmtD(aud.duration);
+  if (lyricsData?.synced) {
+    const el = document.getElementById('ll' + activeLyricIdx);
+    document.getElementById('cinemaLyric').textContent = el?.textContent || '';
+  }
+}
+
+document.getElementById('cinProgTrack').addEventListener('click', e => {
+  if (!aud.duration || isNaN(aud.duration)) return;
+  const r = e.currentTarget.getBoundingClientRect();
+  aud.currentTime = ((e.clientX - r.left) / r.width) * aud.duration;
+});
+
+// ══════════════════════════════════════════════════════════════
+//  SLEEP TIMER
+// ══════════════════════════════════════════════════════════════
+let sleepTimerId     = null;
+let sleepCountdownId = null;
+let sleepEndsAt      = 0;
+
+function toggleSleepMenu() {
+  document.getElementById('sleepMenu').classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.sleep-wrap')) {
+    document.getElementById('sleepMenu').classList.remove('open');
+  }
+});
+
+document.getElementById('sleepMenu').addEventListener('click', e => {
+  const opt = e.target.closest('.sleep-opt'); if (!opt) return;
+  document.getElementById('sleepMenu').classList.remove('open');
+  document.querySelectorAll('.sleep-opt').forEach(o => o.classList.remove('on'));
+  clearTimeout(sleepTimerId);
+  clearInterval(sleepCountdownId);
+
+  const mins = parseInt(opt.dataset.min);
+  if (mins === 0) {
+    document.getElementById('sleepBtn').classList.remove('on');
+    document.getElementById('sleepCountdown').textContent = '';
+    sleepEndsAt = 0;
+    return;
+  }
+
+  opt.classList.add('on');
+  document.getElementById('sleepBtn').classList.add('on');
+  sleepEndsAt = Date.now() + mins * 60000;
+
+  sleepTimerId = setTimeout(() => {
+    aud.pause();
+    document.getElementById('sleepBtn').classList.remove('on');
+    document.getElementById('sleepCountdown').textContent = '';
+    document.querySelectorAll('.sleep-opt').forEach(o => o.classList.remove('on'));
+    clearInterval(sleepCountdownId);
+    sleepEndsAt = 0;
+  }, mins * 60000);
+
+  sleepCountdownId = setInterval(() => {
+    const rem = sleepEndsAt - Date.now();
+    if (rem <= 0) { clearInterval(sleepCountdownId); return; }
+    const m = Math.floor(rem / 60000);
+    const s = Math.floor((rem % 60000) / 1000);
+    document.getElementById('sleepCountdown').textContent = m + ':' + s.toString().padStart(2, '0');
+  }, 1000);
+});
 
 // ══════════════════════════════════════════════════════════════
 //  SUPABASE TABLE SETUP (runs once, creates tables if missing)
