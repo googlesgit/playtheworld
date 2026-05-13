@@ -168,6 +168,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 .cinema-btns{z-index:1;display:flex;align-items:center;gap:5px}
 .cinema-close{position:absolute;top:18px;right:18px;z-index:2;background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;backdrop-filter:blur(8px);transition:.15s;display:flex;align-items:center;justify-content:center}
 .cinema-close:hover{background:rgba(255,255,255,.2)}
+.cinema-lyric-panel{position:absolute;inset:0;z-index:3;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;padding:70px 20px 110px;opacity:0;pointer-events:none;transition:opacity .3s}
+.cinema-lyric-panel.open{opacity:1;pointer-events:all}
+.cinema-lyric-scroll{overflow-y:auto;width:100%;max-width:660px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;scrollbar-width:none}
+.cinema-lyric-scroll::-webkit-scrollbar{display:none}
+.cinema-lyric-panel .lyric-line{font-size:22px;color:rgba(255,255,255,.22)}
+.cinema-lyric-panel .lyric-line.ll-past{color:rgba(255,255,255,.42)}
+.cinema-lyric-panel .lyric-line.ll-active{font-size:30px;font-weight:800;color:#fff}
+.cinema-lyric-panel .lyric-line.ll-static{font-size:16px;color:var(--t1);cursor:default}
+.cinema-lyric-panel .lyric-line.ll-static:hover{color:var(--t1)}
+.cin-lyric-close{position:absolute;top:18px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);border-radius:20px;padding:6px 20px;font-size:12px;letter-spacing:.5px;cursor:pointer;backdrop-filter:blur(8px);transition:.15s}
+.cin-lyric-close:hover{background:rgba(255,255,255,.18);color:#fff}
 
 /* SLEEP TIMER */
 .sleep-wrap{position:relative;display:flex;align-items:center;gap:4px}
@@ -353,7 +364,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
     <button class="cbtn" onclick="prevTrack()">⏮</button>
     <button class="playbtn" id="cinPlayBtn" onclick="togglePlay()">▶</button>
     <button class="cbtn" onclick="nextTrack()">⏭</button>
-    <button class="cbtn" onclick="toggleLyrics()">🎤</button>
+    <button class="cbtn" id="cinLyricsBtn" onclick="toggleCinemaLyrics()">🎤</button>
+  </div>
+  <div class="cinema-lyric-panel" id="cinLyricPanel">
+    <button class="cin-lyric-close" onclick="toggleCinemaLyrics()">▼ Back to player</button>
+    <div class="cinema-lyric-scroll" id="cinLyricBody">
+      <div style="color:rgba(255,255,255,.35);text-align:center;width:100%;padding:60px 0;font-size:15px">Play a song to see lyrics</div>
+    </div>
   </div>
   <button class="cinema-close" onclick="toggleCinema()">✕</button>
 </div>
@@ -601,7 +618,7 @@ aud.addEventListener('timeupdate', () => {
   document.getElementById('progThumb').style.left  = pct + '%';
   document.getElementById('curTime').textContent   = fmtD(aud.currentTime);
   document.getElementById('totTime').textContent   = fmtD(aud.duration);
-  if (lyricsOpen) syncLyricsAt(aud.currentTime);
+  if (lyricsOpen || cinLyricsOpen) syncLyricsAt(aud.currentTime);
   updateCinemaProg();
 });
 aud.addEventListener('error', () => {
@@ -852,6 +869,7 @@ async function loadLyrics(t) {
     badge.style.display = '';
 
     renderLyrics(data);
+    if (cinLyricsOpen) renderCinemaLyrics();
     if (data.synced && !aud.paused) syncLyricsAt(aud.currentTime);
 
   } catch(e) {
@@ -891,6 +909,17 @@ function syncLyricsAt(time) {
   if (idx >= 0) {
     const el = document.getElementById(`ll${idx}`);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  if (cinLyricsOpen) {
+    lines.forEach((_, i) => {
+      const cel = document.getElementById(`cinll${i}`);
+      if (!cel) return;
+      cel.className = 'lyric-line' + (i === idx ? ' ll-active' : i < idx ? ' ll-past' : '');
+    });
+    if (idx >= 0) {
+      const cel = document.getElementById(`cinll${idx}`);
+      if (cel) cel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 }
 
@@ -999,13 +1028,47 @@ requestAnimationFrame(vizTick);
 // ══════════════════════════════════════════════════════════════
 //  CINEMA MODE
 // ══════════════════════════════════════════════════════════════
-let cinemaOpen = false;
+let cinemaOpen    = false;
+let cinLyricsOpen = false;
 
 function toggleCinema() {
   cinemaOpen = !cinemaOpen;
   document.getElementById('cinema').classList.toggle('open', cinemaOpen);
   document.getElementById('cinemaBtn').classList.toggle('on', cinemaOpen);
+  if (!cinemaOpen) {
+    cinLyricsOpen = false;
+    document.getElementById('cinLyricPanel').classList.remove('open');
+    document.getElementById('cinLyricsBtn').classList.remove('on');
+  }
   if (cinemaOpen && cur >= 0) updateCinema(tracks[cur]);
+}
+
+function toggleCinemaLyrics() {
+  cinLyricsOpen = !cinLyricsOpen;
+  document.getElementById('cinLyricPanel').classList.toggle('open', cinLyricsOpen);
+  document.getElementById('cinLyricsBtn').classList.toggle('on', cinLyricsOpen);
+  if (cinLyricsOpen) {
+    if (lyricsData) renderCinemaLyrics();
+    else if (cur >= 0) loadLyrics(tracks[cur]);
+  }
+}
+
+function renderCinemaLyrics() {
+  const body = document.getElementById('cinLyricBody');
+  if (!lyricsData?.lines?.length) {
+    body.innerHTML = '<div style="color:rgba(255,255,255,.35);text-align:center;width:100%;padding:60px 0;font-size:15px">No lyrics found for this song.</div>';
+    return;
+  }
+  if (lyricsData.synced) {
+    body.innerHTML = lyricsData.lines.map((l, i) =>
+      `<div class="lyric-line" id="cinll${i}" onclick="seekToLine(${i})">${x(l.text)}</div>`
+    ).join('');
+    syncLyricsAt(aud.currentTime);
+  } else {
+    body.innerHTML = lyricsData.lines.map((l, i) =>
+      `<div class="lyric-line ll-static" id="cinll${i}">${x(l)}</div>`
+    ).join('');
+  }
 }
 
 function updateCinema(t) {
