@@ -147,9 +147,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 .playbtn{transition:background .5s,box-shadow .5s}
 
 /* VISUALIZER */
-.player{position:relative;overflow:hidden}
+.player{position:relative}
 #vizCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.15;pointer-events:none;z-index:0}
 .nowplay,.pcenter,.pright{position:relative;z-index:1}
+
+/* CINEMA VISUALIZER */
+#cinVizCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.3;pointer-events:none;z-index:0}
 
 /* CINEMA MODE */
 .cinema{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;pointer-events:none;transition:opacity .35s}
@@ -331,6 +334,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 <!-- CINEMA MODE OVERLAY -->
 <div id="cinema" class="cinema">
   <div class="cinema-bg" id="cinemaBg"></div>
+  <canvas id="cinVizCanvas"></canvas>
   <img class="cinema-art" id="cinemaArt" src="" alt=""/>
   <div class="cinema-meta">
     <div class="cinema-title" id="cinemaTitle">RagaSync</div>
@@ -943,26 +947,31 @@ function applyTheme(t) {
 }
 
 // ══════════════════════════════════════════════════════════════
-//  VISUALIZER — simulated waveform on canvas in player bar
+//  VISUALIZER — shared waveform renderer (player bar + cinema)
 // ══════════════════════════════════════════════════════════════
-const vizCanvas = document.getElementById('vizCanvas');
-const vizCtx    = vizCanvas.getContext('2d');
-let vizFrame    = 0;
+const vizCanvas    = document.getElementById('vizCanvas');
+const vizCtx       = vizCanvas.getContext('2d');
+const cinVizCanvas = document.getElementById('cinVizCanvas');
+const cinVizCtx    = cinVizCanvas.getContext('2d');
+let vizFrame       = 0;
 
 function vizResize() {
   vizCanvas.width  = (vizCanvas.offsetWidth  || 800) * devicePixelRatio;
   vizCanvas.height = (vizCanvas.offsetHeight || 148) * devicePixelRatio;
 }
+function cinVizResize() {
+  cinVizCanvas.width  = (cinVizCanvas.offsetWidth  || 1456) * devicePixelRatio;
+  cinVizCanvas.height = (cinVizCanvas.offsetHeight || 816)  * devicePixelRatio;
+}
 vizResize();
+cinVizResize();
 new ResizeObserver(vizResize).observe(vizCanvas.parentElement);
+new ResizeObserver(cinVizResize).observe(cinVizCanvas.parentElement);
 
-function vizTick() {
-  requestAnimationFrame(vizTick);
-  vizFrame++;
-  const W = vizCanvas.width, H = vizCanvas.height;
+function drawVizBars(canvas, ctx, bars) {
+  const W = canvas.width, H = canvas.height;
   if (!W || !H) return;
-  vizCtx.clearRect(0, 0, W, H);
-  const bars = 52;
+  ctx.clearRect(0, 0, W, H);
   const barW = W / bars;
   for (let i = 0; i < bars; i++) {
     const phase = (i / bars) * Math.PI * 6 + vizFrame * 0.05;
@@ -972,11 +981,18 @@ function vizTick() {
     const bh    = Math.max(2, amp * H * 0.88);
     const bx    = i * barW + barW * 0.1;
     const bw    = barW * 0.8;
-    vizCtx.globalAlpha = 0.5 + w1 * 0.5;
-    vizCtx.fillStyle   = vizAccent;
-    vizCtx.fillRect(bx, H - bh, bw, bh);
+    ctx.globalAlpha = 0.5 + w1 * 0.5;
+    ctx.fillStyle   = vizAccent;
+    ctx.fillRect(bx, H - bh, bw, bh);
   }
-  vizCtx.globalAlpha = 1;
+  ctx.globalAlpha = 1;
+}
+
+function vizTick() {
+  requestAnimationFrame(vizTick);
+  vizFrame++;
+  drawVizBars(vizCanvas, vizCtx, 52);
+  if (cinemaOpen) drawVizBars(cinVizCanvas, cinVizCtx, 80);
 }
 requestAnimationFrame(vizTick);
 
