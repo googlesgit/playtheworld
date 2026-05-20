@@ -290,6 +290,11 @@ button,input{touch-action:manipulation}
   .playbtn{width:38px;height:38px;font-size:15px}
   .nowtitle{font-size:12px}
 }
+
+/* RIPPLE */
+.cbtn,.playbtn,.sbtn,.trow,.gtab,.nitem,.lyric-close,.cinema-close,.cin-lyric-close{position:relative;overflow:hidden}
+@keyframes rpl{0%{transform:scale(0);opacity:.7}100%{transform:scale(1);opacity:0}}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);pointer-events:none;animation:rpl .5s ease-out forwards;z-index:99}
 </style>
 </head>
 <body>
@@ -1290,6 +1295,29 @@ async function ensureTables() {
     });
   } catch(e) {}
 }
+
+// ══════════════════════════════════════════════════════════════
+//  RIPPLE — material-style click wave on buttons & track rows
+// ══════════════════════════════════════════════════════════════
+function spawnRipple(e, el) {
+  el = el || e.currentTarget;
+  const rect = el.getBoundingClientRect();
+  const dx = Math.max(e.clientX - rect.left, rect.right  - e.clientX);
+  const dy = Math.max(e.clientY - rect.top,  rect.bottom - e.clientY);
+  const size = Math.sqrt(dx * dx + dy * dy) * 2;
+  const r = document.createElement('span');
+  r.className = 'ripple';
+  r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+  el.appendChild(r);
+  r.addEventListener('animationend', () => r.remove(), {once:true});
+}
+document.querySelectorAll('.cbtn,.playbtn,.sbtn,.gtab').forEach(el => el.addEventListener('click', spawnRipple));
+document.querySelector('.sidebar').addEventListener('click', e => {
+  const item = e.target.closest('.nitem'); if (item) spawnRipple(e, item);
+});
+document.getElementById('trackList').addEventListener('click', e => {
+  const row = e.target.closest('.trow'); if (row) spawnRipple(e, row);
+});
 
 // ══════════════════════════════════════════════════════════════
 //  INIT
