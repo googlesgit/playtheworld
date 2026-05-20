@@ -212,21 +212,21 @@ button,input{touch-action:manipulation}
   /* Shell */
   .app{grid-template-rows:auto 1fr auto;height:100dvh}
 
-  /* Header — logo+tabs on row 1, search full-width on row 2 */
-  header{flex-wrap:wrap;padding:10px 12px 8px;gap:6px;height:auto}
-  .logo{font-size:16px;order:1}
-  .gtabs{order:2;flex:1;gap:4px}
+  /* Header — search on top, tabs below */
+  header{flex-wrap:wrap;padding:8px 12px 6px;gap:5px;height:auto}
+  .logo{font-size:15px;order:1;flex-shrink:0}
+  .sgroup{order:2;flex:1;min-width:0}
+  .swrap{flex:1;width:0;min-width:0;border-radius:24px 0 0 24px}
+  .sbtn{padding:0 12px;font-size:12px}
+  .gtabs{order:3;width:100%;gap:4px;padding-bottom:2px}
   .gtab{padding:4px 10px;font-size:11px}
-  .sgroup{order:3;width:100%}
-  .swrap{flex:1;width:0;border-radius:24px 0 0 24px}
-  .sbtn{padding:0 14px;font-size:12px}
 
   /* Content */
   .content{padding:10px 12px}
   .ctitle{font-size:16px}
   .cheader{margin-bottom:8px}
 
-  /* Track list — hide # column, tighten */
+  /* Track list */
   .thead{display:none}
   .trow{grid-template-columns:42px 1fr 36px;gap:6px;padding:7px 10px}
   .tnum{display:none}
@@ -235,25 +235,56 @@ button,input{touch-action:manipulation}
   .tartist{font-size:11px}
   .tdur{font-size:11px}
 
-  /* Player — stacked column */
-  .player{display:flex;flex-direction:column;padding:8px 14px 12px;gap:6px;height:auto}
+  /* ── Player: 2-column grid ─────────────────────────────────
+     Col 1 (1fr): now-playing info
+     Col 2 (auto): mute + more btn
+     Row 1: nowplay | pright
+     Row 2: progress bar (full width)
+     Row 3: controls (full width)
+  ────────────────────────────────────────────────────────── */
+  .player{
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-rows:auto auto auto;
+    padding:10px 14px 12px;
+    gap:4px 0;
+    height:auto
+  }
   #vizCanvas{display:none}
-  .nowplay{gap:10px}
-  .nowart,.vinyl{width:44px;height:44px}
+
+  /* Row 1, col 1 — song info strip */
+  .nowplay{grid-column:1;grid-row:1;min-width:0;gap:9px}
+  .nowart{width:44px;height:44px}
   .vinyl{width:40px;height:40px}
   .nowtitle{font-size:13px}
   .nowartist{font-size:11px}
-  .hbtn{font-size:16px}
-  .pcenter{width:100%;gap:6px}
-  .controls{gap:3px}
-  .cbtn{width:32px;height:32px;font-size:14px}
-  .playbtn{width:42px;height:42px;font-size:17px}
-  .progwrap{gap:5px}
-  .tlabel{font-size:10px;min-width:28px}
-  /* Right section: hide quality badge, sleep, cinema; keep only mute */
-  .pright{justify-content:flex-end;gap:8px}
+  .hbtn{font-size:16px;flex-shrink:0}
+
+  /* Row 1, col 2 — mute + more */
+  .pright{
+    grid-column:2;grid-row:1;
+    display:flex;align-items:center;gap:6px;
+    padding-left:10px;justify-content:flex-end
+  }
   .qbadge,.sleep-wrap,#cinemaBtn{display:none}
   input[type=range]{display:none}
+
+  /* Row 2–3 — progress then controls, full width */
+  .pcenter{
+    grid-column:1/-1;grid-row:2/4;
+    width:100%;gap:3px;
+    display:flex;flex-direction:column
+  }
+  .progwrap{order:1;gap:5px;padding:2px 0}
+  .progtrack{height:5px}
+  .progthumb{width:16px;height:16px}
+  .controls{order:2;gap:3px;justify-content:center}
+  .tlabel{font-size:10px;min-width:28px}
+  .cbtn{width:32px;height:32px;font-size:14px}
+  .playbtn{width:44px;height:44px;font-size:18px}
+
+  /* Disable 3D float on small art */
+  .nowart.playing{animation:none}
 
   /* Lyrics panel */
   .lyric-hdr{padding:12px 16px 10px}
@@ -262,10 +293,11 @@ button,input{touch-action:manipulation}
   .lyric-line.ll-active{font-size:24px}
   .lyric-line.ll-static{font-size:14px}
 
-  /* Cinema — no split layout on mobile, lyrics go full screen */
+  /* Cinema — full-screen, no split layout */
   .cinema{gap:12px}
-  .cinema-art{width:min(190px,52vw);height:min(190px,52vw)}
-  .cinema-title{font-size:18px}
+  .cinema-art{width:min(200px,55vw);height:min(200px,55vw)}
+  .cinema-title{font-size:19px}
+  .cinema-artist{font-size:12px}
   .cinema-lyric{font-size:16px;padding:0 20px}
   .cinema-prog{width:90vw}
   .cinema-lyric-panel{width:100%}
@@ -285,10 +317,13 @@ button,input{touch-action:manipulation}
 /* Very small phones (≤360px) */
 @media(max-width:360px){
   .gtab{padding:4px 8px;font-size:10px}
+  .logo{font-size:13px}
+  .sbtn{padding:0 10px;font-size:11px}
   .controls{gap:1px}
   .cbtn{width:28px;height:28px;font-size:13px}
-  .playbtn{width:38px;height:38px;font-size:15px}
+  .playbtn{width:40px;height:40px;font-size:16px}
   .nowtitle{font-size:12px}
+  .nowartist{font-size:10px}
 }
 
 /* MOBILE MORE SHEET */
