@@ -500,7 +500,8 @@ let playing  = false;
 let shuffle  = false;
 let repeat   = false;
 let muted    = false;
-let loadToken = 0;
+let loadToken   = 0;
+let searchToken = 0;
 
 // Load user data from Supabase
 let favs   = [];
@@ -812,6 +813,7 @@ function hideAlert() { document.getElementById('alertBox').style.display='none';
 async function doSearch() {
   const q = document.getElementById('searchInput').value.trim();
   if (!q) return;
+  const token = ++searchToken;
   hideAlert();
   document.querySelectorAll('.gtab,.nitem').forEach(b=>b.classList.remove('on'));
   document.getElementById('ctitle').textContent = `"${q}"`;
@@ -820,6 +822,7 @@ async function doSearch() {
 
   try {
     const results = await saavnSearch(q);
+    if (token !== searchToken) return; // a newer search already started — discard this result
     if (results.length) {
       setList(results, `"${q}"`, results.length + ' songs found');
     } else {
@@ -827,6 +830,7 @@ async function doSearch() {
       showAlert('info', 'No results. Try a different spelling or song name.');
     }
   } catch(e) {
+    if (token !== searchToken) return;
     console.error('[RagaSync] Search error:', e);
     showAlert('warn', '⚠️ Search failed. Check your internet and try again.');
     document.getElementById('ccount').textContent = 'Error';
@@ -874,11 +878,8 @@ document.getElementById('sFav').onclick = async () => {
     setList(ft, '❤️ Favorites', ft.length + ' favorites');
     if (!ft.length) showAlert('info', 'No favorites yet. Press ♡ while a song plays!', 4000);
   } catch(e) {
-    const ft = JSON.parse(localStorage.getItem('sq_favs') || '[]');
-    if (!ft.length) {
-      setList([], '❤️ Favorites', '0 favorites');
-      showAlert('info', 'No favorites yet. Press ♡ while a song plays!', 4000);
-    }
+    setList([], '❤️ Favorites', '0 favorites');
+    showAlert('warn', '⚠️ Could not reach server. Favorites unavailable right now.', 5000);
   }
 };
 
@@ -913,8 +914,10 @@ async function loadQuery(q, title) {
     const results = await saavnTrending(q);
     setList(results, title, results.length + ' songs');
   } catch(e) {
+    tracks = []; // clear stale list so old songs can't be accidentally played
     showAlert('warn', '⚠️ Failed to load. Check connection.');
     document.getElementById('ccount').textContent = 'Error';
+    document.getElementById('trackList').innerHTML = `<div class="empty"><div class="eico">⚠️</div><div>Failed to load.<br/>Check your connection.</div></div>`;
   }
 }
 
