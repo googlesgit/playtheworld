@@ -291,6 +291,11 @@ button,input{touch-action:manipulation}
   .nowtitle{font-size:12px}
 }
 
+/* SONG CHANGE FLASH */
+@keyframes pflash{0%{opacity:.18}100%{opacity:0}}
+#playerFlash{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;background:var(--accent);border-radius:inherit}
+#playerFlash.flash{animation:pflash .7s ease forwards}
+
 /* GLOWING PROGRESS BAR */
 .pcenter.playing .progfill{box-shadow:0 0 14px var(--accent),0 0 6px var(--glow);transition:width .3s linear,box-shadow .5s}
 .pcenter.playing .progthumb{opacity:1;box-shadow:0 0 8px var(--accent),0 0 18px var(--glow)}
@@ -413,6 +418,7 @@ button,input{touch-action:manipulation}
 <!-- PLAYER -->
 <footer class="player">
   <canvas id="vizCanvas"></canvas>
+  <div id="playerFlash"></div>
   <div class="nowplay">
     <div class="nowart" id="nowArt">
       <div class="vinyl" id="vinyl"><div class="vring"></div><div class="vctr"></div></div>
@@ -638,6 +644,7 @@ function playIdx(i) {
   document.getElementById('qualBadge').textContent = t.quality === '320kbps' ? '320K' : 'HQ';
   document.title = t.title + ' — RagaSync';
   applyTheme(t);
+  flashPlayer();
 
   const art = document.getElementById('nowArt');
   if (t.image) {
@@ -1316,6 +1323,16 @@ async function ensureTables() {
       body: '{}'
     });
   } catch(e) {}
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SONG CHANGE FLASH
+// ══════════════════════════════════════════════════════════════
+function flashPlayer() {
+  const el = document.getElementById('playerFlash');
+  el.classList.remove('flash');
+  void el.offsetWidth;
+  el.classList.add('flash');
 }
 
 // ══════════════════════════════════════════════════════════════
