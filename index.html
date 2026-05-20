@@ -291,6 +291,9 @@ button,input{touch-action:manipulation}
   .nowtitle{font-size:12px}
 }
 
+/* TRACK ROW SLIDE-IN */
+@keyframes row-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
 /* RIPPLE */
 .cbtn,.playbtn,.sbtn,.trow,.gtab,.nitem,.lyric-close,.cinema-close,.cin-lyric-close{position:relative;overflow:hidden}
 @keyframes rpl{0%{transform:scale(0);opacity:.7}100%{transform:scale(1);opacity:0}}
@@ -501,6 +504,7 @@ const aud     = document.getElementById('aud');
 // ── STATE ──────────────────────────────────────────────────────
 let tracks   = [];
 let cur      = -1;
+let animList = false;
 let playing  = false;
 let shuffle  = false;
 let repeat   = false;
@@ -778,7 +782,9 @@ function setList(arr, title, sub) {
   tracks = arr;
   document.getElementById('ctitle').textContent = title || 'Music';
   document.getElementById('ccount').textContent = sub !== undefined ? sub : arr.length + ' songs';
+  animList = true;
   renderList();
+  animList = false;
 }
 
 function renderList() {
@@ -793,7 +799,8 @@ function renderList() {
     const img = t.image
       ? `<img class="timg" src="${t.image}" alt="" loading="lazy" onerror="this.style.opacity='.1'"/>`
       : `<div class="timg" style="display:flex;align-items:center;justify-content:center;font-size:18px">🎵</div>`;
-    return `<div class="trow${on}" onclick="playIdx(${i})">
+    const anim = animList ? ` style="animation:row-in .22s ease both ${Math.min(i*28,420)}ms"` : '';
+    return `<div class="trow${on}"${anim} onclick="playIdx(${i})">
       <div class="tnum">${num}</div>
       ${img}
       <div class="tinfo">
