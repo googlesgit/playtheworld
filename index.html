@@ -815,6 +815,7 @@ async function doSearch() {
   if (!q) return;
   const token = ++searchToken;
   hideAlert();
+  if (lyricsOpen) toggleLyrics();
   document.querySelectorAll('.gtab,.nitem').forEach(b=>b.classList.remove('on'));
   document.getElementById('ctitle').textContent = `"${q}"`;
   document.getElementById('ccount').textContent = 'Searching…';
@@ -907,6 +908,7 @@ document.querySelectorAll('[data-q]').forEach(el => {
 });
 
 async function loadQuery(q, title) {
+  if (lyricsOpen) toggleLyrics();
   document.getElementById('ctitle').textContent = title;
   document.getElementById('ccount').textContent = 'Loading…';
   document.getElementById('trackList').innerHTML = `<div class="spin-wrap"><div class="spinner"></div><div>Loading…</div></div>`;
