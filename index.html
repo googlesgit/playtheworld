@@ -291,6 +291,27 @@ button,input{touch-action:manipulation}
   .nowtitle{font-size:12px}
 }
 
+/* MOBILE MORE SHEET */
+#moreBtn{display:none}
+.more-overlay{position:fixed;inset:0;z-index:299;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}
+.more-overlay.open{opacity:1;pointer-events:all}
+.more-sheet{position:fixed;bottom:0;left:0;right:0;z-index:300;background:#16111e;border:1px solid var(--border2);border-bottom:none;border-radius:22px 22px 0 0;padding:0 0 max(env(safe-area-inset-bottom,0px),8px);transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 40px rgba(0,0,0,.7)}
+.more-sheet.open{transform:translateY(0)}
+.more-handle{width:40px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:14px auto 0}
+.more-sheet-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;padding:14px 20px 12px;border-bottom:1px solid var(--border)}
+.more-row{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;border-bottom:1px solid var(--border);width:100%;color:var(--t1);font-size:14px;font-family:'DM Sans',sans-serif;text-align:left;background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;transition:background .12s}
+.more-row:last-child{border-bottom:none}
+.more-row:active{background:var(--hover)}
+.more-row-val{font-size:12px;color:var(--t2)}
+.more-sleep-section{padding:14px 20px 16px;border-bottom:1px solid var(--border)}
+.more-sleep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:14px;color:var(--t1)}
+.more-sleep-cd{font-size:13px;color:var(--green);font-weight:600}
+.more-sleep-opts{display:flex;gap:8px;flex-wrap:wrap}
+.more-sleep-btn{padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:20px;color:var(--t1);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
+.more-sleep-btn:hover,.more-sleep-btn:active{background:rgba(255,255,255,.12)}
+.more-sleep-btn.on{background:rgba(167,139,250,.2);border-color:rgba(167,139,250,.5);color:var(--accent)}
+@media(max-width:600px){#moreBtn{display:flex}}
+
 /* SONG CHANGE FLASH */
 @keyframes pflash{0%{opacity:.18}100%{opacity:0}}
 #playerFlash{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;background:var(--accent);border-radius:inherit}
@@ -466,6 +487,7 @@ button,input{touch-action:manipulation}
       <span class="volico" id="volIco" onclick="toggleMute()">🔊</span>
       <input type="range" id="volSlider" min="0" max="100" value="80"/>
     </div>
+    <button class="cbtn" id="moreBtn" onclick="toggleMoreSheet()" title="More options">⋯</button>
   </div>
 </footer>
 </div>
@@ -505,6 +527,33 @@ button,input{touch-action:manipulation}
 
 <!-- Native HTML5 audio — no YouTube, no SoundCloud widget, no ads -->
 <audio id="aud" preload="auto" crossorigin="anonymous"></audio>
+
+<!-- MOBILE MORE SHEET -->
+<div id="moreOverlay" class="more-overlay" onclick="closeMoreSheet()"></div>
+<div id="moreSheet" class="more-sheet">
+  <div class="more-handle"></div>
+  <div class="more-sheet-title">Options</div>
+  <button class="more-row" id="moreCinRow" onclick="toggleCinema();closeMoreSheet()">
+    <span>🎬 Cinema Mode</span><span class="more-row-val">Open →</span>
+  </button>
+  <div class="more-sleep-section">
+    <div class="more-sleep-top">
+      <span>🌙 Sleep Timer</span>
+      <span id="moreSleepCountdown" class="more-sleep-cd"></span>
+    </div>
+    <div class="more-sleep-opts" id="moreSleepOpts">
+      <button class="more-sleep-btn" data-min="15">15 min</button>
+      <button class="more-sleep-btn" data-min="30">30 min</button>
+      <button class="more-sleep-btn" data-min="45">45 min</button>
+      <button class="more-sleep-btn" data-min="60">60 min</button>
+      <button class="more-sleep-btn" data-min="0">Off</button>
+    </div>
+  </div>
+  <div class="more-row" style="cursor:default">
+    <span>🎵 Audio Quality</span>
+    <div class="qbadge" id="moreQualBadge">HQ</div>
+  </div>
+</div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -641,7 +690,9 @@ function playIdx(i) {
   document.getElementById('nowTitle').textContent  = t.title;
   document.getElementById('nowArtist').textContent = t.artist;
   document.getElementById('heartBtn').textContent  = favs.includes(t.id) ? '❤️' : '🤍';
-  document.getElementById('qualBadge').textContent = t.quality === '320kbps' ? '320K' : 'HQ';
+  const qualText = t.quality === '320kbps' ? '320K' : 'HQ';
+  document.getElementById('qualBadge').textContent = qualText;
+  document.getElementById('moreQualBadge').textContent = qualText;
   document.title = t.title + ' — RagaSync';
   applyTheme(t);
   flashPlayer();
@@ -1273,22 +1324,22 @@ document.addEventListener('click', e => {
   }
 });
 
-document.getElementById('sleepMenu').addEventListener('click', e => {
-  const opt = e.target.closest('.sleep-opt'); if (!opt) return;
-  document.getElementById('sleepMenu').classList.remove('open');
-  document.querySelectorAll('.sleep-opt').forEach(o => o.classList.remove('on'));
+function setSleepTimer(mins) {
   clearTimeout(sleepTimerId);
   clearInterval(sleepCountdownId);
+  document.querySelectorAll('.sleep-opt,.more-sleep-btn').forEach(o => o.classList.remove('on'));
+  document.getElementById('sleepMenu').classList.remove('open');
 
-  const mins = parseInt(opt.dataset.min);
   if (mins === 0) {
     document.getElementById('sleepBtn').classList.remove('on');
     document.getElementById('sleepCountdown').textContent = '';
+    document.getElementById('moreSleepCountdown').textContent = '';
     sleepEndsAt = 0;
     return;
   }
 
-  opt.classList.add('on');
+  document.querySelector(`.sleep-opt[data-min="${mins}"]`)?.classList.add('on');
+  document.querySelector(`.more-sleep-btn[data-min="${mins}"]`)?.classList.add('on');
   document.getElementById('sleepBtn').classList.add('on');
   sleepEndsAt = Date.now() + mins * 60000;
 
@@ -1296,7 +1347,8 @@ document.getElementById('sleepMenu').addEventListener('click', e => {
     aud.pause();
     document.getElementById('sleepBtn').classList.remove('on');
     document.getElementById('sleepCountdown').textContent = '';
-    document.querySelectorAll('.sleep-opt').forEach(o => o.classList.remove('on'));
+    document.getElementById('moreSleepCountdown').textContent = '';
+    document.querySelectorAll('.sleep-opt,.more-sleep-btn').forEach(o => o.classList.remove('on'));
     clearInterval(sleepCountdownId);
     sleepEndsAt = 0;
   }, mins * 60000);
@@ -1306,8 +1358,31 @@ document.getElementById('sleepMenu').addEventListener('click', e => {
     if (rem <= 0) { clearInterval(sleepCountdownId); return; }
     const m = Math.floor(rem / 60000);
     const s = Math.floor((rem % 60000) / 1000);
-    document.getElementById('sleepCountdown').textContent = m + ':' + s.toString().padStart(2, '0');
+    const text = m + ':' + s.toString().padStart(2, '0');
+    document.getElementById('sleepCountdown').textContent = text;
+    document.getElementById('moreSleepCountdown').textContent = text;
   }, 1000);
+}
+
+document.getElementById('sleepMenu').addEventListener('click', e => {
+  const opt = e.target.closest('.sleep-opt'); if (!opt) return;
+  setSleepTimer(parseInt(opt.dataset.min));
+});
+
+// ══════════════════════════════════════════════════════════════
+//  MOBILE MORE SHEET
+// ══════════════════════════════════════════════════════════════
+function toggleMoreSheet() {
+  document.getElementById('moreSheet').classList.toggle('open');
+  document.getElementById('moreOverlay').classList.toggle('open');
+}
+function closeMoreSheet() {
+  document.getElementById('moreSheet').classList.remove('open');
+  document.getElementById('moreOverlay').classList.remove('open');
+}
+document.getElementById('moreSleepOpts').addEventListener('click', e => {
+  const btn = e.target.closest('.more-sleep-btn'); if (!btn) return;
+  setSleepTimer(parseInt(btn.dataset.min));
 });
 
 // ══════════════════════════════════════════════════════════════
