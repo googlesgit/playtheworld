@@ -759,6 +759,7 @@ function playIdx(i) {
   document.title = t.title + ' — RagaSync';
   applyTheme(t);
   flashPlayer();
+  updateMediaSession(t);
 
   const art = document.getElementById('nowArt');
   if (t.image) {
@@ -1646,6 +1647,28 @@ document.querySelector('.sidebar').addEventListener('click', e => {
 document.getElementById('trackList').addEventListener('click', e => {
   const row = e.target.closest('.trow'); if (row) spawnRipple(e, row);
 });
+
+// ══════════════════════════════════════════════════════════════
+//  MEDIA SESSION — OS lock screen / notification controls
+// ══════════════════════════════════════════════════════════════
+function updateMediaSession(t) {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title:  t.title,
+    artist: t.artist,
+    artwork: t.image ? [
+      { src: t.image, sizes: '96x96',   type: 'image/jpeg' },
+      { src: t.image, sizes: '512x512', type: 'image/jpeg' },
+    ] : []
+  });
+}
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.setActionHandler('play',          () => aud.play());
+  navigator.mediaSession.setActionHandler('pause',         () => aud.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => prevTrack());
+  navigator.mediaSession.setActionHandler('nexttrack',     () => nextTrack());
+  navigator.mediaSession.setActionHandler('seekto', d => { if (d.seekTime != null) aud.currentTime = d.seekTime; });
+}
 
 // ══════════════════════════════════════════════════════════════
 //  ANIMATED TAB FAVICON — live equalizer bars when playing
