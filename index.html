@@ -22,7 +22,7 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-
 
 /* HEADER */
 header{display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);z-index:20}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0;cursor:pointer;user-select:none}
 .sgroup{display:flex;align-items:center;flex-shrink:0}
 .swrap{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--border);border-right:none;border-radius:24px 0 0 24px;padding:7px 14px;width:270px;transition:.2s}
 .swrap:focus-within{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08)}
@@ -1122,7 +1122,12 @@ function setNav(el) {
   if(el) el.classList.add('on');
 }
 
+document.querySelector('.logo').addEventListener('click', () => {
+  document.getElementById('sDiscover').click();
+});
+
 document.getElementById('sDiscover').onclick = () => {
+  if (lyricsOpen) toggleLyrics();
   setNav(document.getElementById('sDiscover'));
   document.getElementById('searchInput').value = '';
   hideAlert();
