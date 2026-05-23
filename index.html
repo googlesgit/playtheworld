@@ -856,8 +856,8 @@ async function saveRecent(t) {
 // ══════════════════════════════════════════════════════════════
 //  AUDIO EVENTS
 // ══════════════════════════════════════════════════════════════
-aud.addEventListener('play',  () => { playing=true;  syncUI(); });
-aud.addEventListener('pause', () => { playing=false; syncUI(); });
+aud.addEventListener('play',  () => { playing=true;  syncUI(); _faviconStart(); });
+aud.addEventListener('pause', () => { playing=false; syncUI(); _faviconStop(); });
 aud.addEventListener('ended', () => {
   resetProg();
   if (repeat) { aud.currentTime=0; aud.play(); }
@@ -1646,6 +1646,58 @@ document.querySelector('.sidebar').addEventListener('click', e => {
 document.getElementById('trackList').addEventListener('click', e => {
   const row = e.target.closest('.trow'); if (row) spawnRipple(e, row);
 });
+
+// ══════════════════════════════════════════════════════════════
+//  ANIMATED TAB FAVICON — live equalizer bars when playing
+// ══════════════════════════════════════════════════════════════
+const _favCvs = document.createElement('canvas');
+_favCvs.width = 32; _favCvs.height = 32;
+const _favCtx = _favCvs.getContext('2d');
+let _favTimerId = null;
+const _favLink  = document.querySelector("link[rel='icon']");
+
+function _faviconDraw() {
+  const ctx = _favCtx, w = 32, h = 32;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#0a0a0f';
+  if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(0,0,w,h,7); ctx.fill(); }
+  else ctx.fillRect(0,0,w,h);
+  const bars=5, barW=4, gap=2, totalW=bars*barW+(bars-1)*gap;
+  const sx = (w-totalW)/2;
+  if (playing) {
+    const t = Date.now()/180;
+    for (let i=0;i<bars;i++) {
+      const phase = t + i*0.85;
+      const bh = Math.max(4, 4+Math.abs(Math.sin(phase))*18);
+      const bx = sx + i*(barW+gap), by = h-6-bh;
+      const g = ctx.createLinearGradient(bx,by,bx,h-6);
+      g.addColorStop(0, vizAccent); g.addColorStop(1,'#34d399');
+      ctx.fillStyle = g;
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(bx,by,barW,bh,1.5); ctx.fill(); }
+      else ctx.fillRect(bx,by,barW,bh);
+    }
+  } else {
+    const heights=[4,9,14,9,4];
+    for (let i=0;i<bars;i++) {
+      const bh=heights[i], bx=sx+i*(barW+gap), by=h/2-bh/2;
+      ctx.fillStyle='rgba(167,139,250,0.3)';
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(bx,by,barW,bh,1); ctx.fill(); }
+      else ctx.fillRect(bx,by,barW,bh);
+    }
+  }
+  if (_favLink) _favLink.href = _favCvs.toDataURL();
+}
+
+function _faviconStart() {
+  if (_favTimerId) return;
+  function tick() { _faviconDraw(); _favTimerId = setTimeout(tick, 80); }
+  tick();
+}
+function _faviconStop() {
+  if (_favTimerId) { clearTimeout(_favTimerId); _favTimerId = null; }
+  _faviconDraw();
+}
+_faviconDraw(); // draw static state on load
 
 // ══════════════════════════════════════════════════════════════
 //  INIT
