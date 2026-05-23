@@ -1135,6 +1135,7 @@ document.getElementById('sDiscover').onclick = () => {
 };
 
 document.getElementById('sFav').onclick = async () => {
+  if (lyricsOpen) toggleLyrics();
   setNav(document.getElementById('sFav'));
   hideAlert();
   document.getElementById('ctitle').textContent = '❤️ Favorites';
@@ -1150,6 +1151,7 @@ document.getElementById('sFav').onclick = async () => {
 };
 
 document.getElementById('sRecent').onclick = async () => {
+  if (lyricsOpen) toggleLyrics();
   setNav(document.getElementById('sRecent'));
   hideAlert();
   try {
@@ -1208,6 +1210,7 @@ let lyricsOpen    = false;
 let lyricsData    = null;   // { synced, lines, source }
 let lyricsForId   = null;   // song id lyrics were loaded for
 let activeLyricIdx = -1;
+let lyricsLoadToken = 0;   // prevents stale fetch from overwriting newer lyrics
 
 function toggleLyrics() {
   lyricsOpen = !lyricsOpen;
@@ -1219,6 +1222,7 @@ function toggleLyrics() {
 }
 
 async function loadLyrics(t) {
+  const _lyrTok = ++lyricsLoadToken;
   lyricsForId   = t.id;
   lyricsData    = null;
   activeLyricIdx = -1;
@@ -1240,6 +1244,7 @@ async function loadLyrics(t) {
     if (!r.ok) throw new Error('no lyrics');
     const data = await r.json();
     if (data.error || !data.lines?.length) throw new Error('no lyrics');
+    if (_lyrTok !== lyricsLoadToken) return;
 
     lyricsData = data;
 
@@ -1253,6 +1258,7 @@ async function loadLyrics(t) {
     if (data.synced && !aud.paused) syncLyricsAt(aud.currentTime);
 
   } catch(e) {
+    if (_lyrTok !== lyricsLoadToken) return;
     document.getElementById('lyricBody').innerHTML =
       '<div class="lyric-empty"><div class="eico">🎤</div><div>No lyrics found for this song.</div></div>';
     document.getElementById('lyricBadge').style.display = 'none';
