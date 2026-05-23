@@ -207,26 +207,49 @@ button,input{touch-action:manipulation}
   .player{grid-template-columns:1fr 1.5fr 0.8fr}
 }
 
-/* Mobile (≤600px) */
+/* Mobile (≤600px) — native-app experience */
 @media(max-width:600px){
-  /* Shell */
-  .app{grid-template-rows:auto 1fr auto;height:100dvh}
+  /* Override app to flex column so bottom nav fits */
+  .app{
+    display:flex;flex-direction:column;
+    height:100dvh;overflow:hidden;
+    grid-template-rows:unset
+  }
 
-  /* Header */
-  header{flex-wrap:wrap;padding:10px 14px 8px;gap:6px;height:auto}
+  /* Header — 2 rows: logo+search | genre tabs */
+  header{
+    flex-wrap:wrap;padding:10px 14px 0;
+    gap:6px;height:auto;flex-shrink:0
+  }
   .logo{font-size:16px;order:1;flex-shrink:0}
   .sgroup{order:2;flex:1;min-width:0}
   .swrap{flex:1;width:0;min-width:0;border-radius:24px 0 0 24px}
-  .sbtn{padding:0 14px;font-size:12px}
-  .gtabs{order:3;width:100%;gap:5px;padding-bottom:4px}
-  .gtab{padding:5px 12px;font-size:11.5px;border-radius:18px}
+  .sbtn{padding:0 14px;font-size:12px;height:34px}
+  /* Force tabs to their own full-width row */
+  .gtabs{
+    order:3;
+    flex:none;width:100%;
+    gap:5px;padding:6px 0 8px;
+    border-top:1px solid var(--border)
+  }
+  .gtab{padding:5px 13px;font-size:11.5px;border-radius:18px}
 
-  /* Content */
-  .content{padding:10px 12px 6px}
+  /* Main — flex:1, clips sidebar */
+  .main{
+    flex:1;overflow:hidden;position:relative;
+    display:block
+  }
+  .sidebar{display:none}
+
+  /* Content area */
+  .content{
+    position:absolute;inset:0;
+    overflow-y:auto;padding:10px 12px 6px
+  }
   .ctitle{font-size:17px}
   .cheader{margin-bottom:10px;align-items:center}
 
-  /* Track rows — card style */
+  /* Track rows — premium card style */
   .thead{display:none}
   .tgrid{gap:5px}
   .trow{
@@ -236,74 +259,83 @@ button,input{touch-action:manipulation}
     background:rgba(255,255,255,.03);
     border:1px solid rgba(255,255,255,.05)
   }
-  .trow:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
-  .trow.on{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3);border-left:3px solid var(--accent)}
+  .trow:hover,.trow:active{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
+  .trow.on{
+    background:rgba(167,139,250,.1);
+    border-color:rgba(167,139,250,.3);
+    border-left:3px solid var(--accent)
+  }
   .tnum{display:none}
   .timg{width:52px;height:52px;border-radius:10px}
   .tname{font-size:13.5px;font-weight:600}
   .tartist{font-size:11.5px}
   .tdur{font-size:11px}
 
-  /* Player — block layout with dynamic accent line at top */
+  /* ── PLAYER BAR ─────────────────────────────────────────── */
   #vizCanvas{display:none}
   .player{
     display:block;position:relative;
-    padding:0;height:auto;
+    flex-shrink:0;height:auto;padding:0;
     background:rgba(8,8,14,.99)
   }
+  /* Accent gradient line — changes colour with song theme */
   .player::before{
     content:'';display:block;height:2px;
     background:linear-gradient(90deg,var(--accent),var(--blue),var(--green));
-    opacity:.55;transition:background .5s
+    opacity:.6;transition:background .5s
   }
-
-  /* Song info strip — right padding makes room for more button */
+  /* Now-playing info row */
   .nowplay{
     grid-column:unset;grid-row:unset;
     display:flex;align-items:center;gap:12px;
-    padding:14px 68px 6px 16px;min-width:0
+    padding:12px 56px 4px 16px;min-width:0
   }
-  .nowart{width:54px;height:54px;border-radius:12px}
-  .vinyl{width:50px;height:50px}
-  .nowtitle{font-size:14px;font-weight:600}
-  .nowartist{font-size:12px}
-  .hbtn{font-size:19px;flex-shrink:0}
+  .nowart{width:50px;height:50px;border-radius:10px;flex-shrink:0}
+  .vinyl{width:46px;height:46px}
   .nowinfo{flex:1;min-width:0}
-
-  /* More button — absolutely in top-right of player */
+  .nowtitle{font-size:13.5px;font-weight:700}
+  .nowartist{font-size:11.5px}
+  .hbtn{font-size:19px;flex-shrink:0}
+  /* More button: absolute top-right */
   .pright{
     grid-column:unset;grid-row:unset;
-    position:absolute;top:12px;right:14px;
+    position:absolute;top:10px;right:12px;
     display:flex;align-items:center;gap:4px;padding:0
   }
   .qbadge,.sleep-wrap,#cinemaBtn{display:none}
   input[type=range]{display:none}
-
-  /* Progress + controls */
+  /* Progress bar */
   .pcenter{
     grid-column:unset;grid-row:unset;
     display:flex;flex-direction:column;
-    padding:2px 16px 14px;gap:4px;width:100%
+    padding:2px 16px 10px;gap:2px;width:100%
   }
-  .progwrap{order:1;gap:6px;padding:4px 0}
+  .progwrap{order:1;gap:5px;padding:4px 0}
   .progtrack{height:4px}
   .progthumb{width:14px;height:14px}
-  .controls{order:2;gap:4px;justify-content:center;padding:4px 0}
-  .tlabel{font-size:10.5px;min-width:28px}
-  .cbtn{width:36px;height:36px;font-size:15px}
-  .playbtn{width:52px;height:52px;font-size:21px}
+  .tlabel{font-size:10.5px;min-width:28px;color:var(--t3)}
+  /* Controls — space-evenly fills the full width evenly */
+  .controls{
+    order:2;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    padding:4px 0 2px;
+    width:100%
+  }
+  .cbtn{width:38px;height:38px;font-size:16px;border-radius:50%}
+  .playbtn{width:52px;height:52px;font-size:22px}
 
-  /* Disable 3D float on small art */
   .nowart.playing{animation:none}
 
-  /* Lyrics panel — full width on mobile */
+  /* Lyrics panel */
   .lyric-hdr{padding:12px 16px 10px}
-  .lyric-body{padding:18px 16px 80px;gap:4px}
+  .lyric-body{padding:18px 16px 120px;gap:4px}
   .lyric-line{font-size:18px}
   .lyric-line.ll-active{font-size:24px}
   .lyric-line.ll-static{font-size:14px}
 
-  /* Cinema full-screen */
+  /* Cinema */
   .cinema{gap:12px}
   .cinema-art{width:min(200px,55vw);height:min(200px,55vw)}
   .cinema-title{font-size:19px}
@@ -311,10 +343,8 @@ button,input{touch-action:manipulation}
   .cinema-lyric{font-size:16px;padding:0 20px}
   .cinema-prog{width:90vw}
   .cinema-lyric-panel{width:100%}
-  .cinema.lyr-open .cinema-art,
-  .cinema.lyr-open .cinema-meta,
-  .cinema.lyr-open .cinema-prog,
-  .cinema.lyr-open .cinema-btns{transform:none}
+  .cinema.lyr-open .cinema-art,.cinema.lyr-open .cinema-meta,
+  .cinema.lyr-open .cinema-prog,.cinema.lyr-open .cinema-btns{transform:none}
   .cinema.lyr-open .cinema-lyric{transform:none;opacity:0}
   .cinema-lyric-panel .lyric-line{font-size:17px}
   .cinema-lyric-panel .lyric-line.ll-active{font-size:22px}
@@ -326,17 +356,70 @@ button,input{touch-action:manipulation}
 
 /* Very small phones (≤360px) */
 @media(max-width:360px){
-  .gtab{padding:4px 8px;font-size:10.5px}
+  .gtab{padding:4px 10px;font-size:11px}
   .logo{font-size:14px}
   .sbtn{padding:0 10px;font-size:11px}
-  .controls{gap:2px}
-  .cbtn{width:32px;height:32px;font-size:13px}
+  .cbtn{width:34px;height:34px;font-size:14px}
   .playbtn{width:46px;height:46px;font-size:19px}
   .nowtitle{font-size:13px}
   .nowartist{font-size:11px}
   .timg{width:46px;height:46px}
   .tname{font-size:12.5px}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE BOTTOM NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+.mob-nav{display:none}
+@media(max-width:600px){
+  .mob-nav{
+    display:flex;flex-shrink:0;
+    background:rgba(8,8,14,.98);
+    border-top:1px solid var(--border);
+    z-index:25;padding-bottom:env(safe-area-inset-bottom,0px)
+  }
+  .mob-nb{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    gap:3px;padding:10px 4px 12px;
+    background:none;border:none;cursor:pointer;
+    color:var(--t2);font-family:'DM Sans',sans-serif;
+    transition:.15s;-webkit-tap-highlight-color:transparent
+  }
+  .mob-nb.on{color:var(--accent)}
+  .mob-nb:active{background:rgba(255,255,255,.05)}
+  .mob-ni{font-size:20px;line-height:1}
+  .mob-nl{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE BROWSE SHEET
+   ═══════════════════════════════════════════════════════════ */
+.browse-ov{position:fixed;inset:0;z-index:298;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s}
+.browse-ov.open{opacity:1;pointer-events:all}
+.browse-sh{
+  position:fixed;bottom:0;left:0;right:0;z-index:299;
+  background:#110e1b;
+  border:1px solid var(--border2);border-bottom:none;
+  border-radius:22px 22px 0 0;
+  padding:0 0 max(env(safe-area-inset-bottom,0px),16px);
+  max-height:84dvh;overflow-y:auto;
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -8px 48px rgba(0,0,0,.8)
+}
+.browse-sh.open{transform:translateY(0)}
+.browse-hdl{width:40px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:14px auto 0}
+.browse-ttl{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;padding:14px 20px 12px;border-bottom:1px solid var(--border)}
+.browse-sec{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);padding:16px 20px 8px}
+.browse-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 6px}
+.browse-chip{
+  padding:8px 16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border2);
+  border-radius:20px;color:var(--t1);font-size:13px;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:.15s;-webkit-tap-highlight-color:transparent
+}
+.browse-chip:active{background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.55);color:var(--accent)}
 
 /* SEARCH SUGGESTIONS */
 .sgroup{position:relative}
@@ -553,6 +636,71 @@ button,input{touch-action:manipulation}
     <button class="cbtn" id="moreBtn" onclick="toggleMoreSheet()" title="More options">⋯</button>
   </div>
 </footer>
+
+<!-- MOBILE BOTTOM NAVIGATION -->
+<nav class="mob-nav" id="mobNav">
+  <button class="mob-nb on" id="mobDiscover" onclick="mobileNav('discover')">
+    <span class="mob-ni">🏠</span><span class="mob-nl">Discover</span>
+  </button>
+  <button class="mob-nb" id="mobFav" onclick="mobileNav('fav')">
+    <span class="mob-ni">❤️</span><span class="mob-nl">Favorites</span>
+  </button>
+  <button class="mob-nb" id="mobRecent" onclick="mobileNav('recent')">
+    <span class="mob-ni">🕐</span><span class="mob-nl">Recent</span>
+  </button>
+  <button class="mob-nb" id="mobBrowse" onclick="toggleBrowse()">
+    <span class="mob-ni">✦</span><span class="mob-nl">Browse</span>
+  </button>
+</nav>
+</div>
+
+<!-- MOBILE BROWSE SHEET -->
+<div class="browse-ov" id="browseOv" onclick="closeBrowse()"></div>
+<div class="browse-sh" id="browseSh">
+  <div class="browse-hdl"></div>
+  <div class="browse-ttl">Browse</div>
+  <div class="browse-sec">Bollywood Artists</div>
+  <div class="browse-chips">
+    <button class="browse-chip" data-q="arijit singh songs">🎤 Arijit Singh</button>
+    <button class="browse-chip" data-q="atif aslam songs">🎤 Atif Aslam</button>
+    <button class="browse-chip" data-q="shreya ghoshal songs">🎤 Shreya Ghoshal</button>
+    <button class="browse-chip" data-q="kishore kumar songs">🎤 Kishore Kumar</button>
+    <button class="browse-chip" data-q="lata mangeshkar songs">🎤 Lata Mangeshkar</button>
+    <button class="browse-chip" data-q="ar rahman best songs">🎤 A.R. Rahman</button>
+    <button class="browse-chip" data-q="diljit dosanjh songs">🎤 Diljit Dosanjh</button>
+    <button class="browse-chip" data-q="sonu nigam songs">🎤 Sonu Nigam</button>
+  </div>
+  <div class="browse-sec">Indian Genres</div>
+  <div class="browse-chips">
+    <button class="browse-chip" data-q="latest bollywood hits">🎬 Bollywood</button>
+    <button class="browse-chip" data-q="sufi songs hindi">🎶 Sufi</button>
+    <button class="browse-chip" data-q="punjabi bhangra songs">🥁 Punjabi</button>
+    <button class="browse-chip" data-q="hindi devotional bhajans">🙏 Devotional</button>
+    <button class="browse-chip" data-q="old hindi songs golden era">🎼 Classics</button>
+  </div>
+  <div class="browse-sec">Global</div>
+  <div class="browse-chips">
+    <button class="browse-chip" data-q="top english pop songs">🎸 Pop</button>
+    <button class="browse-chip" data-q="ed sheeran songs">🎤 Ed Sheeran</button>
+    <button class="browse-chip" data-q="lofi hip hop beats">😌 Lo-Fi / Chill</button>
+    <button class="browse-chip" data-q="classic rock songs">🎸 Rock</button>
+    <button class="browse-chip" data-q="jazz music">🎷 Jazz</button>
+  </div>
+  <div class="browse-sec">Moods</div>
+  <div class="browse-chips">
+    <button class="browse-chip" data-q="romantic hindi songs love">💝 Romantic</button>
+    <button class="browse-chip" data-q="happy bollywood dance songs">😊 Happy</button>
+    <button class="browse-chip" data-q="sad emotional hindi songs">😢 Sad</button>
+    <button class="browse-chip" data-q="party songs dance bollywood">🎉 Party</button>
+    <button class="browse-chip" data-q="instrumental focus study music">🎯 Focus</button>
+    <button class="browse-chip" data-q="workout gym motivation songs">💪 Workout</button>
+  </div>
+  <div class="browse-sec">Features</div>
+  <div class="browse-chips">
+    <button class="browse-chip" onclick="closeBrowse();setTimeout(toggleCinema,50)">🎬 Cinema Mode</button>
+    <button class="browse-chip" onclick="closeBrowse();setTimeout(toggleSleepMenu,50)">🌙 Sleep Timer</button>
+    <button class="browse-chip" onclick="closeBrowse();setTimeout(toggleLyrics,50)">🎤 Lyrics</button>
+  </div>
 </div>
 
 <!-- CINEMA MODE OVERLAY -->
@@ -1133,7 +1281,48 @@ document.getElementById('gtabs').addEventListener('click', e => {
 function setNav(el) {
   document.querySelectorAll('.nitem').forEach(n=>n.classList.remove('on'));
   if(el) el.classList.add('on');
+  // Sync mobile bottom nav highlight
+  document.querySelectorAll('.mob-nb').forEach(b=>b.classList.remove('on'));
+  if (el?.id==='sDiscover') document.getElementById('mobDiscover')?.classList.add('on');
+  else if (el?.id==='sFav')    document.getElementById('mobFav')?.classList.add('on');
+  else if (el?.id==='sRecent') document.getElementById('mobRecent')?.classList.add('on');
 }
+
+// ══════════════════════════════════════════════════════════════
+//  MOBILE BOTTOM NAV + BROWSE SHEET
+// ══════════════════════════════════════════════════════════════
+function mobileNav(type) {
+  closeBrowse();
+  if (type==='discover') document.getElementById('sDiscover').click();
+  else if (type==='fav')    document.getElementById('sFav').click();
+  else if (type==='recent') document.getElementById('sRecent').click();
+}
+
+function toggleBrowse() {
+  const sh = document.getElementById('browseSh');
+  sh.classList.contains('open') ? closeBrowse() : openBrowse();
+}
+function openBrowse() {
+  document.getElementById('browseOv').classList.add('open');
+  document.getElementById('browseSh').classList.add('open');
+  document.getElementById('mobBrowse').classList.add('on');
+}
+function closeBrowse() {
+  document.getElementById('browseOv').classList.remove('open');
+  document.getElementById('browseSh').classList.remove('open');
+  document.getElementById('mobBrowse').classList.remove('on');
+}
+
+document.getElementById('browseSh').addEventListener('click', e => {
+  const chip = e.target.closest('.browse-chip[data-q]');
+  if (!chip) return;
+  closeBrowse();
+  document.querySelectorAll('.gtab,.nitem').forEach(b=>b.classList.remove('on'));
+  document.getElementById('searchInput').value = '';
+  hideAlert();
+  if (lyricsOpen) toggleLyrics();
+  loadQuery(chip.dataset.q, chip.textContent.trim());
+});
 
 document.querySelector('.logo').addEventListener('click', () => {
   document.getElementById('sDiscover').click();
